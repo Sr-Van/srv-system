@@ -1,3 +1,10 @@
+
+
+let clients = [
+
+]
+
+
 const dashboardBtn = document.querySelector('a.dashboard-btn')
 const cadastrosBtn = document.querySelector('a.cadastros-btn')
 const contasBtn = document.querySelector('a.contas-btn')
@@ -35,3 +42,18 @@ osBtn.addEventListener('click', (e)=>{
     cadastrosBtn.classList.remove("active")
     contasBtn.classList.remove("active")
 })
+
+
+// search [FIX]
+
+const search = document.querySelector("#search")
+const render = document.querySelector("div.show-client")
+
+function searchInKeyUp(){
+    console.log('yes')
+}
+
+
+search.addEventListener('keyup', _.debounce(searchInKeyUp, 400))
+
+
