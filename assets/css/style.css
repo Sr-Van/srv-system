@@ -180,9 +180,44 @@ body{
 
 .show-client{
     display: none;
-    width: 300px;
-    height: 400px;
+    width: auto;
+    height: 95%;
+    flex-direction: column;
     border-radius: .5em;
-    background-color: var(--purple-light);
+    overflow: auto;
     margin: 10px;
 }
+
+.show-client::-webkit-scrollbar{
+    background-color: var(--purple-light);
+    border-radius: .3em;
+}
+
+.show-client::-webkit-scrollbar-thumb{
+    background-color: var(--purple-color);
+    border-radius: .3em;
+    border: 1px rgb(255, 255, 255 , 0.2) solid;
+}
+.show-client .show-multiples{
+    display: flex;
+    width: auto;
+    height: auto;
+    background-color: var(--purple-light);
+    padding: 2em;
+    margin: .2em;
+    border-radius: .5em;
+}
+
+.show-client .show-multiples .atributos{
+    display: flex;
+    justify-content: space-evenly;
+    width: 140em;
+}
+
+.show-client .edit-client{
+    cursor: pointer;
+    color: var(--white-color);
+}
+
+
+
