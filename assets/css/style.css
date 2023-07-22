@@ -141,6 +141,7 @@ body{
 .sidebar a.active{
     background-color: var(--black-bg);
     border-top: 1px solid var(--purple-color);
+    border-bottom: 1px solid var(--purple-color);
 }
 .sidebar a:last-child {
     justify-content: space-between;
@@ -170,9 +171,12 @@ body{
     background-color: var(--purple-color);
 }
 
-.dashboard-content div{
-    width: 300px;
-    height: 400px;
+.dashboard-content{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     border-radius: .5em;
     background-color: var(--purple-light);
     margin: 10px;

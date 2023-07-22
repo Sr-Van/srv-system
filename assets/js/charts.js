@@ -1,9 +1,10 @@
- 
+
 const ctx = document.getElementById('chartAtiv')
 const chartOs = document.getElementById('chartOs')
 const chartFin = document.getElementById('chartFin')
 const chartPlanos = document.getElementById('chartPlanos')
 const blackColor = '#000000'
+
 
 new Chart(ctx, {
     type: 'doughnut',
@@ -11,7 +12,9 @@ new Chart(ctx, {
         labels: ['Conectado', 'desconectado'],
         datasets:[{
             data: [100, 23],
-            borderWidth:1,
+            borderWidth:0.2,
+            borderColor: 'black',
+            backgroundColor: ['#00B050', ' #FF0000']
         }
     ]
     },
@@ -22,8 +25,10 @@ new Chart(ctx, {
                     color: blackColor
                 }
             }
-        }
-        
+        },
+        responsive: false,
+        width: 400, 
+        height: 300, 
     }
 })
 new Chart(chartFin, {
@@ -43,8 +48,10 @@ new Chart(chartFin, {
                     color: blackColor
                 }
             }
-        }
-        
+        },
+        responsive: false,
+        width: 400, 
+        height: 300,
     }
 })
 
@@ -65,8 +72,22 @@ new Chart(chartPlanos, {
                     color: blackColor
                 }
             }
+        },
+        responsive: false,
+        width: 400, 
+        height: 300,
+        scales: {
+            x: {
+              ticks: {
+                color: "black", 
+              },
+            },
+            y: {
+              ticks: {
+                color: "black", 
+              },
+            }
         }
-        
     }
 })
 new Chart(chartOs, {
@@ -86,7 +107,21 @@ new Chart(chartOs, {
                     color: blackColor
                 }
             }
+        },
+        responsive: false,
+        width: 400, 
+        height: 300,
+        scales: {
+            x: {
+              ticks: {
+                color: "black", 
+              },
+            },
+            y: {
+              ticks: {
+                color: "black", 
+              },
+            }
         }
-        
     }
 })

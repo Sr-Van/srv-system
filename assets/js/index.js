@@ -66,7 +66,7 @@ const dashboardBtn = document.querySelector('a.dashboard-btn')
 const cadastrosBtn = document.querySelector('a.cadastros-btn')
 const contasBtn = document.querySelector('a.contas-btn')
 const osBtn = document.querySelector('a.os-btn')
-
+const dashContent = document.querySelector('div.dashboard-content')
 
 dashboardBtn.addEventListener('click', (e)=>{
     e.preventDefault()
@@ -74,6 +74,9 @@ dashboardBtn.addEventListener('click', (e)=>{
     cadastrosBtn.classList.remove("active")
     contasBtn.classList.remove("active")
     osBtn.classList.remove("active")
+
+
+    dashContent.style.display = 'flex' //mostrando o conteudo da div dashboard-content apenas quando o botao dashboard estiver ativo
 })
 
 cadastrosBtn.addEventListener('click', (e)=>{
@@ -82,6 +85,8 @@ cadastrosBtn.addEventListener('click', (e)=>{
     dashboardBtn.classList.remove("active")
     contasBtn.classList.remove("active")
     osBtn.classList.remove("active")
+
+    dashContent.style.display = 'none' //ocultando quando estiver inativo
 })
 
 contasBtn.addEventListener('click', (e)=>{
@@ -90,6 +95,8 @@ contasBtn.addEventListener('click', (e)=>{
     dashboardBtn.classList.remove("active")
     cadastrosBtn.classList.remove("active")
     osBtn.classList.remove("active")
+
+    dashContent.style.display = 'none'
 })
 
 osBtn.addEventListener('click', (e)=>{
@@ -98,6 +105,9 @@ osBtn.addEventListener('click', (e)=>{
     dashboardBtn.classList.remove("active")
     cadastrosBtn.classList.remove("active")
     contasBtn.classList.remove("active")
+
+    dashContent.style.display = 'none'
+
 })
 
 

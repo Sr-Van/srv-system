@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--     <script src="/assets/js/charts.js"></script> -->
-    
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/chart.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="/assets/js/charts.js" defer></script>
+    <script src='/assets/js/index.js' defer></script>
     <title>Dashboard SRV</title>
 </head>
 <body>
     <head>
         <div class="header">
+            <!--header com pesquisa que muda para cada select-->
             <select name="select" id="select">
                 <option value="Nome">Nome</option>
                 <option value="cpf">CPF</option>
@@ -34,6 +36,7 @@
                 </span>
             </div>
             <aside class="sidebar">
+                <!--sidebar-->
                 <a class="dashboard-btn" href="#">
                     <span class="material-symbols-sharp">
                         analytics
@@ -60,17 +63,28 @@
                 </a>
             </aside>
             <div class="main-container">
+                <!--div para mostrar o conteudo principal e todas as div que forem abertas pelo usuario clicando nos sidelinks-->
                 <div class="show-client">
-
+                    <!--Conteudo onde mostra o cliente da pesquisa na searchbox-->
                 </div>
                 <div class="dashboard-content">
-                
+                    <!--graficos do dashboard-->
+                    <canvas id="chartAtiv"></canvas>
+                    <canvas id="chartOs"></canvas>
+                    <canvas id="chartFin"></canvas>
+                    <canvas id="chartPlanos"></canvas>
+                </div>
+                <div class="contas">
+                    <!--fazer contas-->
+                </div>
+                <div class="ordens">
+                    <!--fazer ordens de servico e linkar com o numero no sidebar-->
                 </div>
             </div>  
         </div>
     </main>
 </body>
-<script src='/assets/js/index.js' defer></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </html>
