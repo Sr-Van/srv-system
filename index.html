@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="assets/css/chart.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="/assets/js/charts.js" defer></script>
     <script src='/assets/js/index.js' defer></script>
     <title>Dashboard SRV</title>
 </head>
@@ -25,6 +24,9 @@
             <input id="search" type="text">
         </div>
     </head>
+    <div class="alert">
+        alerta
+    </div>
 
     <main>
         <div class="container">
@@ -37,13 +39,13 @@
             </div>
             <aside class="sidebar">
                 <!--sidebar-->
-                <a class="dashboard-btn" href="#">
+                <a class="dashboard-btn active" href="#">
                     <span class="material-symbols-sharp">
                         analytics
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-                <a class="cadastros-btn active" href="#">
+                <a class="cadastros-btn" href="#">
                     <span class="material-symbols-sharp">
                         groups
                     </span>
@@ -69,10 +71,108 @@
                 </div>
                 <div class="dashboard-content">
                     <!--graficos do dashboard-->
-                    <canvas id="chartAtiv"></canvas>
-                    <canvas id="chartOs"></canvas>
-                    <canvas id="chartFin"></canvas>
-                    <canvas id="chartPlanos"></canvas>
+                    <div class="cards">
+                        <div class="status">
+                            <div class="info">
+                                <h3>Clientes</h3>
+                                <div>
+                                    <h1>Ativos</h1>
+                                    <p>100</p>
+                                </div>
+                                <div>
+                                    <h1>Inativos</h1>
+                                    <p>100</p>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                    <svg>
+                                        <circle cx="38" cy="38" r="36"></circle>
+                                    </svg>
+                                    <div class="percentage">
+                                        <p>+50%</p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sales">
+                        <div class="status">
+                            <div class="info">
+                                <h3>Vendas Mensais</h3>
+                                <div>
+                                    <h1>Recebidas</h1>
+                                    <p>$640,000</p>
+                                </div>
+                                <div>
+                                    <h1>A Receber</h1>
+                                    <p>$128,000</p>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                    <svg>
+                                        <circle cx="38" cy="38" r="36"></circle>
+                                    </svg>
+                                    <div class="percentage">
+                                        <p>+80%</p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cards" style="margin-right: 20px;">
+                        <div class="status">
+                            <div class="info">
+                                <h3>Ordens de Serviço</h3>
+                                <div>
+                                    <h1>Abertas</h1>
+                                    <p>12</p>
+                                </div>
+                                <div>
+                                    <h1>Fechadas</h1>
+                                    <p>12</p>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                    <svg>
+                                        <circle cx="38" cy="38" r="36"></circle>
+                                    </svg>
+                                    <div class="percentage">
+                                        <p>+50%</p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Local para receber Feedbacks da central de auto atendimento online-->
+                    <div class="client-feedb">
+                        <h1>Feedbacks</h1>
+                        <div class="client">
+                            <h3>Carlos Silva</h3>
+                            <span class="material-symbols-sharp" style="color: var(--red-danger); font-size: 120px;">
+                                sentiment_extremely_dissatisfied
+                            </span>
+                            <p>Minha internet esta horrivel!!</p>
+                        </div>
+                        <div class="client">
+                            <h3>Paulo Soares</h3>
+                            <span class="material-symbols-sharp" style="color: #038b79; font-size: 120px;">
+                                sentiment_satisfied
+                            </span>
+                            <p>Nunca tive problemas, pago em dia e tudo otimo!</p>
+                        </div>
+                        <div class="client">
+                            <h3>Marina Silva</h3>
+                            <span class="material-symbols-sharp" style="color: #038b79; font-size: 120px;">
+                                sentiment_satisfied
+                            </span>
+                            <p>Marina Silva está satisfeita.</p>
+                        </div>
+                        <div class="client">
+                            <h3>Joelia Sales</h3>
+                            <span class="material-symbols-sharp" style="color: #038b79; font-size: 120px;">
+                                sentiment_satisfied
+                            </span>
+                            <p>Nunca precisei entrar em contato... nota 10!</p>
+                        </div>
+                        
+                    </div>
                 </div>
                 <div class="contas">
                     <!--fazer contas-->

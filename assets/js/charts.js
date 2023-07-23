@@ -1,12 +1,12 @@
 
-const ctx = document.getElementById('chartAtiv')
+const chartAtiv = document.getElementById('chartAtiv')
 const chartOs = document.getElementById('chartOs')
 const chartFin = document.getElementById('chartFin')
 const chartPlanos = document.getElementById('chartPlanos')
 const blackColor = '#000000'
 
 
-new Chart(ctx, {
+new Chart(chartAtiv, {
     type: 'doughnut',
     data: {
         labels: ['Conectado', 'desconectado'],

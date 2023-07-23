@@ -57,8 +57,6 @@ let clients = [{
     Sexualidade: 'masculino',
     plano: '250mb'
 }
-
-
 ]
 
 
@@ -76,7 +74,7 @@ dashboardBtn.addEventListener('click', (e)=>{
     osBtn.classList.remove("active")
 
 
-    dashContent.style.display = 'flex' //mostrando o conteudo da div dashboard-content apenas quando o botao dashboard estiver ativo
+    dashContent.style.display = 'grid' //mostrando o conteudo da div dashboard-content apenas quando o botao dashboard estiver ativo
 })
 
 cadastrosBtn.addEventListener('click', (e)=>{
@@ -115,6 +113,7 @@ osBtn.addEventListener('click', (e)=>{
 
 const search = document.querySelector("#search")
 const render = document.querySelector("div.show-client")
+const alertBox = document.querySelector("div.alert")
 
 function searchInKeyUp(event){
     let searched = event.target.value
@@ -126,12 +125,15 @@ function searchInKeyUp(event){
     let list = ' '
 
     if(searched.length<=0){
-        /* setTimeout(()=>{
+        
+        setTimeout(()=>{
             alertBox.style.display = 'none'
+            render.style.display = 'none'
         }, 3000)
         alertBox.style.display = 'flex'
         alertBox.innerHTML = 'Digite o nome de um cliente para mostrar o cadastro no dashboard.'
-        dashboard.style.display = 'flex' */
+
+        dashContent.style.display = 'grid'
     }else{
 
         //desativando os botoes da sidebar
@@ -139,7 +141,7 @@ function searchInKeyUp(event){
         dashboardBtn.classList.remove("active")
         cadastrosBtn.classList.remove("active")
         contasBtn.classList.remove("active")
-        /* dashboard.style.display = 'none' */
+        dashContent.style.display = 'none'
         clientFound.forEach((client, index)=>{
             list += `
                 <div class='show-multiples'>
