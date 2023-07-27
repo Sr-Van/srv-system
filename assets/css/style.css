@@ -184,9 +184,26 @@ body{
 
 .dashboard-content{
     display: grid;
+    height: 100%;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.6rem;
     color: var(--white-color);
+    overflow: auto;
+}
+
+.back-animation{
+    animation: back 2s ease;
+}
+
+@keyframes back{
+    from{
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .dashboard-content > div{
@@ -267,7 +284,9 @@ body{
     overflow: auto;
     justify-content: space-between;
     grid-column: span 3;
+    pointer-events: none;
     margin-right: 20px;
+    margin-bottom: 15px;
 }
 
 .dashboard-content .client-feedb h1{
@@ -291,26 +310,6 @@ body{
     top: -30px;
     left: -10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .show-client{
     display: none;
     width: auto;
@@ -350,6 +349,30 @@ body{
 .show-client .edit-client{
     cursor: pointer;
     color: var(--white-color);
+}
+
+
+.header-cadastros{
+    height: 20px;
+    padding: 20px;
+}
+
+.header-cadastros a{
+    color: var(--white-color);
+    background-color: var(--icons-color);
+    padding: .2em .6em;
+    border-radius: 1em;
+}
+
+table::-webkit-scrollbar{
+    background-color: var(--purple-light);
+    border-radius: .3em;
+}
+
+table::-webkit-scrollbar-thumb{
+    background-color: var(--purple-color);
+    border-radius: .3em;
+    border: 2px rgb(255, 255, 255 , 0.2) solid;
 }
 
 

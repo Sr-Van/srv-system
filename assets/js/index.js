@@ -1,13 +1,13 @@
 
 
 let clients = [{
-    nome: 'Teste1',
+    nome: 'Teste1 joaozinho sales dos santos',
     CPF: 99999999911,
     RG: 1301300001,
     Telefone: 77999999999,
-    Endereço: 'rua sei la o que',
+    Endereço: 'rua sei',
     Numero: 120,
-    Bairro: 'new city',
+    Bairro: 'horto city',
     Sexualidade: 'masculino',
     plano: '250mb'
 },
@@ -59,12 +59,15 @@ let clients = [{
 }
 ]
 
+/* Declarando botoes do sidebar */
+const dashboardBtn = document.querySelector('.dashboard-btn')
+const cadastrosBtn = document.querySelector('.cadastros-btn')
+const contasBtn = document.querySelector('.contas-btn')
+const osBtn = document.querySelector('.os-btn')
 
-const dashboardBtn = document.querySelector('a.dashboard-btn')
-const cadastrosBtn = document.querySelector('a.cadastros-btn')
-const contasBtn = document.querySelector('a.contas-btn')
-const osBtn = document.querySelector('a.os-btn')
-const dashContent = document.querySelector('div.dashboard-content')
+/* Declarando conteudos */
+const dashContent = document.querySelector('.dashboard-content')
+const cadastroContent = document.querySelector(".cadastros")
 
 dashboardBtn.addEventListener('click', (e)=>{
     e.preventDefault()
@@ -75,6 +78,7 @@ dashboardBtn.addEventListener('click', (e)=>{
 
 
     dashContent.style.display = 'grid' //mostrando o conteudo da div dashboard-content apenas quando o botao dashboard estiver ativo
+    cadastroContent.style.display = 'none'
 })
 
 cadastrosBtn.addEventListener('click', (e)=>{
@@ -85,6 +89,7 @@ cadastrosBtn.addEventListener('click', (e)=>{
     osBtn.classList.remove("active")
 
     dashContent.style.display = 'none' //ocultando quando estiver inativo
+    cadastroContent.style.display = 'block'
 })
 
 contasBtn.addEventListener('click', (e)=>{
@@ -125,15 +130,17 @@ function searchInKeyUp(event){
     let list = ' '
 
     if(searched.length<=0){
-        
         setTimeout(()=>{
             alertBox.style.display = 'none'
             render.style.display = 'none'
-        }, 3000)
+            dashboardBtn.classList.add("active")
+            dashContent.classList.add("back-animation")
+            dashContent.style.display = 'grid'
+        }, 1000)
         alertBox.style.display = 'flex'
         alertBox.innerHTML = 'Digite o nome de um cliente para mostrar o cadastro no dashboard.'
 
-        dashContent.style.display = 'grid'
+        dashContent.style.display = 'none'
     }else{
 
         //desativando os botoes da sidebar
@@ -186,3 +193,5 @@ function filterSearch(searched){
         return client.nome.toLowerCase().includes(searched.toLowerCase())
     }))
 }
+
+
