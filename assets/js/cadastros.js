@@ -24,3 +24,4 @@ function tableLoad(){
 }
 
 window.addEventListener("load", tableLoad)
+

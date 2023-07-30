@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="assets/css/chart.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -70,7 +71,7 @@
                 <div class="show-client">
                     <!--Conteudo onde mostra o cliente da pesquisa na searchbox-->
                 </div>
-                <div class="dashboard-content">
+                <div class="dashboard-content" style="display: none;">
                     <!--graficos do dashboard-->
                     <div class="cards">
                         <div class="status">
@@ -175,10 +176,10 @@
                         
                     </div>
                 </div>
-                <div style="display: none;" class="cadastros">
+                <div class="cadastros">
                     <div class="header-cadastros">
-                        <a href="#">Novo</a>
-                        <a href="#">Editar</a>
+                        <a class="btn-style novo-cadastro">Novo</a>
+                        <a class="btn-style editar-cadastro">Editar</a>
                     </div>
                     <!--fazer cadastros-->
                     <table style="width: 100%; padding: .3em;display:block;overflow:auto;">
@@ -203,6 +204,59 @@
                     <!--fazer ordens de servico e linkar com o numero no sidebar-->
                 </div>
             </div>  
+        </div>
+        <div class="modal-overlay">
+            <div class="novo-cadastro-modal">
+                <div class="header-n-cadastro">
+                    <a class="btn-style" href="#">Salvar</a>
+                </div>
+                <div class="form-n-cadstro">
+                    <label for="txt-nome">Nome Completo</label>
+                    <input type="text" name="text" id="txt-nome">
+                    <label for="txt-cpf">CPF/CNPJ</label>
+                    <input type="text" name="text" id="txt-cpf">
+                    <label for="txt-rg">RG/IE</label>
+                    <input type="text" name="text" id="txt-rg">
+                    <label for="txt-tel">Telefone</label>
+                    <input type="text" name="text" id="txt-tel">
+                    <label for="txt-endereco">Endereço</label>
+                    <input type="text" name="text" id="txt-endereco">
+                    <label for="txt-nume">Numero</label>
+                    <input type="text" name="text" id="txt-nume">
+                    <label for="txt-bairro">Bairro</label>
+                    <input type="text" name="text" id="txt-bairro">
+                    <div class="sex-select">
+                        <label>Sexualidade: </label>
+                        <input type="radio" name="sex-radio" id="male-sex" value="Masculino">
+                        <label for="male-sex">Masculino</label>
+                        <input type="radio" name="sex-radio" id="female-sex" value="Feminino">
+                        <label for="female-sex">Feminino</label>
+                        <input type="radio" name="sex-radio" id="other-sex" value="Outro" checked>
+                        <label for="male-sex">Outro</label>
+                    </div>
+                    <div class="plano">
+                        <label >Plano: </label>
+                        <select name="select-plano" id="select-plano">
+                            <option value="" selected></option>
+                            <option value="100MB">100mb - R$50,00</option>
+                            <option value="200MB">200mb - R$60,00</option>
+                            <option value="300MB">300mb - R$70,00</option>
+                            <option value="500MB">500mb - R$100,00</option>
+                        </select>
+                    </div>
+                    <div class="Vencimento">
+                        <label >Data de vencimento: </label>
+                        <select name="select-venc" id="select-venc">
+                            <option value="" selected></option>
+                            <option value="1">Pos pago dia 1</option>
+                            <option value="10">Pos pago dia 10</option>
+                            <option value="15">Pos pago dia 15</option>
+                            <option value="20">Pos pago dia 20</option>
+                        </select>
+                    </div>
+                </div>
+                <p>Todos os valores devem ser preenchidos ou o cadastro nao sera realizado</p>
+            </div>
         </div>
     </main>
 </body>
