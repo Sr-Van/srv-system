@@ -357,7 +357,6 @@ body{
     padding: 20px;
 }
 
-
 table::-webkit-scrollbar{
     background-color: var(--purple-light);
     border-radius: .3em;
@@ -454,5 +453,27 @@ select {
     }
 }
 
+.contas{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr, 1fr;
+}
 
+.contas > div{
+    border-radius: 20px;
+    margin: 1rem;
+    background-color: var(--purple-light);
+}
+
+.contas table{
+    width: 100%;
+}
+
+.receber-tb tr{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+}
 

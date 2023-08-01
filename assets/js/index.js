@@ -9,7 +9,8 @@ let clients = [{
     Numero: 120,
     Bairro: 'horto city',
     Sexualidade: 'masculino',
-    plano: '250mb'
+    plano: '200mb',
+    vencimento: 1
 },
 {
     nome: 'Teste2',
@@ -20,7 +21,8 @@ let clients = [{
     Numero: 120,
     Bairro: 'new city',
     Sexualidade: 'masculino',
-    plano: '250mb'
+    plano: '500mb',
+    vencimento: 15
 },
 {
     nome: 'Teste3',
@@ -31,7 +33,8 @@ let clients = [{
     Numero: 120,
     Bairro: 'new city',
     Sexualidade: 'masculino',
-    plano: '250mb'
+    plano: '300mb',
+    vencimento: 10
 },
 {
     nome: 'Teste32',
@@ -42,7 +45,8 @@ let clients = [{
     Numero: 120,
     Bairro: 'new city',
     Sexualidade: 'masculino',
-    plano: '250mb'
+    plano: '100mb',
+    vencimento: 1
 }
 
 ,
@@ -55,7 +59,8 @@ let clients = [{
     Numero: 120,
     Bairro: 'new city',
     Sexualidade: 'masculino',
-    plano: '250mb'
+    plano: '250mb',
+    vencimento: 20
 }
 ]
 
@@ -68,63 +73,65 @@ const osBtn = document.querySelector('.os-btn')
 /* Declarando conteudos */
 const dashContent = document.querySelector('.dashboard-content')
 const cadastroContent = document.querySelector(".cadastros")
+const contasContent = document.querySelector(".contas")
+const ordensContent = document.querySelector(".ordens")
 
 dashboardBtn.addEventListener('click', (e)=>{
     e.preventDefault()
-    dashboardBtn.classList.add("active")
-    cadastrosBtn.classList.remove("active")
-    contasBtn.classList.remove("active")
-    osBtn.classList.remove("active")
-
-
+    activeBtn(dashboardBtn)
+    desativeBtn(osBtn, cadastrosBtn, contasBtn)
     dashContent.style.display = 'grid' //mostrando o conteudo da div dashboard-content apenas quando o botao dashboard estiver ativo
-    unSelect(cadastroContent)
+    unSelect(cadastroContent, contasContent, ordensContent)
 })
 
 cadastrosBtn.addEventListener('click', (e)=>{
     e.preventDefault()
-    cadastrosBtn.classList.add("active")
-    dashboardBtn.classList.remove("active")
-    contasBtn.classList.remove("active")
-    osBtn.classList.remove("active")
-
-    unSelect(dashContent)
+    activeBtn(cadastrosBtn)
+    desativeBtn(dashboardBtn, osBtn, contasBtn)
+    unSelect(dashContent, contasContent, ordensContent)
     cadastroContent.style.display = 'block'
     tableLoad()
 })
 
 contasBtn.addEventListener('click', (e)=>{
     e.preventDefault()
-    contasBtn.classList.add("active")
-    dashboardBtn.classList.remove("active")
-    cadastrosBtn.classList.remove("active")
-    osBtn.classList.remove("active")
-
-    unSelect(dashContent)
+    activeBtn(contasBtn)
+    desativeBtn(dashboardBtn, cadastrosBtn, osBtn)
+    unSelect(dashContent, cadastroContent, ordensContent)
+    contasContent.style.display = 'grid'
+    tableContasLoad()
 })
 
 osBtn.addEventListener('click', (e)=>{
     e.preventDefault()
-    osBtn.classList.add("active")
-    dashboardBtn.classList.remove("active")
-    cadastrosBtn.classList.remove("active")
-    contasBtn.classList.remove("active")
-
-    unSelect(dashContent)
+    activeBtn(osBtn)
+    desativeBtn(dashboardBtn, cadastrosBtn, contasBtn)
+    unSelect(dashContent, cadastroContent, contasContent)
 })
 
 //TODO: create a function to use less lines on the eventListener arrow functions
 
-//TODO: add the div to unselect on anchor2 e 3
-function unSelect(anchor1, anchor2, anchor3){
-    anchor1.style.display = "none"
-    /* anchor2.style.display = "none"
-    anchor3.style.display = "none" */
+
+//functions to active and desative the btns, less code more optimized 
+function activeBtn(btn){
+    btn.classList.add("active")
+}
+
+function desativeBtn(btn1, btn2, btn3){
+    btn1.classList.remove("active")
+    btn2.classList.remove("active")
+    btn3.classList.remove("active")
+}
+
+//TODO: add the div to unselect on content2 e 3
+function unSelect(content1, content2, content3){
+    content1.style.display = "none"
+    content2.style.display = "none"
+    content3.style.display = "none"
 }
 
 
 // search [FIX]
-
 const search = document.querySelector("#search")
 const render = document.querySelector("div.show-client")
 const alertBox = document.querySelector("div.alert")
@@ -277,5 +284,31 @@ function newClientAdd(){
     clients.push(newClient)
     tableLoad()
 }
+
+
+//fazendo interacao da div contas
+let counterContasFunc = 0
+
+function tableContasLoad(){
+    let tableList
+    let table = document.querySelector(".receber-tb")
+    //condicao com contador para nao concatenar varios vezes em caso de varios clicks
+    if(counterContasFunc === 0){
+        clients.forEach((client, index)=>{
+            tableList = `
+                <tr style="border-bottom: 1px solid var(--grey-color);">
+                    <td>${client.nome}</td>
+                    <td>${client.plano}</td>
+                    <td>${client.vencimento}</td>
+                </tr>
+                `
+            table.innerHTML += tableList
+            
+        })
+    }
+    counterContasFunc++
+    console.log(counterFunc)
+}
+
 
 

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src='/assets/js/index.js' defer></script>
-    <script type="module" src='/assets/js/cadastros.js' defer></script>
     <title>Dashboard SRV</title>
 </head>
 <body>
@@ -195,14 +194,34 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="contas">
+                <div style="display: none;" class="contas">
                     <!--fazer contas-->
+                    <div class="table-receber">
+                        <table>
+                            <tbody class="receber-tb">
+                                <tr style="color: var(--white-color); font-size: 20px; border-bottom: 1px solid var(--white-color);">
+                                    <td>Cliente</td>
+                                    <td>plano</td>
+                                    <td>vencimento</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cards-planos">
+                        <div class="plano-de-100">
+                            <span>clientes de 100MB</span>
+                        </div>
+                        <div class="plano-de-200"></div>
+                        <div class="plano-de-300"></div>
+                        <div class="plano-de-500"></div>
+                    </div>
                 </div>
                 <div class="ordens">
                     <!--fazer ordens de servico e linkar com o numero no sidebar-->
                 </div>
             </div>  
         </div>
+        <!--modal overlay-->
         <div style="display: none;" class="modal-overlay modal-anim">
             <div class="novo-cadastro-modal new-modal-anim">
                 <div class="header-n-cadastro">
