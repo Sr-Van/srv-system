@@ -390,6 +390,8 @@ table::-webkit-scrollbar-thumb{
 }
 
 .novo-cadastro-modal .header-n-cadastro{
+    display: flex;
+    align-items: center;
     position: relative;
     height: 50px;
     border-top-left-radius: inherit;
@@ -397,15 +399,18 @@ table::-webkit-scrollbar-thumb{
     background-color: var(--purple-color);
 }
 .novo-cadastro-modal .header-n-cadastro a{
-    position: absolute;
-    top: 15px;
-    left: 40px;
+    margin-left: 20px;
 }
 
-.novo-cadastro-modal .form-n-cadstro{
+.novo-cadastro-modal .form-n-cadastro{
     display: flex;
     flex-direction: column;
     margin: 20px;
+}
+.novo-cadastro-modal .form-n-cadastro > input{
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey-color);
+    width: 300px;
 }
 
 .btn-style{
@@ -422,6 +427,31 @@ table::-webkit-scrollbar-thumb{
     bottom: 0;
     left: 25%;
     padding-bottom: .4em;
+}
+
+select {
+    background-color: var(--grey-light);
+    text-align: end;
+}
+
+.modal-anim{
+    animation: bluranim 1s ease-in;
+}
+
+@keyframes bluranim{
+    from{
+        filter: blur(10px);
+    }
+}
+
+.new-modal-anim{
+    animation: newmodal 1s ease-in-out;
+}
+
+@keyframes newmodal{
+    from{
+        transform: translateY(-100vh);
+    }
 }
 
 
