@@ -64,6 +64,12 @@ let clients = [{
 }
 ]
 
+let date = new Date()
+let diaAtual = date.getDate()
+let mes = date.getUTCMonth()
+
+console.log(diaAtual, mes)
+
 /* Declarando botoes do sidebar */
 const dashboardBtn = document.querySelector('.dashboard-btn')
 const cadastrosBtn = document.querySelector('.cadastros-btn')
@@ -290,16 +296,64 @@ function newClientAdd(){
 let counterContasFunc = 0
 
 function tableContasLoad(){
+    
     let tableList
     let table = document.querySelector(".receber-tb")
     //condicao com contador para nao concatenar varios vezes em caso de varios clicks
     if(counterContasFunc === 0){
-        clients.forEach((client, index)=>{
+        clients.forEach((client)=>{
+
+            let diaVenc = client.vencimento
+
+            let diaFormated = () => {
+                if(diaVenc <= 9) {
+                    return "0" + diaVenc
+                }else {
+                    return diaVenc
+                }
+            }
+
+            let mesFormated = () => {
+                if(calcVencimento() <= 9) {
+                    return "0" + calcVencimento()
+                }else {
+                    return calcVencimento()
+                }
+            }
+
+
+            let calcVencimento = () => {
+                if ( client.vencimento <= diaAtual ) {
+                    return mes
+                }else {
+                    return mes + 1
+                }
+            }
+
+            //funcoes para analisar o vencimento e mudar a cor do texto 
+
+            let vencimento = () => {
+                if ( client.vencimento <= diaAtual ) {
+                    return "A receber"
+                }else {
+                    return "Vencido"
+                }
+            }
+
+            let colorVenc = () => {
+                if ( client.vencimento <= diaAtual ) {
+                    return `style="color:#f31818";`
+                }else {
+                    return `style="color:#3ee60bb3";` 
+                }
+            }
+
             tableList = `
                 <tr style="border-bottom: 1px solid var(--grey-color);">
                     <td>${client.nome}</td>
                     <td>${client.plano}</td>
-                    <td>${client.vencimento}</td>
+                    <td>${diaFormated()}/${mesFormated()}</td>
+                    <td ${colorVenc()}>${vencimento()}</td>
                 </tr>
                 `
             table.innerHTML += tableList
