@@ -1,74 +1,21 @@
+let clients = []
 
+//setting data in localStorage for manipulating
 
-let clients = [{
-    nome: 'Teste1 joaozinho sales dos santos',
-    CPF: 99999999911,
-    RG: 1301300001,
-    Telefone: 77999999999,
-    Endereço: 'rua sei',
-    Numero: 120,
-    Bairro: 'horto city',
-    Sexualidade: 'masculino',
-    plano: '200mb',
-    vencimento: 1
-},
-{
-    nome: 'Teste2',
-    CPF: 99999999911,
-    RG: 1301300001,
-    Telefone: 77999999999,
-    Endereço: 'rua sei la o que',
-    Numero: 120,
-    Bairro: 'new city',
-    Sexualidade: 'masculino',
-    plano: '500mb',
-    vencimento: 15
-},
-{
-    nome: 'Teste3',
-    CPF: 99999999911,
-    RG: 1301300001,
-    Telefone: 77999999999,
-    Endereço: 'rua sei la o que',
-    Numero: 120,
-    Bairro: 'new city',
-    Sexualidade: 'masculino',
-    plano: '300mb',
-    vencimento: 10
-},
-{
-    nome: 'Teste32',
-    CPF: 99999999911,
-    RG: 1301300001,
-    Telefone: 77999999999,
-    Endereço: 'rua sei la o que',
-    Numero: 120,
-    Bairro: 'new city',
-    Sexualidade: 'masculino',
-    plano: '100mb',
-    vencimento: 1
+if(localStorage.clients) {
+    clients = JSON.parse(localStorage.getItem("clients"))
+} else {
+    localStorage.clients = JSON.stringify(clients)
 }
 
-,
-{
-    nome: 'Teste31',
-    CPF: 99999999911,
-    RG: 1301300001,
-    Telefone: 77999999999,
-    Endereço: 'rua sei la o que',
-    Numero: 120,
-    Bairro: 'new city',
-    Sexualidade: 'masculino',
-    plano: '250mb',
-    vencimento: 20
+let setDb = () => {
+    localStorage.clients = JSON.stringify(clients)
 }
-]
 
 let date = new Date()
 let diaAtual = date.getDate()
 let mes = date.getUTCMonth()
 
-console.log(diaAtual, mes)
 
 /* Declarando botoes do sidebar */
 const dashboardBtn = document.querySelector('.dashboard-btn')
@@ -115,10 +62,6 @@ osBtn.addEventListener('click', (e)=>{
     unSelect(dashContent, cadastroContent, contasContent)
 })
 
-//TODO: create a function to use less lines on the eventListener arrow functions
-
-
-//functions to active and desative the btns, less code more optimized 
 function activeBtn(btn){
     btn.classList.add("active")
 }
@@ -144,10 +87,8 @@ const alertBox = document.querySelector("div.alert")
 
 function searchInKeyUp(event){
     let searched = event.target.value
-    console.log(searched)
 
-    let clientFound = filterSearch(searched)
-    console.log(clientFound)
+    clientFound = filterSearch(searched)
 
     let list = ' '
 
@@ -174,7 +115,7 @@ function searchInKeyUp(event){
         clientFound.forEach((client, index)=>{
             list += `
                 <div class='show-multiples'>
-                    <div class='edit-client' onclick='editClient()'><span class="material-symbols-sharp">
+                    <div class='edit-client'><span data-change="${index}" class="material-symbols-sharp">
                     edit
                     </span></div>
                     <div class='atributos'>
@@ -207,48 +148,80 @@ function searchInKeyUp(event){
     render.innerHTML = list
 }
 
+let target
+//using event.target.getAttribute to select the right client on the array clients so i can edit
+window.addEventListener("dblclick", (event) => {
+    target = event.target.getAttribute("data-id")
+
+    if(target) {
+        modalEdit.style.display = "grid"
+        document.querySelector("#txt-e-nome").value = clients[target].nome
+        document.querySelector("#txt-e-cpf").value = clients[target].CPF
+        document.querySelector("#txt-e-rg").value = clients[target].RG 
+        document.querySelector("#txt-e-tel").value = clients[target].Telefone
+        document.querySelector("#txt-e-cep").value = clients[target].CEP
+        document.querySelector("#txt-e-cidade").value = clients[target].cidade
+        document.querySelector("#txt-e-endereco").value = clients[target].Endereço
+        document.querySelector("#txt-e-nume").value = clients[target].Numero
+        document.querySelector("#txt-e-bairro").value = clients[target].Bairro
+        document.querySelector('input[name=sex-e-radio]:checked').value = clients[target].Sexualidade
+        document.querySelector("#select-e-plano").value = clients[target].plano
+        document.querySelector("#select-e-venc").value = clients[target].vencimento
+
+    }
+})
+
+window.addEventListener("click", (event) => {
+    target = event.target.getAttribute("data-change")
+
+    if(target) {
+        modalEdit.style.display = "grid"
+        document.querySelector("#txt-e-nome").value = clientFound[target].nome
+        document.querySelector("#txt-e-cpf").value = clientFound[target].CPF
+        document.querySelector("#txt-e-rg").value = clientFound[target].RG 
+        document.querySelector("#txt-e-tel").value = clientFound[target].Telefone
+        document.querySelector("#txt-e-cep").value = clientFound[target].CEP
+        document.querySelector("#txt-e-cidade").value = clientFound[target].cidade
+        document.querySelector("#txt-e-endereco").value = clientFound[target].Endereço
+        document.querySelector("#txt-e-nume").value = clientFound[target].Numero
+        document.querySelector("#txt-e-bairro").value = clientFound[target].Bairro
+        document.querySelector('input[name=sex-e-radio]:checked').value = clientFound[target].Sexualidade
+        document.querySelector("#select-e-plano").value = clientFound[target].plano
+        document.querySelector("#select-e-venc").value = clientFound[target].vencimento
+
+    }
+})
+
 
 search.addEventListener('keyup', _.debounce(searchInKeyUp, 400))
 
 function filterSearch(searched){
-    return clients.filter((client =>{
+    return clients.filter(((client, index) =>{
         return client.nome.toLowerCase().includes(searched.toLowerCase())
     }))
 }
 
 // deleted the cadastros.js because i was having some modules problemas, still working here
 
-
-
-// adding a counter to my tableLoad no keep adding the same things on the table while a click a lot of times in the buttons
-
-let counterFunc = 0
-
 function tableLoad(){
     let tableList
     let table = document.querySelector(".client-tb")
-    if(counterFunc === 0){
-        clients.forEach((client, index)=>{
-            tableList = `
-                <tr style="width: 100%; font-size: 12px; display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid; padding: 3px; background-color: var(--purple-light);">
-                    <td style="width: 300px;">
-                        <a style="cursor: pointer; padding-right: 5px;"><span style="font-size: 12px; color: var(--white-color);" class="material-symbols-sharp">
-                        open_in_new
-                        </span></a>
-                        ${client.nome}
-                    </td>
-                    <td style="width: 100px; text-align: start;">${client.plano}</td>
-                    <td style="width: 100px;"> ${client.CPF}</td>
-                    <td style="width: 80px;">${client.RG}</td>
-                    <td style="width: 80px;">${client.Telefone}</td>
-                    <td style="width: 80px;">${client.Bairro}</td>
-                    <td style="width: 200px;">${client.Endereço}</td>
-                `
-            table.innerHTML += tableList
-        })
-    }
-    counterFunc++
-    console.log(counterFunc)
+    table.innerHTML = ""
+    clients.forEach((client, index)=>{
+        tableList = `
+            <tr style="width: 100%; font-size: 12px; display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid; padding: 3px; background-color: var(--purple-light); gap:10px">
+                <td style="width: 250px; cursor: pointer;" data-id="${index}">
+                    ${client.nome}
+                </td>
+                <td>${client.plano}</td>
+                <td> ${client.CPF}</td>
+                <td>${client.RG}</td>
+                <td>${client.Telefone}</td>
+                <td>${client.Bairro}</td>
+                <td>${client.Endereço}</td>
+            `
+        table.innerHTML += tableList
+    })
 }
 
 
@@ -257,8 +230,11 @@ function tableLoad(){
 
 const btnNovoCad = document.querySelector(".novo-cadastro")
 const modal = document.querySelector(".modal-overlay")
+const modalEdit = document.querySelector(".modal-e-overlay")
 const btnSalvarCad = document.querySelector(".btn-salvar")
 const btnCancelCad = document.querySelector(".btn-cancelar")
+const btnEditarCad = document.querySelector(".btn-editar")
+const btnCancelEdCad = document.querySelector(".btn-cancelar-edit")
 
 btnNovoCad.addEventListener("click", ()=>{
     modal.style.display = "grid"
@@ -266,102 +242,192 @@ btnNovoCad.addEventListener("click", ()=>{
 
 btnCancelCad.addEventListener("click", ()=>{
     modal.style.display = "none"
+
+    document.querySelector("#txt-nome").value = ""
+    document.querySelector("#txt-cpf").value = ""
+    document.querySelector("#txt-rg").value = ""
+    document.querySelector("#txt-tel").value = ""
+    document.querySelector("#txt-cep").value = ""
+    document.querySelector("#txt-cidade").value = ""
+    document.querySelector("#txt-endereco").value = ""
+    document.querySelector("#txt-nume").value = ""
+    document.querySelector("#txt-bairro").value = ""
+    document.getElementsByName("sex-radio").value = ""
+    document.querySelector("#select-plano").value = ""
+    document.querySelector("#select-venc").value = ""
 })
 
 
 //adicionando novo cadastro no array de cadastros
 
-btnSalvarCad.addEventListener("click",newClientAdd)
+btnSalvarCad.addEventListener("click", newClientAdd)
+btnEditarCad.addEventListener("click", editClient)
 
-function newClientAdd(){
-    let newClient = {}
-
-    newClient.nome = document.querySelector("#txt-nome").value
-    newClient.CPF = document.querySelector("#txt-cpf").value
-    newClient.RG = document.querySelector("#txt-rg").value
-    newClient.Telefone = document.querySelector("#txt-tel").value
-    newClient.Endereço = document.querySelector("#txt-endereco").value
-    newClient.Numero = document.querySelector("#txt-nume").value
-    newClient.Bairro = document.querySelector("#txt-bairro").value
-    newClient.Sexualidade = document.getElementsByName("sex-radio").value
-    newClient.plano = document.querySelector("#select-plano").value
-    newClient.vencimento = document.querySelector("#select-venc").value
-
-    clients.push(newClient)
-    tableLoad()
+function editClient () {
+    console.log(target)
 }
 
 
-//fazendo interacao da div contas
-let counterContasFunc = 0
+function newClientAdd(){
+        
+        let newClient = {}
+    
+        newClient.nome = nameFormatted
+        newClient.CPF = cpfFormatted
+        newClient.RG = rgFormatted
+        newClient.Telefone = telFormatted
+        newClient.CEP = cepFormatted
+        newClient.cidade = document.querySelector("#txt-cidade").value
+        newClient.Endereço = document.querySelector("#txt-endereco").value
+        newClient.Numero = document.querySelector("#txt-nume").value
+        newClient.Bairro = document.querySelector("#txt-bairro").value
+        newClient.Sexualidade = document.querySelector('input[name=sex-radio]:checked').value
+        newClient.plano = document.querySelector("#select-plano").value
+        newClient.vencimento = document.querySelector("#select-venc").value
+    
+        let {nome, CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento} = newClient
+    
+        if (CPF === "" || RG === "" || Telefone === "" || CEP === "" || cidade === "" || Endereço === "" || Numero === "" || Bairro === "" || plano === "" || vencimento === "") {
+            console.log("erro!")
+        }else {
+            //Cleaning the input value after getting the value from the client
+            document.querySelector("#txt-nome").value = ""
+            document.querySelector("#txt-cpf").value = ""
+            document.querySelector("#txt-rg").value = ""
+            document.querySelector("#txt-tel").value = ""
+            document.querySelector("#txt-cep").value = ""
+            document.querySelector("#txt-cidade").value = ""
+            document.querySelector("#txt-endereco").value = ""
+            document.querySelector("#txt-nume").value = ""
+            document.querySelector("#txt-bairro").value = ""
+            document.getElementsByName("sex-radio").value = ""
+            document.querySelector("#select-plano").value = ""
+            document.querySelector("#select-venc").value = ""  
+            clients.push(newClient)
+            tableLoad()
+            setDb()
+        }
+}
+
+function formatNames () {
+    nomeDefault = document.querySelector("#txt-nome").value
+    let completeName = nomeDefault.toString()
+    let eachName = completeName.split(" ")
+    nameFormatted = ""
+    eachName.forEach((named) => {
+        format = named[0].toUpperCase() + named.substring(1)
+        nameFormatted += format + " "
+    })
+    document.querySelector("#txt-nome").value = nameFormatted
+}
+
+function formatCpf() {
+    let cpfDefault = document.querySelector("#txt-cpf").value
+    if (cpfDefault.length <= 10 || cpfDefault.length >= 12) {
+        document.querySelector("#txt-cpf").value = ""
+    } else {
+        cpfFormatted = cpfDefault.replace(/(\d{3})?(\d{3})?(\d{3})?(\d{2})/, "$1.$2.$3-$4")
+        document.querySelector("#txt-cpf").value = cpfFormatted
+    }
+}
+
+function formatRg() {
+    let rgDefault = document.querySelector("#txt-rg").value
+    if (rgDefault.length <= 8 || rgDefault.length >= 10) {
+        document.querySelector("#txt-rg").value = ""
+    } else {
+        rgFormatted = rgDefault.replace(/(\d{2})?(\d{3})?(\d{3})?(\d{1})/, "$1.$2.$3-$4")
+        document.querySelector("#txt-rg").value = rgFormatted
+    } 
+}
+
+function formatTel() {
+    let telDefault = document.querySelector("#txt-tel").value
+    if (telDefault.length <= 10 || telDefault.length >= 12) {
+        document.querySelector("#txt-tel").value = ""
+    } else {
+        telFormatted = telDefault.replace(/(\d{2})?(\d{5})?(\d{4})/, "($1) $2-$3")
+        document.querySelector("#txt-tel").value = telFormatted
+
+    }
+}
+
+function formatCep() {
+    let cepDefault = document.querySelector("#txt-cep").value
+    if (cepDefault.length <= 7 || cepDefault.length >= 9) {
+        document.querySelector("#txt-cep").value = ""
+    } else {
+        cepFormatted = cepDefault.replace(/(\d{5})?(\d{3})/, "$1-$2")
+        document.querySelector("#txt-cep").value = cepFormatted
+    }
+}
+
+
 
 function tableContasLoad(){
     
     let tableList
     let table = document.querySelector(".receber-tb")
-    //condicao com contador para nao concatenar varios vezes em caso de varios clicks
-    if(counterContasFunc === 0){
-        clients.forEach((client)=>{
 
-            let diaVenc = client.vencimento
+    table.innerHTML = ""
+    clients.forEach((client)=>{
 
-            let diaFormated = () => {
-                if(diaVenc <= 9) {
-                    return "0" + diaVenc
-                }else {
-                    return diaVenc
-                }
+        let diaVenc = client.vencimento
+
+        let diaFormatted = () => {
+            if(diaVenc <= 9) {
+                return "0" + diaVenc
+            }else {
+                return diaVenc
             }
+        }
 
-            let mesFormated = () => {
-                if(calcVencimento() <= 9) {
-                    return "0" + calcVencimento()
-                }else {
-                    return calcVencimento()
-                }
+        let mesFormatted = () => {
+            if(calcVencimento() <= 9) {
+                return "0" + calcVencimento()
+            }else {
+                return calcVencimento()
             }
+        }
 
 
-            let calcVencimento = () => {
-                if ( client.vencimento <= diaAtual ) {
-                    return mes
-                }else {
-                    return mes + 1
-                }
+        let calcVencimento = () => {
+            if ( client.vencimento <= diaAtual ) {
+                return mes
+            }else {
+                return mes + 1
             }
+        }
 
-            //funcoes para analisar o vencimento e mudar a cor do texto 
+        //funcoes para analisar o vencimento e mudar a cor do texto 
 
-            let vencimento = () => {
-                if ( client.vencimento <= diaAtual ) {
-                    return "A receber"
-                }else {
-                    return "Vencido"
-                }
+        let vencimento = () => {
+            if ( client.vencimento <= diaAtual ) {
+                return "A receber"
+            }else {
+                return "Vencido"
             }
+        }
 
-            let colorVenc = () => {
-                if ( client.vencimento <= diaAtual ) {
-                    return `style="color:#f31818";`
-                }else {
-                    return `style="color:#3ee60bb3";` 
-                }
+        let colorVenc = () => {
+            if ( client.vencimento <= diaAtual ) {
+                return `style="color:#f31818";`
+            }else {
+                return `style="color:#3ee60bb3";` 
             }
+        }
 
-            tableList = `
-                <tr style="border-bottom: 1px solid var(--grey-color);">
-                    <td>${client.nome}</td>
-                    <td>${client.plano}</td>
-                    <td>${diaFormated()}/${mesFormated()}</td>
-                    <td ${colorVenc()}>${vencimento()}</td>
-                </tr>
-                `
-            table.innerHTML += tableList
-            
-        })
-    }
-    counterContasFunc++
-    console.log(counterFunc)
+        tableList = `
+            <tr style="border-bottom: 1px solid var(--grey-color);">
+                <td>${client.nome}</td>
+                <td>${client.plano}</td>
+                <td>${diaFormatted()}/${mesFormatted()}</td>
+                <td ${colorVenc()}>${vencimento()}</td>
+            </tr>
+            `
+        table.innerHTML += tableList
+        
+    })
 }
 
 

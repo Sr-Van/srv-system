@@ -181,16 +181,17 @@
                     </div>
                     <!--fazer cadastros-->
                     <table style="width: 100%; padding: .3em;display:block;overflow:auto;">
-                        <tbody class="client-tb" style="width: 100%; padding: .3em; display: grid; grid-template-columns: repeat(1, 1fr);">
-                            <tr style="width: 100%; font-size: 20px; color: var(--white-color); display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid; padding-bottom: 3px;">
-                                <td style="width: 300px;">Nome</td>
-                                <td style="width: 100px; text-align: start;">Plano</td>
-                                <td style="width: 100px;"> CPF/CNPJ</td>
-                                <td style="width: 80px;">RG/IE</td>
-                                <td style="width: 80px;">Telefone</td>
-                                <td style="width: 80px;">Bairro</td>
-                                <td style="width: 200px;">Endereço</td>
-                            </tr>
+                        <tr style="width: 100%; font-size: 20px; color: var(--white-color); display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid; padding-bottom: 3px; gap: 10px;">
+                            <td style="width: 250px;">Nome</td>
+                            <td>Plano</td>
+                            <td> CPF/CNPJ</td>
+                            <td>RG/IE</td>
+                            <td>Telefone</td>
+                            <td>Bairro</td>
+                            <td>Endereço</td>
+                        </tr>
+                        <tbody class="client-tb" style="width: 100%; display: grid; grid-template-columns: repeat(1, 1fr);">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -198,13 +199,17 @@
                     <!--fazer contas-->
                     <div class="table-receber">
                         <table>
+                            <tr style="color: var(--white-color); font-size: 20px; border-bottom: 1px solid var(--white-color); width: 100%;
+                            display: grid;
+                            grid-template-columns: repeat(4, 1fr);
+                            text-align: center;">
+                                <td>Cliente</td>
+                                <td>plano</td>
+                                <td>vencimento</td>
+                                <td>Situacao</td>
+                            </tr>
                             <tbody class="receber-tb">
-                                <tr style="color: var(--white-color); font-size: 20px; border-bottom: 1px solid var(--white-color);">
-                                    <td>Cliente</td>
-                                    <td>plano</td>
-                                    <td>vencimento</td>
-                                    <td>Situacao</td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -231,19 +236,23 @@
                 </div>
                 <div class="form-n-cadastro">
                     <label for="txt-nome">Nome Completo</label>
-                    <input type="text" name="text" id="txt-nome">
+                    <input onblur="formatNames()"  type="text" id="txt-nome">
                     <label for="txt-cpf">CPF/CNPJ</label>
-                    <input type="text" name="text" id="txt-cpf">
+                    <input onblur="formatCpf()" type="text" id="txt-cpf">
                     <label for="txt-rg">RG/IE</label>
-                    <input type="text" name="text" id="txt-rg">
+                    <input onblur="formatRg()" type="text" id="txt-rg">
                     <label for="txt-tel">Telefone</label>
-                    <input type="text" name="text" id="txt-tel">
+                    <input onblur="formatTel()" type="tel" required id="txt-tel">
+                    <label for="txt-cep">CEP</label>
+                    <input onblur="formatCep()" type="text" name="text" id="txt-cep">
+                    <label for="txt-cep">Cidade</label>
+                    <input type="text" name="text" id="txt-cidade">
                     <label for="txt-endereco">Endereço</label>
-                    <input type="text" name="text" id="txt-endereco">
+                    <input type="text" id="txt-endereco">
                     <label for="txt-nume">Numero</label>
-                    <input type="text" name="text" id="txt-nume">
+                    <input type="text" id="txt-nume">
                     <label for="txt-bairro">Bairro</label>
-                    <input type="text" name="text" id="txt-bairro">
+                    <input type="text" id="txt-bairro">
                     <div style="padding-top: 20px;" class="sex-select">
                         <label>Sexualidade: </label>
                         <input type="radio" name="sex-radio" id="male-sex" value="Masculino">
@@ -266,6 +275,64 @@
                     <div class="Vencimento">
                         <label >Data de vencimento: </label>
                         <select name="select-venc" id="select-venc">
+                            <option value="" selected>Selecionar</option>
+                            <option value="1">Pos pago dia 1</option>
+                            <option value="10">Pos pago dia 10</option>
+                            <option value="15">Pos pago dia 15</option>
+                            <option value="20">Pos pago dia 20</option>
+                        </select>
+                    </div>
+                </div>
+                <p>Todos os valores devem ser preenchidos ou o cadastro nao sera realizado</p>
+            </div>
+        </div>
+        <div style="display: none;" class="modal-e-overlay modal-anim">
+            <div class="edit-cadastro-modal new-modal-anim">
+                <div class="header-e-cadastro">
+                    <a class="btn-style btn-editar" href="#">editar</a>
+                    <a class="btn-style btn-cancelar-edit" href="#">Cancelar</a>
+                </div>
+                <div class="form-e-cadastro">
+                    <label for="txt-e-nome">Nome Completo</label>
+                    <input type="text" id="txt-e-nome">
+                    <label for="txt-e-cpf">CPF/CNPJ</label>
+                    <input type="text" id="txt-e-cpf">
+                    <label for="txt-e-rg">RG/IE</label>
+                    <input type="text" id="txt-e-rg">
+                    <label for="txt-e-tel">Telefone</label>
+                    <input type="tel" required id="txt-e-tel">
+                    <label for="txt-e-cep">CEP</label>
+                    <input type="text" name="text" id="txt-e-cep">
+                    <label for="txt-e-cep">Cidade</label>
+                    <input type="text" name="text" id="txt-e-cidade">
+                    <label for="txt-e-endereco">Endereço</label>
+                    <input type="text" id="txt-e-endereco">
+                    <label for="txt-e-nume">Numero</label>
+                    <input type="text" id="txt-e-nume">
+                    <label for="txt-e-bairro">Bairro</label>
+                    <input type="text" id="txt-e-bairro">
+                    <div style="padding-top: 20px;" class="sex-select">
+                        <label>Sexualidade: </label>
+                        <input type="radio" name="sex-e-radio" id="male-sex" value="Masculino">
+                        <label for="male-sex">Masculino</label>
+                        <input type="radio" name="sex-e-radio" id="female-sex" value="Feminino">
+                        <label for="female-sex">Feminino</label>
+                        <input type="radio" name="sex-e-radio" id="other-sex" value="Outro" checked>
+                        <label for="male-sex">Outro</label>
+                    </div>
+                    <div class="plano">
+                        <label >Plano: </label>
+                        <select name="select-plano" id="select-e-plano">
+                            <option value="" selected>Selecionar</option>
+                            <option value="100MB">100mb - R$50,00</option>
+                            <option value="200MB">200mb - R$60,00</option>
+                            <option value="300MB">300mb - R$70,00</option>
+                            <option value="500MB">500mb - R$100,00</option>
+                        </select>
+                    </div>
+                    <div class="Vencimento">
+                        <label >Data de vencimento: </label>
+                        <select name="select-venc" id="select-e-venc">
                             <option value="" selected>Selecionar</option>
                             <option value="1">Pos pago dia 1</option>
                             <option value="10">Pos pago dia 10</option>

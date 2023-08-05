@@ -425,6 +425,68 @@ table::-webkit-scrollbar-thumb{
     padding-bottom: .4em;
 }
 
+/* edit modal */
+
+.modal-e-overlay{
+    display: grid;
+    place-items: center;
+    position: relative;
+    z-index: 998;
+    height: 100vh;
+    width: min(100%, 100vw);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal-e-overlay .edit-cadastro-modal{
+    position: absolute;
+    z-index: 999;
+    width: min(100%, 900px);
+    height: 600px;
+    background-color: var(--grey-light);
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-cadastro-modal .header-e-cadastro{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 50px;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: var(--purple-color);
+}
+.edit-cadastro-modal .header-e-cadastro a{
+    margin-left: 20px;
+}
+
+.edit-cadastro-modal .form-e-cadastro{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.edit-cadastro-modal .form-e-cadastro > input{
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey-color);
+    width: min(100%, 300px);
+}
+
+.btn-style{
+    color: var(--white-color);
+    background-color: var(--icons-color);
+    padding: .2em .6em;
+    border-radius: 1em;
+    cursor: pointer;
+}
+.edit-cadastro-modal p{
+    color: var(--red-danger);
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    padding-bottom: .4em;
+}
+
 select {
     background-color: var(--grey-light);
     text-align: end;
