@@ -90,7 +90,7 @@ body{
     width: 98%;
     margin: o auto;
     gap: 1.8rem;
-    grid-template-columns: 12rem auto 23rem;
+    grid-template-columns: 12rem auto;
 }
 
 .user{
@@ -173,8 +173,10 @@ body{
     position: absolute;
     right: 2rem;
     top: 5rem;
-    width: min(100%, 75vw);
-    height: 80vh;
+    width: 100%;
+    max-width:  75vw;
+    height: 100%;
+    max-height: 80vh;
     border-radius: 20px;
     background-color: var(--purple-color);
 }
@@ -288,6 +290,8 @@ body{
 
 .dashboard-content .client-feedb h1{
     position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
     font-size: min(14px, 20px);
 }
 
@@ -306,6 +310,10 @@ body{
     position: relative;
     top: -30px;
     left: -10px;
+}
+
+.dashboard-content .client-feedb p {
+    font-size: 10px;
 }
 .show-client{
     display: none;
@@ -363,6 +371,31 @@ table::-webkit-scrollbar-thumb{
     background-color: var(--purple-color);
     border-radius: .3em;
     border: 2px rgb(255, 255, 255 , 0.2) solid;
+}
+
+.tr-padrao {
+    width: 100%;
+    max-width: 983px; 
+    font-size: minmax(auto,20px); 
+    color: var(--white-color); 
+    display: grid; 
+    grid-template-columns: repeat(7, 1fr); 
+    border-bottom: 1px solid; 
+    padding-bottom: 3px; 
+    gap: 5px;
+}
+
+.tr-padrao-2 {
+    width: 100%; 
+    height: 25px; 
+    font-size: 12px; 
+    display: grid; 
+    grid-template-columns: repeat(7, 1fr); 
+    border-bottom: 1px solid; 
+    padding: 3px; 
+    background-color: var(--purple-light); 
+    gap:10px; 
+    overflow: hidden;
 }
 
 .modal-overlay{
@@ -522,12 +555,13 @@ select {
 .contas > div{
     border-radius: 20px;
     margin: 1rem;
-    background-color: var(--purple-light);
 }
 
 .contas table{
     width: 100%;
 }
+
+
 
 .receber-tb tr{
     width: 100%;
