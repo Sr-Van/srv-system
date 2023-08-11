@@ -449,6 +449,11 @@ table::-webkit-scrollbar-thumb{
     border-radius: 1em;
     cursor: pointer;
 }
+
+.excluir-cadastro {
+    position: absolute;
+    right: 2em;
+}
 .novo-cadastro-modal p{
     color: var(--red-danger);
     font-size: 12px;

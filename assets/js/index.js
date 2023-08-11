@@ -12,6 +12,143 @@ const setDb = () => {
     localStorage.clients = JSON.stringify(clients)
 }
 
+const tableContasLoad = () =>{
+    
+    let tableList
+    let table = document.querySelector(".receber-tb")
+
+    table.innerHTML = ""
+    clients.forEach( client => {
+
+        const { vencimento, nome, plano } = client
+
+        const diaFormatted = () => {
+            if(vencimento <= 9) {
+                return "0" + vencimento
+            }else {
+                return vencimento
+            }
+        }
+
+        const mesFormatted = () => {
+            if(calcVencimento() <= 9) {
+                return "0" + calcVencimento()
+            }else {
+                return calcVencimento()
+            }
+        }
+
+
+        const calcVencimento = () => {
+            if ( vencimento <= diaAtual ) {
+                return mes
+            }else {
+                return mes + 1
+            }
+        }
+
+        //funcoes para analisar o vencimento e mudar a cor do texto 
+
+        const situacao = () => {
+            if ( vencimento <= diaAtual ) {
+                return "A receber"
+            }else {
+                return "Vencido"
+            }
+        }
+
+        const colorVenc = () => {
+            if ( vencimento <= diaAtual ) {
+                return `style="color:#f31818";`
+            }else {
+                return `style="color:#3ee60bb3";` 
+            }
+        }
+
+        tableList = `
+            <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light)">
+                <td>${nome}</td>
+                <td>${plano}</td>
+                <td>${diaFormatted()}/${mesFormatted()}</td>
+                <td ${colorVenc()}>${situacao()}</td>
+            </tr>
+            `
+        table.innerHTML += tableList
+        
+    })
+}
+
+const cleanInputs = () => {
+    document.querySelector("#txt-nome").value = ""
+    document.querySelector("#txt-cpf").value = ""
+    document.querySelector("#txt-rg").value = ""
+    document.querySelector("#txt-tel").value = ""
+    document.querySelector("#txt-cep").value = ""
+    document.querySelector("#txt-cidade").value = ""
+    document.querySelector("#txt-endereco").value = ""
+    document.querySelector("#txt-nume").value = ""
+    document.querySelector("#txt-bairro").value = ""
+    document.getElementsByName("sex-radio").value = ""
+    document.querySelector("#select-plano").value = ""
+    document.querySelector("#select-venc").value = ""
+}
+
+
+
+const formatNames = () => {
+    nomeDefault = document.querySelector("#txt-nome").value
+    let completeName = nomeDefault.toString()
+    let eachName = completeName.split(" ")
+    nameFormatted = ""
+    eachName.forEach((named) => {
+        format = named[0].toUpperCase() + named.substring(1)
+        nameFormatted += format + " "
+    })
+    document.querySelector("#txt-nome").value = nameFormatted
+}
+
+const formatCpf = () => {
+    let cpfDefault = document.querySelector("#txt-cpf").value
+    if (cpfDefault.length <= 10 || cpfDefault.length >= 12) {
+        document.querySelector("#txt-cpf").value = ""
+    } else {
+        cpfFormatted = cpfDefault.replace(/(\d{3})?(\d{3})?(\d{3})?(\d{2})/, "$1.$2.$3-$4")
+        document.querySelector("#txt-cpf").value = cpfFormatted
+    }
+}
+
+const formatRg = () => {
+    let rgDefault = document.querySelector("#txt-rg").value
+    if (rgDefault.length <= 8 || rgDefault.length >= 10) {
+        document.querySelector("#txt-rg").value = ""
+    } else {
+        rgFormatted = rgDefault.replace(/(\d{2})?(\d{3})?(\d{3})?(\d{1})/, "$1.$2.$3-$4")
+        document.querySelector("#txt-rg").value = rgFormatted
+    } 
+}
+
+const formatTel = () => {
+    let telDefault = document.querySelector("#txt-tel").value
+    if (telDefault.length <= 10 || telDefault.length >= 12) {
+        document.querySelector("#txt-tel").value = ""
+    } else {
+        telFormatted = telDefault.replace(/(\d{2})?(\d{5})?(\d{4})/, "($1) $2-$3")
+        document.querySelector("#txt-tel").value = telFormatted
+
+    }
+}
+
+const formatCep = () => {
+    let cepDefault = document.querySelector("#txt-cep").value
+    if (cepDefault.length <= 7 || cepDefault.length >= 9) {
+        document.querySelector("#txt-cep").value = ""
+    } else {
+        cepFormatted = cepDefault.replace(/(\d{5})?(\d{3})/, "$1-$2")
+        document.querySelector("#txt-cep").value = cepFormatted
+    }
+}
+
+
 let date = new Date()
 const diaAtual = date.getDate()
 const mes = date.getUTCMonth()
@@ -57,7 +194,6 @@ contasBtn.addEventListener('click', (e)=>{
     contasContent.style.display = 'grid'
     tableContasLoad()
     desativeRender()
-
 })
 
 osBtn.addEventListener('click', (e)=>{
@@ -148,14 +284,16 @@ const searchInKeyUp = event => {
         setTimeout(()=>{
             desativeRender()
             activeBtn(dashboardBtn)
+            desativeBtn(osBtn, cadastrosBtn, contasBtn)
             dashContent.classList.add("back-animation")
             dashContent.style.display = 'grid'
         }, 1000)
         alertBox.style.display = 'flex'
         alertBox.innerHTML = 'Digite o nome de um cliente para mostrar o cadastro no dashboard.'
 
-        dashContent.style.display = 'none'
+        unSelect(dashContent, cadastroContent, contasContent)
     }else{
+        unSelect(dashContent, cadastroContent, contasContent)
         renderInSearch(list)
     }
 }
@@ -176,20 +314,29 @@ const newClientAdd = () =>{
     newClient.plano = document.querySelector("#select-plano").value
     newClient.vencimento = document.querySelector("#select-venc").value
 
-    const {nome, CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento} = newClient
+    const {CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento} = newClient
 
     if (CPF === "" || RG === "" || Telefone === "" || CEP === "" || cidade === "" || Endereço === "" || Numero === "" || Bairro === "" || plano === "" || vencimento === "") {
-        console.log("erro!")
-    }else {
-        //Cleaning the input value after getting the value from the client
-        cleanInputs()
-        clients.push(newClient)
-        tableLoad()
-        setDb()
+        return
     }
+    cleanInputs()
+    clients.push(newClient)
+    tableLoad()
+    setDb()
 }
 
-const openModalEdit = (clients, target) => {
+const deleteClient = target => {
+    const indexToDelete = clients.map(client => client.nome)
+    .indexOf(clients[target].nome)
+
+    clients.splice(indexToDelete, 1)
+    setDb()
+    modalEdit.style.display = "none"
+    cleanInputs()
+    tableLoad()
+}
+
+const openModalEdit =  (clients, target) => {
     const {nome, CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento, Sexualidade} = clients[target]
     modalEdit.style.display = "grid"
     document.querySelector("#txt-e-nome").value = nome
@@ -204,11 +351,12 @@ const openModalEdit = (clients, target) => {
     document.querySelector('input[name=sex-e-radio]:checked').value = Sexualidade
     document.querySelector("#select-e-plano").value = plano
     document.querySelector("#select-e-venc").value = vencimento
+
 }
 
 let target
 //using event.target.getAttribute to select the right client on the array clients so i can edit
-window.addEventListener("dblclick", (event) => {
+window.addEventListener("dblclick", event => {
     target = event.target.getAttribute("data-id")
 
     if(target) {
@@ -216,7 +364,7 @@ window.addEventListener("dblclick", (event) => {
     }
 })
 
-window.addEventListener("click", (event) => {
+window.addEventListener("click", event => {
     target = event.target.getAttribute("data-change")
 
     if(target) {
@@ -227,13 +375,12 @@ window.addEventListener("click", (event) => {
 
 search.addEventListener('keyup', _.debounce(searchInKeyUp, 400))
 
-function filterSearch(searched){
-    return clients.filter(((client, index) =>{
+const filterSearch = searched => {
+    return clients.filter(( client =>{
         return client.nome.toLowerCase().includes(searched.toLowerCase())
     }))
 }
 
-// deleted the cadastros.js because i was having some modules problemas, still working here
 
 const tableLoad = () => {
     let tableList = ""
@@ -267,6 +414,7 @@ const btnSalvarCad = document.querySelector(".btn-salvar")
 const btnCancelCad = document.querySelector(".btn-cancelar")
 const btnEditarCad = document.querySelector(".btn-editar")
 const btnCancelEdCad = document.querySelector(".btn-cancelar-edit")
+const btnExcluirCad = document.querySelector(".excluir-cadastro")
 
 btnNovoCad.addEventListener("click", ()=>{
     modal.style.display = "grid"
@@ -282,153 +430,15 @@ btnCancelEdCad.addEventListener("click", ()=>{
     cleanInputs()
 })
 
-
-
-//adicionando novo cadastro no array de cadastros
-
 btnSalvarCad.addEventListener("click", newClientAdd)
-btnEditarCad.addEventListener("click", editClient)
 
-function editClient () {
-    console.log(target)
-}
-
-const cleanInputs = () => {
-    document.querySelector("#txt-nome").value = ""
-    document.querySelector("#txt-cpf").value = ""
-    document.querySelector("#txt-rg").value = ""
-    document.querySelector("#txt-tel").value = ""
-    document.querySelector("#txt-cep").value = ""
-    document.querySelector("#txt-cidade").value = ""
-    document.querySelector("#txt-endereco").value = ""
-    document.querySelector("#txt-nume").value = ""
-    document.querySelector("#txt-bairro").value = ""
-    document.getElementsByName("sex-radio").value = ""
-    document.querySelector("#select-plano").value = ""
-    document.querySelector("#select-venc").value = ""
-}
+btnExcluirCad.addEventListener("click", deleteClient)
 
 
 
-const formatNames = () => {
-    nomeDefault = document.querySelector("#txt-nome").value
-    let completeName = nomeDefault.toString()
-    let eachName = completeName.split(" ")
-    nameFormatted = ""
-    eachName.forEach((named) => {
-        format = named[0].toUpperCase() + named.substring(1)
-        nameFormatted += format + " "
-    })
-    document.querySelector("#txt-nome").value = nameFormatted
-}
-
-const formatCpf = () => {
-    let cpfDefault = document.querySelector("#txt-cpf").value
-    if (cpfDefault.length <= 10 || cpfDefault.length >= 12) {
-        document.querySelector("#txt-cpf").value = ""
-    } else {
-        cpfFormatted = cpfDefault.replace(/(\d{3})?(\d{3})?(\d{3})?(\d{2})/, "$1.$2.$3-$4")
-        document.querySelector("#txt-cpf").value = cpfFormatted
-    }
-}
-
-const formatRg = () => {
-    let rgDefault = document.querySelector("#txt-rg").value
-    if (rgDefault.length <= 8 || rgDefault.length >= 10) {
-        document.querySelector("#txt-rg").value = ""
-    } else {
-        rgFormatted = rgDefault.replace(/(\d{2})?(\d{3})?(\d{3})?(\d{1})/, "$1.$2.$3-$4")
-        document.querySelector("#txt-rg").value = rgFormatted
-    } 
-}
-
-const formatTel = () => {
-    let telDefault = document.querySelector("#txt-tel").value
-    if (telDefault.length <= 10 || telDefault.length >= 12) {
-        document.querySelector("#txt-tel").value = ""
-    } else {
-        telFormatted = telDefault.replace(/(\d{2})?(\d{5})?(\d{4})/, "($1) $2-$3")
-        document.querySelector("#txt-tel").value = telFormatted
-
-    }
-}
-
-const formatCep = () => {
-    let cepDefault = document.querySelector("#txt-cep").value
-    if (cepDefault.length <= 7 || cepDefault.length >= 9) {
-        document.querySelector("#txt-cep").value = ""
-    } else {
-        cepFormatted = cepDefault.replace(/(\d{5})?(\d{3})/, "$1-$2")
-        document.querySelector("#txt-cep").value = cepFormatted
-    }
-}
 
 
-const tableContasLoad = () =>{
-    
-    let tableList
-    let table = document.querySelector(".receber-tb")
 
-    table.innerHTML = ""
-    clients.forEach((client)=>{
-
-        const diaVenc = client.vencimento
-
-        const diaFormatted = () => {
-            if(diaVenc <= 9) {
-                return "0" + diaVenc
-            }else {
-                return diaVenc
-            }
-        }
-
-        const mesFormatted = () => {
-            if(calcVencimento() <= 9) {
-                return "0" + calcVencimento()
-            }else {
-                return calcVencimento()
-            }
-        }
-
-
-        const calcVencimento = () => {
-            if ( client.vencimento <= diaAtual ) {
-                return mes
-            }else {
-                return mes + 1
-            }
-        }
-
-        //funcoes para analisar o vencimento e mudar a cor do texto 
-
-        const vencimento = () => {
-            if ( client.vencimento <= diaAtual ) {
-                return "A receber"
-            }else {
-                return "Vencido"
-            }
-        }
-
-        const colorVenc = () => {
-            if ( client.vencimento <= diaAtual ) {
-                return `style="color:#f31818";`
-            }else {
-                return `style="color:#3ee60bb3";` 
-            }
-        }
-
-        tableList = `
-            <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light)">
-                <td>${client.nome}</td>
-                <td>${client.plano}</td>
-                <td>${diaFormatted()}/${mesFormatted()}</td>
-                <td ${colorVenc()}>${vencimento()}</td>
-            </tr>
-            `
-        table.innerHTML += tableList
-        
-    })
-}
 
 
 
