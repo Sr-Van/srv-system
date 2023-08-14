@@ -242,6 +242,7 @@
                                     <td>Motivo</td>
                                     <td>Cliente</td>
                                     <td>Data</td>
+                                    <td>Situacao</td>
                                 </tr> 
                             </thead>
                             <tbody></tbody>
@@ -379,6 +380,41 @@
                     </div>
                 </div>
                 <p>Todos os valores devem ser preenchidos ou o cadastro nao sera realizado</p>
+            </div>
+        </div>
+        <div class="modal-overlay modal-anim">
+            <div class="nova-os-modal new-modal-anim">
+                <div class="header-os-cadastro">
+                    <a class="btn-style btn-salvar-ordem" href="#">Salvar</a>
+                    <a class="btn-style btn-cancelar-ordem" href="#">Cancelar</a>
+                    <a class="btn-style btn-finalizar-ordem" href="#">Finalizar</a>
+                </div>
+                <div class="form-n-os">
+                    <label for="">Motivo:</label>
+                    <select name="motivo" id="motivo-select">
+                        <option value="">Escolha o motivo</option>
+                        <option value="1">Instalacao</option>
+                        <option value="2">Troca de roteador</option>
+                        <option value="3">lentidao ao jogar</option>
+                        <option value="4">lentidao ao jogar</option>
+                        <option value="5">Remocao de equipamento</option>
+                        <option value="6">Velocidade nao corresponde ao plano</option>
+                        <option value="7">Troca de plano</option>
+                        <option value="8">Problema externo</option>
+                        <option value="9">Feedback do cliente</option>
+                    </select>
+
+                    <label for="">Cliente:</label>
+                    <select name="cliente-select" id="cliente-select">
+                        <option value="">Selecione o cliente</option>
+                    </select>
+                    <label for="">Data de abertura:</label>
+                    <input type="date" id="date-os">
+
+                    <label for="">OBS:</label>
+                    <input type="text" style="width: 350px;
+                    height: 200px; background-color: var(--white-color);border-radius: .2em;">
+                </div>
             </div>
         </div>
         <footer style="color: var(--white-color); position: absolute;
