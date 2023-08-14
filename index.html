@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src='/assets/js/index.js' defer></script>
+    <script src='/assets/js/ordens.js' defer></script>
     <title>Dashboard SRV</title>
 </head>
 <body>
@@ -27,7 +28,6 @@
     <div class="alert">
         alerta
     </div>
-
     <main>
         <div class="container">
             <div class="user">
@@ -66,10 +66,8 @@
             </aside>
             <div class="main-container">
                 <!--div para mostrar o conteudo principal e todas as div que forem abertas pelo usuario clicando nos sidelinks-->
-                <div class="show-client">
-                    <!--Conteudo onde mostra o cliente da pesquisa na searchbox-->
-                </div>
-                <div class="dashboard-content">
+                <div class="show-client"></div>
+                <div style="display: none;" class="dashboard-content">
                     <!--graficos do dashboard-->
                     <div class="cards">
                         <div class="status">
@@ -235,7 +233,33 @@
                     </div>
                 </div>
                 <div class="ordens">
-                    <!--fazer ordens de servico e linkar com o numero no sidebar-->
+                    <a class="btn-style btn-nova-os">Nova</a>
+                    <div class="table-os">
+                        <h2>Ordens de Serviço:</h2>
+                        <table data-js="table-os">
+                            <thead>
+                                <tr style="color: var(--white-color); font-size: 20px; border-bottom: 1px solid var(--white-color); background-color: transparent; max-height: 30px;" class="tr-padrao-os">
+                                    <td>Motivo</td>
+                                    <td>Cliente</td>
+                                    <td>Data</td>
+                                </tr> 
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="status-os">
+                        <div>
+                            <p class="p-done-os">12</p>
+                            <h3>Feitas</h3>
+                        </div>
+                        <div>
+                            <p class="p-todo-os">12</p>
+                            <h3>Em aberto</h3>
+                        </div>
+                    </div>
+                    <div class="comment-output">
+
+                    </div>
                 </div>
             </div>  
         </div>

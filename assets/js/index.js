@@ -1,4 +1,135 @@
-let clients = []
+let clients = [
+    {
+      nome: "Ana da Silva",
+      CPF: "123.456.789-00",
+      RG: "12.345.678-9",
+      Telefone: "(11) 98765-4321",
+      CEP: "12345-678",
+      cidade: "Sao Paulo",
+      Endereco: "Rua A, 123",
+      Numero: 123,
+      Bairro: "Centro",
+      plano: "Plano A",
+      vencimento: 1
+    },
+    {
+      nome: "Joao Souza",
+      CPF: "987.654.321-00",
+      RG: "98.765.432-1",
+      Telefone: "(21) 98765-4321",
+      CEP: "54321-678",
+      cidade: "Rio de Janeiro",
+      Endereco: "Avenida B, 456",
+      Numero: 456,
+      Bairro: "Copacabana",
+      plano: "Plano B",
+      vencimento: 5
+    },
+    {
+      nome: "Maria Oliveira",
+      CPF: "111.222.333-44",
+      RG: "11.222.333-4",
+      Telefone: "(31) 98765-4321",
+      CEP: "98765-432",
+      cidade: "Belo Horizonte",
+      Endereco: "Praça C, 789",
+      Numero: 789,
+      Bairro: "Savassi",
+      plano: "Plano C",
+      vencimento: 10
+    },
+    {
+      nome: "Carlos Santos",
+      CPF: "555.666.777-88",
+      RG: "55.666.777-8",
+      Telefone: "(41) 98765-4321",
+      CEP: "76543-210",
+      cidade: "Curitiba",
+      Endereco: "Rua D, 987",
+      Numero: 987,
+      Bairro: "Batel",
+      plano: "Plano D",
+      vencimento: 15
+    },
+    {
+      nome: "Laura Lima",
+      CPF: "888.999.000-11",
+      RG: "88.999.000-1",
+      Telefone: "(51) 98765-4321",
+      CEP: "87654-321",
+      cidade: "Porto Alegre",
+      Endereco: "Avenida E, 654",
+      Numero: 654,
+      Bairro: "Moinhos de Vento",
+      plano: "Plano E",
+      vencimento: 20
+    },
+    {
+      nome: "Rafael Alves",
+      CPF: "222.333.444-55",
+      RG: "22.333.444-5",
+      Telefone: "(61) 98765-4321",
+      CEP: "23456-789",
+      cidade: "Brasilia",
+      Endereco: "Quadra F, 123",
+      Numero: 123,
+      Bairro: "Asa Sul",
+      plano: "Plano F",
+      vencimento: 25
+    },
+    {
+      nome: "Isabel Castro",
+      CPF: "444.555.666-77",
+      RG: "44.555.666-7",
+      Telefone: "(71) 98765-4321",
+      CEP: "34567-890",
+      cidade: "Salvador",
+      Endereco: "Rua G, 987",
+      Numero: 987,
+      Bairro: "Barra",
+      plano: "Plano G",
+      vencimento: 1
+    },
+    {
+      nome: "Antonio Pereira",
+      CPF: "666.777.888-99",
+      RG: "66.777.888-9",
+      Telefone: "(81) 98765-4321",
+      CEP: "45678-901",
+      cidade: "Recife",
+      Endereco: "Avenida H, 654",
+      Numero: 654,
+      Bairro: "Boa Viagem",
+      plano: "Plano H",
+      vencimento: 5
+    },
+    {
+      nome: "Leticia Carvalho",
+      CPF: "999.000.111-22",
+      RG: "99.000.111-2",
+      Telefone: "(85) 98765-4321",
+      CEP: "56789-012",
+      cidade: "Fortaleza",
+      Endereco: "Rua I, 123",
+      Numero: 123,
+      Bairro: "Meireles",
+      plano: "Plano I",
+      vencimento: 10
+    },
+    {
+      nome: "Gabriel Santos",
+      CPF: "111.222.333-44",
+      RG: "11.222.333-4",
+      Telefone: "(92) 98765-4321",
+      CEP: "67890-123",
+      cidade: "Manaus",
+      Endereco: "Avenida J, 987",
+      Numero: 987,
+      Bairro: "Centro",
+      plano: "Plano J",
+      vencimento: 15
+    }
+]
 
 //setting data in localStorage for manipulating
 
@@ -228,15 +359,15 @@ const render = document.querySelector("div.show-client")
 const alertBox = document.querySelector("div.alert")
 
 const renderInSearch = list => {
-        desativeBtn(osBtn, dashboardBtn, cadastrosBtn)
-        contasBtn.classList.remove("active")
-        dashContent.style.display = 'none'
-        clientFound.forEach((client, index)=>{
-            list += `
-                <div class='show-multiples'>
+    desativeBtn(osBtn, dashboardBtn, cadastrosBtn)
+    contasBtn.classList.remove("active")
+    dashContent.style.display = 'none'
+    clientFound.forEach((client, index)=>{
+        list += `
+                <div class="show-multiples">
                     <div class='edit-client'>
-                        <span data-change="${index}" class="material-symbols-sharp">
-                            edit
+                        <span data-change="${index}"            class="material-symbols-sharp">
+                        edit
                         </span>
                     </div>
                     <div class='atributos'>
@@ -262,10 +393,10 @@ const renderInSearch = list => {
                         </div>
                     </div>
                 </div>
-            `
-        })
-    render.style.display = 'flex'
+                    `
+    })
     render.innerHTML = list
+    render.style.display = 'flex'
 }
 
 const desativeRender = () => {
@@ -325,11 +456,13 @@ const newClientAdd = () =>{
     setDb()
 }
 
-const deleteClient = target => {
-    const indexToDelete = clients.map(client => client.nome)
-    .indexOf(clients[target].nome)
+const findIndexToDelete = () => {
+    return clients.map(client => client.nome)
+    .indexOf(nomeParaIndex)
+}
 
-    clients.splice(indexToDelete, 1)
+const deleteClient = () => {
+    clients.splice(findIndexToDelete(), 1)
     setDb()
     modalEdit.style.display = "none"
     cleanInputs()
@@ -338,7 +471,13 @@ const deleteClient = target => {
 
 const openModalEdit =  (clients, target) => {
     const {nome, CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento, Sexualidade} = clients[target]
+
+    nomeParaIndex = nome
+
+
     modalEdit.style.display = "grid"
+
+
     document.querySelector("#txt-e-nome").value = nome
     document.querySelector("#txt-e-cpf").value = CPF
     document.querySelector("#txt-e-rg").value = RG 
@@ -402,10 +541,6 @@ const tableLoad = () => {
     })
     table.innerHTML += tableList
 }
-
-
-
-//declarando botoes do cadastro e modal
 
 const btnNovoCad = document.querySelector(".novo-cadastro")
 const modal = document.querySelector(".modal-overlay")
