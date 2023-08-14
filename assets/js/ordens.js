@@ -1,4 +1,4 @@
-let ordens = [
+let orders = [
     {
         id: 1,
         type: 1,
@@ -45,8 +45,16 @@ const typesOfOrders = {
     9: "Feedback do cliente"
 }
 
-const getTypeOfOrders = ordem => {
-    const { id, type, client, date, situation } = ordem
+const finalOrderMessages = {
+    1: "Finalizada",
+    2: "Necessita de equipe extra",
+    3: "Cliente nao estava presente",
+    4: "Nao foi possivel realizar o atendimento",
+    5: "Passada ao setor administrativo"
+}
+
+const getTypeOfOrders = order => {
+    const { id, type, client, date, situation } = order
     const typeToText = typesOfOrders[type]
     const table = document.querySelector(`[data-js="table-os"]`)
     const tr = document.createElement("tr")
@@ -62,7 +70,7 @@ const getTypeOfOrders = ordem => {
 }
 
 const init = () => {
-    ordens.forEach(ordem => getTypeOfOrders(ordem))
+    orders.forEach(order => getTypeOfOrders(order))
 }
 
 init()
@@ -72,7 +80,7 @@ const countOrders = () => {
     const messageCounterOnScreen = document.querySelector(".count-messages")
     const messageCounterToDoOnDiv = document.querySelector(".p-todo-os")
 
-    const ordersOpened = ordens.filter(ordem => ordem.situation === "Aberta")
+    const ordersOpened = orders.filter(order => order.situation === "Aberta")
 
     messageCounterOnScreen.textContent = ordersOpened.length
     messageCounterToDoOnDiv.textContent = ordersOpened.length
@@ -93,4 +101,54 @@ const clientNameOnSelect = () => {
 }
 
 clientNameOnSelect()
+
+const selectSituacao = document.querySelector("#select-situacao")
+const selectMotivo = document.querySelector("#motivo-select")
+
+const getFinalMessageArray = () => {
+    const arr =  Object.values(finalOrderMessages)
+    arr.forEach((message, index) => putMessageOnSelect(message, index, selectSituacao))
+}
+
+const getReasonMessageArray = () => {
+    const arr =  Object.values(typesOfOrders)
+    arr.forEach((message, index) => putMessageOnSelect(message, index, selectMotivo))
+}
+
+const putMessageOnSelect = (message, i, select) => {
+    i++
+    const option = document.createElement("option")
+    option.setAttribute("value", i)
+    option.textContent = message
+    select.append(option)
+}
+
+getFinalMessageArray()
+getReasonMessageArray()
+
+const buttonNewOrder = document.querySelector(".btn-nova-os")
+const buttonSaveOrder = document.querySelector(".btn-salvar-ordem")
+const buttonCancelOrder = document.querySelector(".btn-cancelar-ordem")
+const buttonEndOrder = document.querySelector(".btn-finalizar-ordem")
+
+const addNewOrder = () => {
+    const newOrder = {}
+    const GetSelectClient = document.querySelector("#cliente-select")
+    const GetSelectSituation = document.querySelector("#select-situacao")
+    const typeAsNumber = Number(document.querySelector("#motivo-select").value)
+    const client = GetSelectClient.options[GetSelectClient.selectedIndex].text
+    const situation = GetSelectSituation.options[GetSelectSituation.selectedIndex].text
+
+    newOrder.id = orders.length + 1
+    newOrder.type = typeAsNumber
+    newOrder.client = client
+    newOrder.message = document.querySelector("#message").value
+    newOrder.date = document.querySelector("#date-os").value
+    newOrder.situation = situation
+
+    return orders.push(newOrder)
+}
+
+buttonSaveOrder.addEventListener("click", addNewOrder)
+
 

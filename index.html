@@ -391,17 +391,9 @@
                 </div>
                 <div class="form-n-os">
                     <label for="">Motivo:</label>
-                    <select name="motivo" id="motivo-select">
+                    <select name="motivo-select" id="motivo-select">
                         <option value="">Escolha o motivo</option>
-                        <option value="1">Instalacao</option>
-                        <option value="2">Troca de roteador</option>
-                        <option value="3">lentidao ao jogar</option>
-                        <option value="4">lentidao ao jogar</option>
-                        <option value="5">Remocao de equipamento</option>
-                        <option value="6">Velocidade nao corresponde ao plano</option>
-                        <option value="7">Troca de plano</option>
-                        <option value="8">Problema externo</option>
-                        <option value="9">Feedback do cliente</option>
+                        
                     </select>
 
                     <label for="">Cliente:</label>
@@ -412,8 +404,12 @@
                     <input type="date" id="date-os">
 
                     <label for="">OBS:</label>
-                    <input type="text" style="width: 350px;
-                    height: 200px; background-color: var(--white-color);border-radius: .2em;">
+                    <input type="text" style="width: 350px; background-color: var(--white-color);border-radius: .2em;" placeholder="insira os detalhes da ordem" id="message">
+
+                    <label for="">Situacao</label>
+                    <select name="select-situacao" id="select-situacao">
+                        <option value="">Aberta</option>
+                    </select>
                 </div>
             </div>
         </div>
