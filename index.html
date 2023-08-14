@@ -236,7 +236,7 @@
                     <a class="btn-style btn-nova-os">Nova</a>
                     <div class="table-os">
                         <h2>Ordens de Serviço:</h2>
-                        <table data-js="table-os">
+                        <table>
                             <thead>
                                 <tr style="color: var(--white-color); font-size: 20px; border-bottom: 1px solid var(--white-color); background-color: transparent; max-height: 30px;" class="tr-padrao-os">
                                     <td>Motivo</td>
@@ -245,7 +245,7 @@
                                     <td>Situacao</td>
                                 </tr> 
                             </thead>
-                            <tbody></tbody>
+                            <tbody data-js="table-os"></tbody>
                         </table>
                     </div>
                     <div class="status-os">
@@ -382,7 +382,7 @@
                 <p>Todos os valores devem ser preenchidos ou o cadastro nao sera realizado</p>
             </div>
         </div>
-        <div class="modal-overlay modal-anim">
+        <div style="display: none;" class="modal-os-overlay modal-overlay modal-anim">
             <div class="nova-os-modal new-modal-anim">
                 <div class="header-os-cadastro">
                     <a class="btn-style btn-salvar-ordem" href="#">Salvar</a>

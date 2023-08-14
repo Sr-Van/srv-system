@@ -1,37 +1,14 @@
-let orders = [
-    {
-        id: 1,
-        type: 1,
-        client: "Marielson Silva",
-        message: "Cliente sem internet a mais de 2 dias, nao conseguiu entrar em contato e por isso so solicitou atendimento hoje.",
-        date: "25/10",
-        situation: "Aberta"
-    },
-    {
-        id: 2,
-        type: 4,
-        client: "Marielson Silva",
-        message: "Cliente sem internet a mais de 2 dias, nao conseguiu entrar em contato e por isso so solicitou atendimento hoje.",
-        date: "25/10",
-        situation: "Aberta"
-    },
-    {
-        id: 3,
-        type: 7,
-        client: "Marielson Silva",
-        message: "Cliente sem internet a mais de 2 dias, nao conseguiu entrar em contato e por isso so solicitou atendimento hoje.",
-        date: "25/10",
-        situation: "Aberta"
-    },
-    {
-        id: 4,
-        type: 1,
-        client: "Marielson Silva",
-        message: "Cliente sem internet a mais de 2 dias, nao conseguiu entrar em contato e por isso so solicitou atendimento hoje.",
-        date: "25/10",
-        situation: "Fechada"
-    }
-]
+let orders = []
+
+if(localStorage.orders) {
+    orders = JSON.parse(localStorage.getItem("orders"))
+} else {
+    localStorage.orders = JSON.stringify(orders)
+}
+
+const setOrdersData = () => {
+    localStorage.orders = JSON.stringify(orders)
+}
 
 const typesOfOrders = {
     1: "instalacao",
@@ -53,15 +30,24 @@ const finalOrderMessages = {
     5: "Passada ao setor administrativo"
 }
 
-const getTypeOfOrders = order => {
+const table = document.querySelector(`[data-js="table-os"]`)
+const selectSituacao = document.querySelector("#select-situacao")
+const selectMotivo = document.querySelector("#motivo-select")
+const buttonNewOrder = document.querySelector(".btn-nova-os")
+const buttonSaveOrder = document.querySelector(".btn-salvar-ordem")
+const buttonCancelOrder = document.querySelector(".btn-cancelar-ordem")
+const buttonEndOrder = document.querySelector(".btn-finalizar-ordem")
+const modalOverlay = document.querySelector(".modal-os-overlay")
+const messageOutput = document.querySelector(".comment-output")
+
+const getTypeOfOrders = (order, index) => {
     const { id, type, client, date, situation } = order
     const typeToText = typesOfOrders[type]
-    const table = document.querySelector(`[data-js="table-os"]`)
     const tr = document.createElement("tr")
 
     tr.classList.add("tr-padrao-os")
     tr.innerHTML = `
-        <td data-id="${id}" style="cursor: pointer;">${typeToText}</td>
+        <td data-id="${index}" style="cursor: pointer;">${typeToText}</td>
         <td>${client}</td>
         <td>${date}</td>
         <td>${situation}</td>
@@ -69,11 +55,12 @@ const getTypeOfOrders = order => {
     table.append(tr)
 }
 
-const init = () => {
-    orders.forEach(order => getTypeOfOrders(order))
+const renderTable = () => {
+    table.innerHTML = ""
+    orders.forEach((order, index) => getTypeOfOrders(order, index))
 }
 
-init()
+renderTable()
 
 const countOrders = () => {
 
@@ -102,9 +89,6 @@ const clientNameOnSelect = () => {
 
 clientNameOnSelect()
 
-const selectSituacao = document.querySelector("#select-situacao")
-const selectMotivo = document.querySelector("#motivo-select")
-
 const getFinalMessageArray = () => {
     const arr =  Object.values(finalOrderMessages)
     arr.forEach((message, index) => putMessageOnSelect(message, index, selectSituacao))
@@ -126,10 +110,6 @@ const putMessageOnSelect = (message, i, select) => {
 getFinalMessageArray()
 getReasonMessageArray()
 
-const buttonNewOrder = document.querySelector(".btn-nova-os")
-const buttonSaveOrder = document.querySelector(".btn-salvar-ordem")
-const buttonCancelOrder = document.querySelector(".btn-cancelar-ordem")
-const buttonEndOrder = document.querySelector(".btn-finalizar-ordem")
 
 const addNewOrder = () => {
     const newOrder = {}
@@ -145,10 +125,23 @@ const addNewOrder = () => {
     newOrder.message = document.querySelector("#message").value
     newOrder.date = document.querySelector("#date-os").value
     newOrder.situation = situation
-
-    return orders.push(newOrder)
+    orders.push(newOrder)
+    renderTable()
+    setOrdersData()
 }
 
+
 buttonSaveOrder.addEventListener("click", addNewOrder)
+buttonCancelOrder.addEventListener("click", () => modalOverlay.style.display = "none")
+buttonNewOrder.addEventListener("click", () => modalOverlay.style.display = "grid")
+
+table.addEventListener("click", event => {
+    const target = event.target.getAttribute("data-id")
+    console.log(orders[target]);
+    const { message } = orders[target]
+    messageOutput.textContent = ""
+    messageOutput.textContent = message
+})
+
 
 

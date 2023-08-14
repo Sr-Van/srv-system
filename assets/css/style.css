@@ -639,9 +639,15 @@ select {
 
 .ordens .comment-output {
     grid-area: output;
+    background-color: var(--purple-light);
+    padding: 2em;
+    border-radius: 2em;
+    height: auto;
+    max-height: 250px;
 }
 
-.modal-overlay .nova-os-modal{
+
+.modal-os-overlay .nova-os-modal{
     position: absolute;
     z-index: 999;
     width: min(100%, 800px);
