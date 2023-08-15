@@ -131,16 +131,19 @@ let clients = [
     }
 ]
 
+let orders = []
 //setting data in localStorage for manipulating
 
 if(localStorage.clients) {
     clients = JSON.parse(localStorage.getItem("clients"))
+    orders = JSON.parse(localStorage.getItem("orders"))
 } else {
     localStorage.clients = JSON.stringify(clients)
 }
 
 const setDb = () => {
     localStorage.clients = JSON.stringify(clients)
+    localStorage.orders = JSON.stringify(orders)
 }
 
 const tableContasLoad = () =>{
@@ -283,6 +286,7 @@ const formatCep = () => {
 let date = new Date()
 const diaAtual = date.getDate()
 const mes = date.getUTCMonth()
+const ano = date.getFullYear()
 
 
 /* Declarando botoes do sidebar */
@@ -429,6 +433,19 @@ const searchInKeyUp = event => {
     }
 }
 
+const addOrderNewClient = () => {
+    const newOrderAdd = {}
+    newOrderAdd.type = 1
+    newOrderAdd.id = orders.length + 1
+    newOrderAdd.message = "Nova instalacao"
+    newOrderAdd.situation = "Aberta"
+    newOrderAdd.date = `${ano}-${mes}-${diaAtual}`
+
+    orders.push(newOrderAdd)
+    setOrdersData()
+}
+
+
 const newClientAdd = () =>{    
     let newClient = {}
 
@@ -454,6 +471,7 @@ const newClientAdd = () =>{
     clients.push(newClient)
     tableLoad()
     setDb()
+    addOrderNewClient()
 }
 
 const findIndexToDelete = () => {
