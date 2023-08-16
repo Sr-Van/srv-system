@@ -362,44 +362,54 @@ const search = document.querySelector("#search")
 const render = document.querySelector("div.show-client")
 const alertBox = document.querySelector("div.alert")
 
-const renderInSearch = list => {
+const renderInSearch = (client, index) => {
+
     desativeBtn(osBtn, dashboardBtn, cadastrosBtn)
     contasBtn.classList.remove("active")
     dashContent.style.display = 'none'
-    clientFound.forEach((client, index)=>{
-        list += `
-                <div class="show-multiples">
-                    <div class='edit-client'>
-                        <span data-change="${index}"            class="material-symbols-sharp">
-                        edit
-                        </span>
-                    </div>
-                    <div class='atributos'>
-                        <div class='client-atrib'>
-                            <h3>Cliente: </h3>
-                            <p> ${client.nome}</p>
-                        </div>
-                        <div class='client-atrib'>
-                            <h3>CPF/CNPJ: </h3>
-                            <p> ${client.CPF}</p>
-                        </div>
-                        <div class='client-atrib'>
-                            <h3>RG/IE: </h3>
-                            <p> ${client.RG}</p>
-                        </div>
-                        <div class='client-atrib'>
-                            <h3>Telefone: </h3>
-                            <p> ${client.Telefone}</p>
-                        </div>
-                        <div class='client-atrib'>
-                            <h3>Plano: </h3>
-                            <p> ${client.plano}</p>
-                        </div>
-                    </div>
-                </div>
-                    `
-    })
-    render.innerHTML = list
+
+    const fragment = document.createDocumentFragment()
+    const showMultiplesDiv = document.createElement("div")
+    showMultiplesDiv.classList.add("show-multiples")
+    const atributosDiv = document.createElement("div")
+    const editClientDiv = document.createElement("div")
+    editClientDiv.classList.add("edit-client")
+    atributosDiv.classList.add("atributos")
+    
+    editClientDiv.innerHTML = `
+        <span data-change="${index}" class="material-symbols-sharp">
+            edit
+        </span>
+        `
+    
+    atributosDiv.innerHTML = `
+        <div class='client-atrib'>
+            <h3>Cliente: </h3>
+            <p> ${client.nome}</p>
+        </div>
+        <div class='client-atrib'>
+            <h3>CPF/CNPJ: </h3>
+            <p> ${client.CPF}</p>
+        </div>
+        <div class='client-atrib'>
+            <h3>RG/IE: </h3>
+            <p> ${client.RG}</p>
+        </div>
+        <div class='client-atrib'>
+            <h3>Telefone: </h3>
+            <p> ${client.Telefone}</p>
+        </div>
+        <div class='client-atrib'>
+            <h3>Plano: </h3>
+            <p> ${client.plano}</p>
+        </div>
+    `
+
+    showMultiplesDiv.append(editClientDiv)
+    showMultiplesDiv.append(atributosDiv)
+    fragment.append(showMultiplesDiv)
+    
+    render.append(fragment)
     render.style.display = 'flex'
 }
 
@@ -411,9 +421,7 @@ const desativeRender = () => {
 const searchInKeyUp = event => {
     let searched = event.target.value
 
-    clientFound = filterSearch(searched)
-
-    let list = ' '
+    let clientFound = filterSearch(searched)
 
     if(searched.length<=0){
         setTimeout(()=>{
@@ -427,10 +435,12 @@ const searchInKeyUp = event => {
         alertBox.innerHTML = 'Digite o nome de um cliente para mostrar o cadastro no dashboard.'
 
         unSelect(dashContent, cadastroContent, contasContent)
-    }else{
-        unSelect(dashContent, cadastroContent, contasContent)
-        renderInSearch(list)
+        return
     }
+
+    unSelect(dashContent, cadastroContent, contasContent)
+    render.innerHTML = ""
+    clientFound.forEach((client, index) => renderInSearch(client, index))
 }
 
 const addOrderNewClient = () => {
