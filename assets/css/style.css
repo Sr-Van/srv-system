@@ -582,6 +582,7 @@ select {
     "list status"
     "list output";
     position: relative;
+    gap: 5em
 }
 
 .ordens .btn-nova-os {
@@ -632,18 +633,49 @@ select {
 
 .ordens .status-os {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: flex-end;
     grid-area: status;
+    height: 230px;
+    position: relative;
 }
 
+.status-os h2{
+    position: absolute;
+    top: 1em;
+    color: var(--white-color);
+}
+
+.status-os div{
+    width: 55px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.status-os .status1{
+    background-color: #038b79; 
+    max-height: 100px;
+}
+
+.status-os .status2{
+    background-color: #f31818;
+    max-height: 100px;
+}
 .ordens .comment-output {
     grid-area: output;
     background-color: var(--purple-light);
     padding: 2em;
     border-radius: 2em;
-    height: auto;
-    max-height: 250px;
+    width: 380px;
+    height: 200px;
+    box-shadow: var(--box-shadow);
+}
+
+.comment-output .output {
+    display: block;
+    overflow: auto;
+    max-width: 300px;
+    max-height: 140px;
 }
 
 

@@ -1,4 +1,4 @@
-let orders = []
+
 
 if(localStorage.orders) {
     orders = JSON.parse(localStorage.getItem("orders"))
@@ -38,7 +38,14 @@ const buttonSaveOrder = document.querySelector(".btn-salvar-ordem")
 const buttonCancelOrder = document.querySelector(".btn-cancelar-ordem")
 const buttonEndOrder = document.querySelector(".btn-finalizar-ordem")
 const modalOverlay = document.querySelector(".modal-os-overlay")
-const messageOutput = document.querySelector(".comment-output")
+const messageOutput = document.querySelector(".output")
+const progressDoneCount = document.querySelector(".status1")
+const progressTodoCount = document.querySelector(".status2")
+const messageCounterOnScreen = document.querySelector(".count-messages")
+const messageCounterToDoOnDiv = document.querySelector(".p-todo-os")
+const messageCounterDoneOnDiv = document.querySelector(".p-done-os")
+const messageCounterToDoOndash = document.querySelector(".p-orders-dash-todo")
+const messageCounterdoneOndash = document.querySelector(".p-orders-dash-done")
 
 const getTypeOfOrders = (order, index) => {
     const { id, type, client, date, situation } = order
@@ -63,14 +70,18 @@ const renderTable = () => {
 renderTable()
 
 const countOrders = () => {
-
-    const messageCounterOnScreen = document.querySelector(".count-messages")
-    const messageCounterToDoOnDiv = document.querySelector(".p-todo-os")
-
-    const ordersOpened = orders.filter(order => order.situation === "Aberta")
-
-    messageCounterOnScreen.textContent = ordersOpened.length
-    messageCounterToDoOnDiv.textContent = ordersOpened.length
+    const arrayOrdersOpened = orders
+    .filter(order => order
+    .situation === "Aberta")
+    const ordersOpened = arrayOrdersOpened.length
+    const ordersNotOpened = orders.length - ordersOpened
+    messageCounterOnScreen.textContent = ordersOpened
+    messageCounterToDoOnDiv.textContent = ordersOpened
+    messageCounterToDoOndash.textContent = ordersOpened
+    messageCounterDoneOnDiv.textContent = ordersNotOpened
+    messageCounterdoneOndash.textContent = ordersNotOpened
+    progressDoneCount.style.height = `${ordersNotOpened}px`
+    progressTodoCount.style.height = `${ordersOpened}px`
 }
 
 countOrders()
@@ -137,11 +148,11 @@ buttonNewOrder.addEventListener("click", () => modalOverlay.style.display = "gri
 
 table.addEventListener("click", event => {
     const target = event.target.getAttribute("data-id")
-    console.log(orders[target]);
     const { message } = orders[target]
     messageOutput.textContent = ""
     messageOutput.textContent = message
 })
+
 
 
 

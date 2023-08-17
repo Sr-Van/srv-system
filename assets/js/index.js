@@ -153,62 +153,22 @@ const tableContasLoad = () =>{
 
     table.innerHTML = ""
     clients.forEach( client => {
-
         const { vencimento, nome, plano } = client
-
-        const diaFormatted = () => {
-            if(vencimento <= 9) {
-                return "0" + vencimento
-            }else {
-                return vencimento
-            }
-        }
-
-        const mesFormatted = () => {
-            if(calcVencimento() <= 9) {
-                return "0" + calcVencimento()
-            }else {
-                return calcVencimento()
-            }
-        }
-
-
-        const calcVencimento = () => {
-            if ( vencimento <= diaAtual ) {
-                return mes
-            }else {
-                return mes + 1
-            }
-        }
-
-        //funcoes para analisar o vencimento e mudar a cor do texto 
-
-        const situacao = () => {
-            if ( vencimento <= diaAtual ) {
-                return "A receber"
-            }else {
-                return "Vencido"
-            }
-        }
-
-        const colorVenc = () => {
-            if ( vencimento <= diaAtual ) {
-                return `style="color:#f31818";`
-            }else {
-                return `style="color:#3ee60bb3";` 
-            }
-        }
+        const diaFormatted =  vencimento <= 9 ? "0" + vencimento : vencimento
+        const calcVencimento =  vencimento <= diaAtual ? mes : mes + 1
+        const mesFormatted = calcVencimento <= 9 ? "0" + calcVencimento : calcVencimento
+        const situacao = vencimento <= diaAtual ? "A receber" : "Vencido"
+        const colorVenc =  vencimento <= diaAtual ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
 
         tableList = `
             <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light)">
                 <td>${nome}</td>
                 <td>${plano}</td>
-                <td>${diaFormatted()}/${mesFormatted()}</td>
-                <td ${colorVenc()}>${situacao()}</td>
+                <td>${diaFormatted}/${mesFormatted}</td>
+                <td ${colorVenc}>${situacao}</td>
             </tr>
             `
         table.innerHTML += tableList
-        
     })
 }
 
@@ -226,8 +186,6 @@ const cleanInputs = () => {
     document.querySelector("#select-plano").value = ""
     document.querySelector("#select-venc").value = ""
 }
-
-
 
 const formatNames = () => {
     nomeDefault = document.querySelector("#txt-nome").value
@@ -336,6 +294,7 @@ osBtn.addEventListener('click', (e)=>{
     activeBtn(osBtn)
     desativeBtn(dashboardBtn, cadastrosBtn, contasBtn)
     unSelect(dashContent, cadastroContent, contasContent)
+    ordensContent.style.display = 'grid'
     desativeRender()
 })
 
@@ -434,7 +393,7 @@ const searchInKeyUp = event => {
         alertBox.style.display = 'flex'
         alertBox.innerHTML = 'Digite o nome de um cliente para mostrar o cadastro no dashboard.'
 
-        unSelect(dashContent, cadastroContent, contasContent)
+        unSelect(dashContent, cadastroContent, contasContent) 
         return
     }
 

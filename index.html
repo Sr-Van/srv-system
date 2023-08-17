@@ -67,7 +67,7 @@
             <div class="main-container">
                 <!--div para mostrar o conteudo principal e todas as div que forem abertas pelo usuario clicando nos sidelinks-->
                 <div class="show-client"></div>
-                <div style="display: none;" class="dashboard-content">
+                <div class="dashboard-content">
                     <!--graficos do dashboard-->
                     <div class="cards">
                         <div class="status">
@@ -121,11 +121,11 @@
                                 <h3>Ordens de Serviço</h3>
                                 <div>
                                     <h1>Abertas</h1>
-                                    <p>12</p>
+                                    <p class="p-orders-dash-todo">12</p>
                                 </div>
                                 <div>
                                     <h1>Fechadas</h1>
-                                    <p>12</p>
+                                    <p class="p-orders-dash-done">12</p>
                                 </div>
                             </div>
                             <div class="progress">
@@ -232,7 +232,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="ordens">
+                <div style="display: none;" class="ordens">
                     <a class="btn-style btn-nova-os">Nova</a>
                     <div class="table-os">
                         <h2>Ordens de Serviço:</h2>
@@ -249,17 +249,19 @@
                         </table>
                     </div>
                     <div class="status-os">
-                        <div>
+                        <h2>Ordens por Status</h2>
+                        <div class="status1">
                             <p class="p-done-os">12</p>
                             <h3>Feitas</h3>
                         </div>
-                        <div>
+                        <div class="status2">
                             <p class="p-todo-os">12</p>
-                            <h3>Em aberto</h3>
+                            <h3>Abertas</h3>
                         </div>
                     </div>
                     <div class="comment-output">
-
+                        <h2 style="color: var(--white-color);">Observacao:</h2>
+                        <p class="output"></p>
                     </div>
                 </div>
             </div>  
