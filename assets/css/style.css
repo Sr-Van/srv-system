@@ -567,8 +567,17 @@ select {
 .receber-tb tr{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     text-align: center;
+}
+
+.confirm-pag{
+    background-color: var(--purple-color);
+    border-radius: 1rem;
+    padding: 3px;
+    color: var(--white-color);
+    font-size: 12px;
+    cursor: pointer;
 }
 
 .ordens {

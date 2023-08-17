@@ -146,29 +146,47 @@ const setDb = () => {
     localStorage.orders = JSON.stringify(orders)
 }
 
+let date = new Date()
+const diaAtual = date.getDate()
+const mes = date.getUTCMonth() + 1
+const ano = date.getFullYear()
+
+
+/* Declarando botoes do sidebar */
+const dashboardBtn = document.querySelector('.dashboard-btn')
+const cadastrosBtn = document.querySelector('.cadastros-btn')
+const contasBtn = document.querySelector('.contas-btn')
+const osBtn = document.querySelector('.os-btn')
+
+/* Declarando conteudos */
+const dashContent = document.querySelector('.dashboard-content')
+const cadastroContent = document.querySelector(".cadastros")
+const contasContent = document.querySelector(".contas")
+const ordensContent = document.querySelector(".ordens")
+const tableContas = document.querySelector(".receber-tb")
+
 const tableContasLoad = () =>{
     
     let tableList
-    let table = document.querySelector(".receber-tb")
 
-    table.innerHTML = ""
-    clients.forEach( client => {
-        const { vencimento, nome, plano } = client
+    tableContas.innerHTML = ""
+    clients.forEach( (client, index) => {
+        const { vencimento, nome, plano, pagamento } = client
         const diaFormatted =  vencimento <= 9 ? "0" + vencimento : vencimento
-        const calcVencimento =  vencimento <= diaAtual ? mes : mes + 1
+        const calcVencimento =  vencimento <= diaAtual + 7 ? mes + 1  : mes 
         const mesFormatted = calcVencimento <= 9 ? "0" + calcVencimento : calcVencimento
-        const situacao = vencimento <= diaAtual ? "A receber" : "Vencido"
-        const colorVenc =  vencimento <= diaAtual ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
+        const colorVenc =  pagamento === "A Receber" ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
 
         tableList = `
             <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light)">
                 <td>${nome}</td>
                 <td>${plano}</td>
                 <td>${diaFormatted}/${mesFormatted}</td>
-                <td ${colorVenc}>${situacao}</td>
+                <td ${colorVenc}>${pagamento}</td>
+                <td><a class="confirm-pag" data-id="${index}">confirmar pag.</a></td>
             </tr>
             `
-        table.innerHTML += tableList
+            tableContas.innerHTML += tableList
     })
 }
 
@@ -240,24 +258,18 @@ const formatCep = () => {
     }
 }
 
+const confirmPayment = id => {
+    clients[id].pagamento = "Recebido"
+    setDb()
+    tableContasLoad()
+}
 
-let date = new Date()
-const diaAtual = date.getDate()
-const mes = date.getUTCMonth()
-const ano = date.getFullYear()
+tableContas.addEventListener("click", e => {
+    const idToConfirm = e.target.getAttribute("data-id")
+    confirmPayment(idToConfirm)
+})
 
 
-/* Declarando botoes do sidebar */
-const dashboardBtn = document.querySelector('.dashboard-btn')
-const cadastrosBtn = document.querySelector('.cadastros-btn')
-const contasBtn = document.querySelector('.contas-btn')
-const osBtn = document.querySelector('.os-btn')
-
-/* Declarando conteudos */
-const dashContent = document.querySelector('.dashboard-content')
-const cadastroContent = document.querySelector(".cadastros")
-const contasContent = document.querySelector(".contas")
-const ordensContent = document.querySelector(".ordens")
 
 dashboardBtn.addEventListener('click', (e)=>{
     e.preventDefault()
@@ -404,6 +416,7 @@ const searchInKeyUp = event => {
 
 const addOrderNewClient = () => {
     const newOrderAdd = {}
+    newOrderAdd.client = document.querySelector("#txt-nome").value
     newOrderAdd.type = 1
     newOrderAdd.id = orders.length + 1
     newOrderAdd.message = "Nova instalacao"
@@ -430,6 +443,7 @@ const newClientAdd = () =>{
     newClient.Sexualidade = document.querySelector('input[name=sex-radio]:checked').value
     newClient.plano = document.querySelector("#select-plano").value
     newClient.vencimento = document.querySelector("#select-venc").value
+    newClient.pagamento = "A Receber"
 
     const {CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento} = newClient
 
