@@ -6,7 +6,7 @@ let clients = [
       Telefone: "(11) 98765-4321",
       CEP: "12345-678",
       cidade: "Sao Paulo",
-      Endereco: "Rua A, 123",
+      Endereço: "Rua A, 123",
       Numero: 123,
       Bairro: "Centro",
       plano: "Plano A",
@@ -19,7 +19,7 @@ let clients = [
       Telefone: "(21) 98765-4321",
       CEP: "54321-678",
       cidade: "Rio de Janeiro",
-      Endereco: "Avenida B, 456",
+      Endereço: "Avenida B, 456",
       Numero: 456,
       Bairro: "Copacabana",
       plano: "Plano B",
@@ -32,7 +32,7 @@ let clients = [
       Telefone: "(31) 98765-4321",
       CEP: "98765-432",
       cidade: "Belo Horizonte",
-      Endereco: "Praça C, 789",
+      Endereço: "Praça C, 789",
       Numero: 789,
       Bairro: "Savassi",
       plano: "Plano C",
@@ -45,7 +45,7 @@ let clients = [
       Telefone: "(41) 98765-4321",
       CEP: "76543-210",
       cidade: "Curitiba",
-      Endereco: "Rua D, 987",
+      Endereço: "Rua D, 987",
       Numero: 987,
       Bairro: "Batel",
       plano: "Plano D",
@@ -58,7 +58,7 @@ let clients = [
       Telefone: "(51) 98765-4321",
       CEP: "87654-321",
       cidade: "Porto Alegre",
-      Endereco: "Avenida E, 654",
+      Endereço: "Avenida E, 654",
       Numero: 654,
       Bairro: "Moinhos de Vento",
       plano: "Plano E",
@@ -71,7 +71,7 @@ let clients = [
       Telefone: "(61) 98765-4321",
       CEP: "23456-789",
       cidade: "Brasilia",
-      Endereco: "Quadra F, 123",
+      Endereço: "Quadra F, 123",
       Numero: 123,
       Bairro: "Asa Sul",
       plano: "Plano F",
@@ -84,7 +84,7 @@ let clients = [
       Telefone: "(71) 98765-4321",
       CEP: "34567-890",
       cidade: "Salvador",
-      Endereco: "Rua G, 987",
+      Endereço: "Rua G, 987",
       Numero: 987,
       Bairro: "Barra",
       plano: "Plano G",
@@ -97,7 +97,7 @@ let clients = [
       Telefone: "(81) 98765-4321",
       CEP: "45678-901",
       cidade: "Recife",
-      Endereco: "Avenida H, 654",
+      Endereço: "Avenida H, 654",
       Numero: 654,
       Bairro: "Boa Viagem",
       plano: "Plano H",
@@ -110,7 +110,7 @@ let clients = [
       Telefone: "(85) 98765-4321",
       CEP: "56789-012",
       cidade: "Fortaleza",
-      Endereco: "Rua I, 123",
+      Endereço: "Rua I, 123",
       Numero: 123,
       Bairro: "Meireles",
       plano: "Plano I",
@@ -123,7 +123,7 @@ let clients = [
       Telefone: "(92) 98765-4321",
       CEP: "67890-123",
       cidade: "Manaus",
-      Endereco: "Avenida J, 987",
+      Endereço: "Avenida J, 987",
       Numero: 987,
       Bairro: "Centro",
       plano: "Plano J",
@@ -353,86 +353,14 @@ const search = document.querySelector("#search")
 const render = document.querySelector("div.show-client")
 const alertBox = document.querySelector("div.alert")
 
-const renderInSearch = (client, index) => {
 
-    desativeBtn(osBtn, dashboardBtn, cadastrosBtn)
-    contasBtn.classList.remove("active")
-    dashContent.style.display = 'none'
-
-    const fragment = document.createDocumentFragment()
-    const showMultiplesDiv = document.createElement("div")
-    showMultiplesDiv.classList.add("show-multiples")
-    const atributosDiv = document.createElement("div")
-    const editClientDiv = document.createElement("div")
-    editClientDiv.classList.add("edit-client")
-    atributosDiv.classList.add("atributos")
-    
-    editClientDiv.innerHTML = `
-        <span data-change="${index}" class="material-symbols-sharp">
-            edit
-        </span>
-        `
-    
-    atributosDiv.innerHTML = `
-        <div class='client-atrib'>
-            <h3>Cliente: </h3>
-            <p> ${client.nome}</p>
-        </div>
-        <div class='client-atrib'>
-            <h3>CPF/CNPJ: </h3>
-            <p> ${client.CPF}</p>
-        </div>
-        <div class='client-atrib'>
-            <h3>RG/IE: </h3>
-            <p> ${client.RG}</p>
-        </div>
-        <div class='client-atrib'>
-            <h3>Telefone: </h3>
-            <p> ${client.Telefone}</p>
-        </div>
-        <div class='client-atrib'>
-            <h3>Plano: </h3>
-            <p> ${client.plano}</p>
-        </div>
-    `
-
-    showMultiplesDiv.append(editClientDiv)
-    showMultiplesDiv.append(atributosDiv)
-    fragment.append(showMultiplesDiv)
-    
-    render.append(fragment)
-    render.style.display = 'flex'
-}
 
 const desativeRender = () => {
     alertBox.style.display = 'none'
     render.style.display = 'none'
 }
 
-const searchInKeyUp = event => {
-    let searched = event.target.value
 
-    let clientFound = filterSearch(searched)
-
-    if(searched.length<=0){
-        setTimeout(()=>{
-            desativeRender()
-            activeBtn(dashboardBtn)
-            desativeBtn(osBtn, cadastrosBtn, contasBtn)
-            dashContent.classList.add("back-animation")
-            dashContent.style.display = 'grid'
-        }, 1000)
-        alertBox.style.display = 'flex'
-        alertBox.innerHTML = 'Digite o nome de um cliente para mostrar o cadastro no dashboard.'
-
-        unSelect(dashContent, cadastroContent, contasContent) 
-        return
-    }
-
-    unSelect(dashContent, cadastroContent, contasContent)
-    render.innerHTML = ""
-    clientFound.forEach((client, index) => renderInSearch(client, index))
-}
 
 const addOrderNewClient = () => {
     const newOrderAdd = {}
@@ -494,10 +422,7 @@ const openModalEdit =  (clients, target) => {
     const {nome, CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento, Sexualidade} = clients[target]
 
     nomeParaIndex = nome
-
-
     modalEdit.style.display = "grid"
-
 
     document.querySelector("#txt-e-nome").value = nome
     document.querySelector("#txt-e-cpf").value = CPF
@@ -515,7 +440,7 @@ const openModalEdit =  (clients, target) => {
 }
 
 let target
-//using event.target.getAttribute to select the right client on the array clients so i can edit
+
 window.addEventListener("dblclick", event => {
     target = event.target.getAttribute("data-id")
 
@@ -533,13 +458,6 @@ window.addEventListener("click", event => {
 })
 
 
-search.addEventListener('keyup', _.debounce(searchInKeyUp, 400))
-
-const filterSearch = searched => {
-    return clients.filter(( client =>{
-        return client.nome.toLowerCase().includes(searched.toLowerCase())
-    }))
-}
 
 
 const tableLoad = () => {

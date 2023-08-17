@@ -62,7 +62,7 @@ body{
     color: var(--purple-light);
 }
 
-.header #select{
+.header #select-filter{
     text-align: center;
     border-radius: 1em;
     color: var(--white-color);
