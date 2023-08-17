@@ -34,6 +34,7 @@ const selectSituacao = document.querySelector("#select-situacao")
 const selectMotivo = document.querySelector("#motivo-select")
 const buttonNewOrder = document.querySelector(".btn-nova-os")
 const buttonSaveOrder = document.querySelector(".btn-salvar-ordem")
+const buttonChangeOrder = document.querySelector(".btn-change-os")
 const buttonCancelOrder = document.querySelector(".btn-cancelar-ordem")
 const buttonEndOrder = document.querySelector(".btn-finalizar-ordem")
 const modalOverlay = document.querySelector(".modal-os-overlay")
@@ -144,13 +145,22 @@ const addNewOrder = () => {
 buttonSaveOrder.addEventListener("click", addNewOrder)
 buttonCancelOrder.addEventListener("click", () => modalOverlay.style.display = "none")
 buttonNewOrder.addEventListener("click", () => modalOverlay.style.display = "grid")
+buttonChangeOrder.addEventListener("click", e => {
+    e.preventDefault()
+    const target = e.target.getAttribute("data-id")
+    orders[target].situation = "Finalizada"
+    countOrders()
+    renderTable()
+    setOrdersData()
+})
 
 table.addEventListener("click", event => {
     const target = event.target.getAttribute("data-id")
-    const { message } = orders[target]
+    const { message, id } = orders[target]
     messageOutput.textContent = ""
     messageOutput.textContent = message
-})
+    buttonChangeOrder.setAttribute("data-id", id - 1)
+}) 
 
 
 
