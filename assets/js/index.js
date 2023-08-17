@@ -165,6 +165,10 @@ const contasContent = document.querySelector(".contas")
 const ordensContent = document.querySelector(".ordens")
 const tableContas = document.querySelector(".receber-tb")
 
+const modalConfirmPayment = document.querySelector(".modal-confirm-payment-overlay")
+const addPaymentBtn = document.querySelector(".btn-confirm")
+const denyPaymentBtn = document.querySelector(".btn-deny")
+
 const tableContasLoad = () =>{
     
     let tableList
@@ -264,9 +268,25 @@ const confirmPayment = id => {
     tableContasLoad()
 }
 
+let idToConfirm
+
 tableContas.addEventListener("click", e => {
-    const idToConfirm = e.target.getAttribute("data-id")
+    e.preventDefault()
+    idToConfirm = e.target.getAttribute("data-id")
+    if(idToConfirm === null) {
+        return
+    }
+    modalConfirmPayment.style.display = "grid"
+})
+
+denyPaymentBtn.addEventListener("click", event => {
+    event.preventDefault()
+    modalConfirmPayment.style.display = "none"
+})
+addPaymentBtn.addEventListener("click", event => {
+    event.preventDefault()
     confirmPayment(idToConfirm)
+    modalConfirmPayment.style.display = "none"
 })
 
 

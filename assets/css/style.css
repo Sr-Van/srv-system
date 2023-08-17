@@ -465,15 +465,7 @@ table::-webkit-scrollbar-thumb{
 
 /* edit modal */
 
-.modal-e-overlay{
-    display: grid;
-    place-items: center;
-    position: relative;
-    z-index: 998;
-    height: 100vh;
-    width: min(100%, 100vw);
-    background-color: rgba(0, 0, 0, 0.7);
-}
+
 .modal-e-overlay .edit-cadastro-modal{
     position: absolute;
     z-index: 999;
@@ -730,3 +722,36 @@ select {
     width: min(100%, 300px);
 }
 
+.confirm-payment {
+    height: 110px;
+    width: 200px;
+    background-color: var(--grey-light);
+    border-radius: 1em;
+    display: grid;
+    grid-template-areas: 
+    "header header"
+    "left right";
+    gap: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+.confirm-payment p {
+    grid-area: header;
+    text-align: center;
+    background-color: var(--purple-color);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+.btn-confirm {
+    grid-area: left;
+}
+
+.btn-modal-padrao{
+    text-align: center;
+    margin: 5px;
+    box-shadow: var(--box-shadow);
+}
+
+.btn-deny {
+    grid-area: right;
+}
