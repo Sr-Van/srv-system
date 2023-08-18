@@ -182,7 +182,7 @@ const tableContasLoad = () =>{
         const colorVenc =  pagamento === "A Receber" ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
 
         tableList = `
-            <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light)">
+            <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light); max-height: 30px; overflow: hidden;">
                 <td>${nome}</td>
                 <td>${plano}</td>
                 <td>${diaFormatted}/${mesFormatted}</td>
@@ -373,6 +373,8 @@ const addOrderNewClient = () => {
 
     orders.push(newOrderAdd)
     setOrdersData()
+    renderTable()
+    countOrders()
 }
 
 
@@ -398,11 +400,12 @@ const newClientAdd = () =>{
     if (CPF === "" || RG === "" || Telefone === "" || CEP === "" || cidade === "" || Endereço === "" || Numero === "" || Bairro === "" || plano === "" || vencimento === "") {
         return
     }
-    cleanInputs()
     clients.push(newClient)
     tableLoad()
     setDb()
     addOrderNewClient()
+    cleanInputs()
+    modal.style.display = "none"
 }
 
 const findIndexToDelete = () => {
@@ -456,9 +459,6 @@ window.addEventListener("click", event => {
         openModalEdit(clientFound, target)
     }
 })
-
-
-
 
 const tableLoad = () => {
     let tableList = ""

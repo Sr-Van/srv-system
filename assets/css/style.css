@@ -663,6 +663,7 @@ select {
     max-height: 100px;
 }
 .ordens .comment-output {
+    position: relative;
     grid-area: output;
     background-color: var(--purple-light);
     padding: 2em;
@@ -677,6 +678,11 @@ select {
     overflow: auto;
     max-width: 300px;
     max-height: 140px;
+}
+.comment-output .btn-change-os {
+    position: absolute;
+    top: 1em;
+    right: 1em;
 }
 
 

@@ -74,7 +74,7 @@ const filterSearch = searched => {
 const searchInKeyUp = event => {
     let searched = event.target.value
 
-    let clientFound = filterSearch(searched)
+    clientFound = filterSearch(searched)
 
     if(searched.length<=0){
         setTimeout(()=>{

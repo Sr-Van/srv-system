@@ -37,7 +37,7 @@ const buttonSaveOrder = document.querySelector(".btn-salvar-ordem")
 const buttonChangeOrder = document.querySelector(".btn-change-os")
 const buttonCancelOrder = document.querySelector(".btn-cancelar-ordem")
 const buttonEndOrder = document.querySelector(".btn-finalizar-ordem")
-const modalOverlay = document.querySelector(".modal-os-overlay")
+const modalOsOverlay = document.querySelector(".modal-os-overlay")
 const messageOutput = document.querySelector(".output")
 const progressDoneCount = document.querySelector(".status1")
 const progressTodoCount = document.querySelector(".status2")
@@ -46,6 +46,8 @@ const messageCounterToDoOnDiv = document.querySelector(".p-todo-os")
 const messageCounterDoneOnDiv = document.querySelector(".p-done-os")
 const messageCounterToDoOndash = document.querySelector(".p-orders-dash-todo")
 const messageCounterdoneOndash = document.querySelector(".p-orders-dash-done")
+const osPercengateDashboard = document.querySelector(".os-percengate")
+const osPercengateDashboardCircle = document.querySelector(".os-svg")
 
 const getTypeOfOrders = (order, index) => {
     const { id, type, client, date, situation } = order
@@ -69,6 +71,17 @@ const renderTable = () => {
 
 renderTable()
 
+const ordersPercentage = (ordersOpened) => {
+    const percentage = (ordersOpened * 100) / orders.length
+    const percentageFormat = Math.trunc(percentage)
+    osPercengateDashboard.textContent = `${percentageFormat}%`
+    if(percentage >= 51){
+        osPercengateDashboardCircle.style.stroke = "#f31818"
+    }
+    console.log(percentageFormat)
+}
+
+
 const countOrders = () => {
     const arrayOrdersOpened = orders
     .filter(order => order
@@ -82,6 +95,7 @@ const countOrders = () => {
     messageCounterdoneOndash.textContent = ordersNotOpened
     progressDoneCount.style.height = `${ordersNotOpened}px`
     progressTodoCount.style.height = `${ordersOpened}px`
+    ordersPercentage(ordersOpened)
 }
 
 countOrders()
@@ -118,9 +132,6 @@ const putMessageOnSelect = (message, i, select) => {
     select.append(option)
 }
 
-getFinalMessageArray()
-getReasonMessageArray()
-
 
 const addNewOrder = () => {
     const newOrder = {}
@@ -139,12 +150,13 @@ const addNewOrder = () => {
     orders.push(newOrder)
     renderTable()
     setOrdersData()
+    ordersPercentage()
 }
 
 
 buttonSaveOrder.addEventListener("click", addNewOrder)
-buttonCancelOrder.addEventListener("click", () => modalOverlay.style.display = "none")
-buttonNewOrder.addEventListener("click", () => modalOverlay.style.display = "grid")
+buttonCancelOrder.addEventListener("click", () => modalOsOverlay.style.display = "none")
+buttonNewOrder.addEventListener("click", () => modalOsOverlay.style.display = "grid")
 buttonChangeOrder.addEventListener("click", e => {
     e.preventDefault()
     const target = e.target.getAttribute("data-id")
@@ -161,7 +173,5 @@ table.addEventListener("click", event => {
     messageOutput.textContent = message
     buttonChangeOrder.setAttribute("data-id", id - 1)
 }) 
-
-
 
 
