@@ -61,7 +61,7 @@ const getTypeOfOrders = (order, index) => {
         <td>${date}</td>
         <td>${situation}</td>
     `
-    table.append(tr)
+    table.prepend(tr)
 }
 
 const renderTable = () => {
@@ -71,7 +71,7 @@ const renderTable = () => {
 
 renderTable()
 
-const ordersPercentage = (ordersOpened) => {
+const ordersPercentage = ordersOpened => {
     const percentage = (ordersOpened * 100) / orders.length
     const percentageFormat = Math.trunc(percentage)
     osPercengateDashboard.textContent = `${percentageFormat}%`

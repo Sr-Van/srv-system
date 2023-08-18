@@ -1,135 +1,4 @@
-let clients = [
-    {
-      nome: "Ana da Silva",
-      CPF: "123.456.789-00",
-      RG: "12.345.678-9",
-      Telefone: "(11) 98765-4321",
-      CEP: "12345-678",
-      cidade: "Sao Paulo",
-      Endereço: "Rua A, 123",
-      Numero: 123,
-      Bairro: "Centro",
-      plano: "Plano A",
-      vencimento: 1
-    },
-    {
-      nome: "Joao Souza",
-      CPF: "987.654.321-00",
-      RG: "98.765.432-1",
-      Telefone: "(21) 98765-4321",
-      CEP: "54321-678",
-      cidade: "Rio de Janeiro",
-      Endereço: "Avenida B, 456",
-      Numero: 456,
-      Bairro: "Copacabana",
-      plano: "Plano B",
-      vencimento: 5
-    },
-    {
-      nome: "Maria Oliveira",
-      CPF: "111.222.333-44",
-      RG: "11.222.333-4",
-      Telefone: "(31) 98765-4321",
-      CEP: "98765-432",
-      cidade: "Belo Horizonte",
-      Endereço: "Praça C, 789",
-      Numero: 789,
-      Bairro: "Savassi",
-      plano: "Plano C",
-      vencimento: 10
-    },
-    {
-      nome: "Carlos Santos",
-      CPF: "555.666.777-88",
-      RG: "55.666.777-8",
-      Telefone: "(41) 98765-4321",
-      CEP: "76543-210",
-      cidade: "Curitiba",
-      Endereço: "Rua D, 987",
-      Numero: 987,
-      Bairro: "Batel",
-      plano: "Plano D",
-      vencimento: 15
-    },
-    {
-      nome: "Laura Lima",
-      CPF: "888.999.000-11",
-      RG: "88.999.000-1",
-      Telefone: "(51) 98765-4321",
-      CEP: "87654-321",
-      cidade: "Porto Alegre",
-      Endereço: "Avenida E, 654",
-      Numero: 654,
-      Bairro: "Moinhos de Vento",
-      plano: "Plano E",
-      vencimento: 20
-    },
-    {
-      nome: "Rafael Alves",
-      CPF: "222.333.444-55",
-      RG: "22.333.444-5",
-      Telefone: "(61) 98765-4321",
-      CEP: "23456-789",
-      cidade: "Brasilia",
-      Endereço: "Quadra F, 123",
-      Numero: 123,
-      Bairro: "Asa Sul",
-      plano: "Plano F",
-      vencimento: 25
-    },
-    {
-      nome: "Isabel Castro",
-      CPF: "444.555.666-77",
-      RG: "44.555.666-7",
-      Telefone: "(71) 98765-4321",
-      CEP: "34567-890",
-      cidade: "Salvador",
-      Endereço: "Rua G, 987",
-      Numero: 987,
-      Bairro: "Barra",
-      plano: "Plano G",
-      vencimento: 1
-    },
-    {
-      nome: "Antonio Pereira",
-      CPF: "666.777.888-99",
-      RG: "66.777.888-9",
-      Telefone: "(81) 98765-4321",
-      CEP: "45678-901",
-      cidade: "Recife",
-      Endereço: "Avenida H, 654",
-      Numero: 654,
-      Bairro: "Boa Viagem",
-      plano: "Plano H",
-      vencimento: 5
-    },
-    {
-      nome: "Leticia Carvalho",
-      CPF: "999.000.111-22",
-      RG: "99.000.111-2",
-      Telefone: "(85) 98765-4321",
-      CEP: "56789-012",
-      cidade: "Fortaleza",
-      Endereço: "Rua I, 123",
-      Numero: 123,
-      Bairro: "Meireles",
-      plano: "Plano I",
-      vencimento: 10
-    },
-    {
-      nome: "Gabriel Santos",
-      CPF: "111.222.333-44",
-      RG: "11.222.333-4",
-      Telefone: "(92) 98765-4321",
-      CEP: "67890-123",
-      cidade: "Manaus",
-      Endereço: "Avenida J, 987",
-      Numero: 987,
-      Bairro: "Centro",
-      plano: "Plano J",
-      vencimento: 15
-    }
-]
+let clients = []
 
 let orders = []
 //setting data in localStorage for manipulating
@@ -183,17 +52,17 @@ const tableContasLoad = () =>{
     tableContas.innerHTML = ""
     clients.forEach( (client, index) => {
         const { vencimento, nome, plano, pagamento } = client
+        getPaymentSituation(pagamento)
         const diaFormatted =  vencimento <= 9 ? "0" + vencimento : vencimento
-        const calcVencimento =  vencimento <= diaAtual + 7 ? mes + 1  : mes 
-        const mesFormatted = calcVencimento <= 9 ? "0" + calcVencimento : calcVencimento
-        const colorVenc =  pagamento === "A Receber" ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
+        const mesFormatted = paymentMonth <= 9 ? "0" + paymentMonth : paymentMonth
+        const colorVenc =  getColorPayment(pagamento) === 'A receber' ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
 
         tableList = `
             <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light); max-height: 30px; overflow: hidden;">
                 <td>${nome}</td>
                 <td>${plano}</td>
                 <td>${diaFormatted}/${mesFormatted}</td>
-                <td ${colorVenc}>${pagamento}</td>
+                <td ${colorVenc}>${paymentSituation}</td>
                 <td><a class="confirm-pag" data-id="${index}">confirmar pag.</a></td>
             </tr>
             `
@@ -201,6 +70,22 @@ const tableContasLoad = () =>{
     })
 }
 
+const getColorPayment = pagamentos => {
+    const findActualMonth = pagamentos.find(pagamento => pagamento.month == mes)
+    if(findActualMonth) {
+        return findActualMonth.situation
+    }
+    return ""
+}
+
+const getPaymentSituation = pagamentos => {
+    const fisrFindPayment = pagamentos
+    .find(pagamento => pagamento.situation == "A receber")
+    const { month, situation } = fisrFindPayment
+    paymentMonth = month
+    paymentSituation = situation
+
+}
 const cleanInputs = () => {
     document.querySelector("#txt-nome").value = ""
     document.querySelector("#txt-cpf").value = ""
@@ -384,11 +269,11 @@ const addOrderNewClient = () => {
     countOrders()
 }
 
-const generatePayment = planoValue => {
+const generatePayment = (planoValue, vencimento) => {
     const payment = [];
-    for (i=mes; i <= 12; i++) {
+    for (i=mes; i < 12; i++) {
         const objPayment = { }
-        objPayment.month = i
+        objPayment.month = vencimento <= diaAtual + 7 ? i + 1 : i
         objPayment.value = planosObj[planoValue]
         
         objPayment.situation = "A receber"
@@ -397,7 +282,11 @@ const generatePayment = planoValue => {
     return payment
 }
 
-
+const getTextSelectPlano = () => {
+    const selecPlano = document.querySelector("#select-plano")
+    const optionPlano = selecPlano.children[selecPlano.selectedIndex]
+    return optionPlano.textContent
+}
 
 const newClientAdd = () =>{    
     let newClient = {}
@@ -412,12 +301,12 @@ const newClientAdd = () =>{
     newClient.Numero = document.querySelector("#txt-nume").value
     newClient.Bairro = document.querySelector("#txt-bairro").value
     newClient.Sexualidade = document.querySelector('input[name=sex-radio]:checked').value
-    newClient.plano = document.querySelector("#select-plano").textContent
+    newClient.plano = getTextSelectPlano()
     newClient.vencimento = document.querySelector("#select-venc").value
     
     const {CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento} = newClient
     const planoValue = document.querySelector("#select-plano").value
-    newClient.pagamento = generatePayment(planoValue)
+    newClient.pagamento = generatePayment(planoValue, vencimento)
 
     if (CPF === "" || RG === "" || Telefone === "" || CEP === "" || cidade === "" || Endereço === "" || Numero === "" || Bairro === "" || plano === "" || vencimento === "") {
         return

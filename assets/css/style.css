@@ -600,13 +600,16 @@ select {
     place-items: center;
     grid-template-rows: 100px auto;
     overflow: auto;
-
 }
 
 .table-os > table {
     width: 100%;
     height: 100%;
     padding: 16px 0 0 16px;
+    display: block;
+}
+.table-os > table > tbody {
+    overflow: auto;
 }
 
 .tr-padrao-os {
