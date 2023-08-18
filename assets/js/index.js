@@ -146,6 +146,13 @@ const setDb = () => {
     localStorage.orders = JSON.stringify(orders)
 }
 
+const planosObj = {
+    1: "50,00",
+    2: "60,00",
+    3: "70,00",
+    4: "100,00"
+}
+
 let date = new Date()
 const diaAtual = date.getDate()
 const mes = date.getUTCMonth() + 1
@@ -377,6 +384,20 @@ const addOrderNewClient = () => {
     countOrders()
 }
 
+const generatePayment = planoValue => {
+    const payment = [];
+    for (i=mes; i <= 12; i++) {
+        const objPayment = { }
+        objPayment.month = i
+        objPayment.value = planosObj[planoValue]
+        
+        objPayment.situation = "A receber"
+        payment.push(objPayment)
+    }
+    return payment
+}
+
+
 
 const newClientAdd = () =>{    
     let newClient = {}
@@ -391,11 +412,12 @@ const newClientAdd = () =>{
     newClient.Numero = document.querySelector("#txt-nume").value
     newClient.Bairro = document.querySelector("#txt-bairro").value
     newClient.Sexualidade = document.querySelector('input[name=sex-radio]:checked').value
-    newClient.plano = document.querySelector("#select-plano").value
+    newClient.plano = document.querySelector("#select-plano").textContent
     newClient.vencimento = document.querySelector("#select-venc").value
-    newClient.pagamento = "A Receber"
-
+    
     const {CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento} = newClient
+    const planoValue = document.querySelector("#select-plano").value
+    newClient.pagamento = generatePayment(planoValue)
 
     if (CPF === "" || RG === "" || Telefone === "" || CEP === "" || cidade === "" || Endereço === "" || Numero === "" || Bairro === "" || plano === "" || vencimento === "") {
         return

@@ -50,7 +50,7 @@ const osPercengateDashboard = document.querySelector(".os-percengate")
 const osPercengateDashboardCircle = document.querySelector(".os-svg")
 
 const getTypeOfOrders = (order, index) => {
-    const { id, type, client, date, situation } = order
+    const { type, client, date, situation } = order
     const typeToText = typesOfOrders[type]
     const tr = document.createElement("tr")
 
@@ -78,7 +78,9 @@ const ordersPercentage = (ordersOpened) => {
     if(percentage >= 51){
         osPercengateDashboardCircle.style.stroke = "#f31818"
     }
-    console.log(percentageFormat)
+    //CALCULO PORCENTAGEM    
+    const percentageCircle = Math.trunc(Math.abs((percentageFormat - 100) / 100 * 222))
+    osPercengateDashboardCircle.style.strokeDashoffset = percentageCircle
 }
 
 
@@ -124,6 +126,7 @@ const getReasonMessageArray = () => {
     arr.forEach((message, index) => putMessageOnSelect(message, index, selectMotivo))
 }
 
+
 const putMessageOnSelect = (message, i, select) => {
     i++
     const option = document.createElement("option")
@@ -151,10 +154,16 @@ const addNewOrder = () => {
     renderTable()
     setOrdersData()
     ordersPercentage()
+    countOrders()
 }
 
+getReasonMessageArray()
 
-buttonSaveOrder.addEventListener("click", addNewOrder)
+
+buttonSaveOrder.addEventListener("click", () =>{
+    addNewOrder()
+    modalOsOverlay.style.display = "none"
+})
 buttonCancelOrder.addEventListener("click", () => modalOsOverlay.style.display = "none")
 buttonNewOrder.addEventListener("click", () => modalOsOverlay.style.display = "grid")
 buttonChangeOrder.addEventListener("click", e => {

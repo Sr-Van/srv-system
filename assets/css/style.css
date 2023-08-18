@@ -252,21 +252,22 @@ body{
 
 .dashboard-content .cards svg circle{
     stroke: #038b79;
-    stroke-dashoffset: -30;
-    stroke-dasharray: 130;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 222;
+}
+.dashboard-content .clients svg circle{
+    stroke: #038b79;
+    stroke-dashoffset: 111;
+    stroke-dasharray: 222;
 }
 
 
 .dashboard-content .sales svg circle{
     stroke: #038b79;
-    stroke-dashoffset: -30;
-    stroke-dasharray: 200;
+    stroke-dashoffset: 222;
+    stroke-dasharray: 222;
 }
-.dashboard-content .total-sales svg circle{
-    stroke: #038b79;
-    stroke-dashoffset: -30;
-    stroke-dasharray: 90;
-}
+
 .dashboard-content .progress .percentage{
     position: absolute;
     top: 30px;
