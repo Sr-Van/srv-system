@@ -733,8 +733,8 @@ select {
 }
 
 .confirm-payment {
-    height: 110px;
-    width: 200px;
+    height: 400px;
+    width: 400px;
     background-color: var(--grey-light);
     border-radius: 1em;
     display: grid;

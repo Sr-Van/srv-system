@@ -154,13 +154,39 @@ const formatCep = () => {
     }
 }
 
-const confirmPayment = id => {
-    clients[id].pagamento = "Recebido"
-    setDb()
-    tableContasLoad()
+const paymentTable = document.querySelector("#payments")
+
+const renderPaymentTable = payment => {
+    console.log(payment);
+    const { month, situation, value } = payment
+    const tr = document.createElement("tr")
+    tr.innerHTML = `
+        <td>Mes: ${month}</td>
+        <td>${situation}</td>
+        <td>Valor: ${value}</td>
+        <td data-js="${month}" style="cursor: pointer;">Selecionar</td>
+    `
+    paymentTable.append(tr)
 }
 
+
+const getPayment = id => {
+    paymentTable.innerHTML = ""
+    arrayPayment = clients[id].pagamento
+    arrayPayment.forEach(payment => renderPaymentTable(payment))
+    /* const monthToPay = arrayPayment.find(payment => payment.month == month) */
+}
+
+const payManualMonth = month => {
+    const monthToPay = arrayPayment.find(payment => payment.month == month)
+    monthToPay.situation = "Recebido"
+    console.log(monthToPay);
+}
+
+//TODO: CREATE A LET MONTHTOCONFIRM AND MAKE THEM SELECT THE ID FROM THE MONTH
+
 let idToConfirm
+let monthToConfirm
 
 tableContas.addEventListener("click", e => {
     e.preventDefault()
@@ -169,6 +195,12 @@ tableContas.addEventListener("click", e => {
         return
     }
     modalConfirmPayment.style.display = "grid"
+    getPayment(idToConfirm)
+})
+paymentTable.addEventListener("click", e => {
+    e.preventDefault()
+    monthToConfirm = e.target.getAttribute("data-js")
+    payManualMonth(monthToConfirm)
 })
 
 denyPaymentBtn.addEventListener("click", event => {
@@ -177,8 +209,8 @@ denyPaymentBtn.addEventListener("click", event => {
 })
 addPaymentBtn.addEventListener("click", event => {
     event.preventDefault()
-    confirmPayment(idToConfirm)
     modalConfirmPayment.style.display = "none"
+    payManualMonth(monthToConfirm)
 })
 
 
