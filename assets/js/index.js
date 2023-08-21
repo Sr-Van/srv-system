@@ -63,7 +63,7 @@ const tableContasLoad = () =>{
                 <td>${plano}</td>
                 <td>${diaFormatted}/${mesFormatted}</td>
                 <td ${colorVenc}>${paymentSituation}</td>
-                <td><a class="confirm-pag" data-id="${index}">confirmar pag.</a></td>
+                <td><a class="confirm-pag" data-id="${index}">Financeiro</a></td>
             </tr>
             `
             tableContas.innerHTML += tableList
@@ -157,12 +157,13 @@ const formatCep = () => {
 const paymentTable = document.querySelector("#payments")
 
 const renderPaymentTable = payment => {
-    console.log(payment);
     const { month, situation, value } = payment
+    const colorVenc =  situation === 'A receber' ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
     const tr = document.createElement("tr")
+    tr.setAttribute("class", "tr-padrao-3")
     tr.innerHTML = `
         <td>Mes: ${month}</td>
-        <td>${situation}</td>
+        <td ${colorVenc}>${situation}</td>
         <td>Valor: ${value}</td>
         <td data-js="${month}" style="cursor: pointer;">Selecionar</td>
     `
@@ -174,13 +175,12 @@ const getPayment = id => {
     paymentTable.innerHTML = ""
     arrayPayment = clients[id].pagamento
     arrayPayment.forEach(payment => renderPaymentTable(payment))
-    /* const monthToPay = arrayPayment.find(payment => payment.month == month) */
 }
 
 const payManualMonth = month => {
     const monthToPay = arrayPayment.find(payment => payment.month == month)
     monthToPay.situation = "Recebido"
-    console.log(monthToPay);
+    setDb()
 }
 
 //TODO: CREATE A LET MONTHTOCONFIRM AND MAKE THEM SELECT THE ID FROM THE MONTH
@@ -200,7 +200,6 @@ tableContas.addEventListener("click", e => {
 paymentTable.addEventListener("click", e => {
     e.preventDefault()
     monthToConfirm = e.target.getAttribute("data-js")
-    payManualMonth(monthToConfirm)
 })
 
 denyPaymentBtn.addEventListener("click", event => {
@@ -303,11 +302,36 @@ const addOrderNewClient = () => {
 
 const generatePayment = (planoValue, vencimento) => {
     const payment = [];
-    for (i=mes; i < 12; i++) {
+    const valuePerDay = parseInt(planosObj[planoValue]) / 30
+    const valuePerDayFixed = parseFloat(valuePerDay.toFixed(2))
+
+    let counter = 0
+
+    for (i=mes; i <= 12; i++) {
+        console.log(counter);
         const objPayment = { }
-        objPayment.month = vencimento <= diaAtual + 7 ? i + 1 : i
-        objPayment.value = planosObj[planoValue]
         
+        objPayment.month = vencimento <= diaAtual + 7 ? i + 1 : i
+
+        if(counter == 0) {
+            const parsePlano = parseFloat(planosObj[planoValue])
+
+            const daysSignal = vencimento - diaAtual 
+            
+            const daysOff = Math.abs(vencimento - diaAtual)
+
+            const totalValueDiff = valuePerDayFixed * daysOff
+
+            const diff = daysSignal < 0 ? parsePlano - totalValueDiff : parsePlano + totalValueDiff
+
+
+            const fixedDiff = diff.toFixed(2)
+
+            objPayment.value = fixedDiff
+            counter++
+        }else {
+            objPayment.value = planosObj[planoValue]  
+        }
         objPayment.situation = "A receber"
         payment.push(objPayment)
     }
