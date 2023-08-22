@@ -77,6 +77,8 @@ const ordersPercentage = ordersOpened => {
     osPercengateDashboard.textContent = `${percentageFormat}%`
     if(percentage >= 51){
         osPercengateDashboardCircle.style.stroke = "#f31818"
+    } else {
+        osPercengateDashboardCircle.style.stroke = "#038b79";
     }
     //CALCULO PORCENTAGEM    
     const percentageCircle = Math.trunc(Math.abs((percentageFormat - 100) / 100 * 222))

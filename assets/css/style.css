@@ -765,6 +765,8 @@ select {
 .select-td-payment {
     cursor: pointer;
     text-align: center;
+    background-color: var(--icons-color);
+    border-radius: 1em;
 }
 
 .select-td-payment:active {

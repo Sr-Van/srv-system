@@ -22,6 +22,8 @@ const planosObj = {
     4: "100,00"
 }
 
+
+
 let date = new Date()
 const diaAtual = date.getDate()
 const mes = date.getUTCMonth() + 1
@@ -39,60 +41,30 @@ const dashContent = document.querySelector('.dashboard-content')
 const cadastroContent = document.querySelector(".cadastros")
 const contasContent = document.querySelector(".contas")
 const ordensContent = document.querySelector(".ordens")
-const tableContas = document.querySelector(".receber-tb")
 
-const modalConfirmPayment = document.querySelector(".modal-confirm-payment-overlay")
-const addPaymentBtn = document.querySelector(".btn-confirm")
-const denyPaymentBtn = document.querySelector(".btn-deny")
 
-const paymentTable = document.querySelector("#payments")
-
-const tableContasLoad = () =>{
-    
-    let tableList
-
-    tableContas.innerHTML = ""
-    clients.forEach( (client, index) => {
-        const { vencimento, nome, plano, pagamento } = client
-        getPaymentSituation(pagamento)
-        const diaFormatted =  vencimento <= 9 ? "0" + vencimento : vencimento
-        const mesFormatted = paymentMonth <= 9 ? "0" + paymentMonth : paymentMonth
-        const colorVenc =  getColorPayment(pagamento) === 'A receber' ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
-
-        tableList = `
-            <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light); max-height: 30px; overflow: hidden;">
-                <td>${nome}</td>
-                <td>${plano}</td>
-                <td>${diaFormatted}/${mesFormatted}</td>
-                <td ${colorVenc}>${paymentSituation}</td>
-                <td><a class="confirm-pag" data-id="${index}">Financeiro</a></td>
-            </tr>
+const tableLoad = () => {
+    let tableList = ""
+    let table = document.querySelector(".client-tb")
+    table.innerHTML = ""
+    clients.forEach((client, index)=>{
+        tableList += `
+            <tr class="tr-padrao-2">
+                <td style="width: 230px; cursor: pointer; overflow: hidden;" data-id="${index}">
+                    ${client.nome}
+                </td>
+                <td>${client.plano}</td>
+                <td> ${client.CPF}</td>
+                <td>${client.RG}</td>
+                <td>${client.Telefone}</td>
+                <td>${client.Bairro}</td>
+                <td>${client.Endereço}</td>
             `
-            tableContas.innerHTML += tableList
     })
+    table.innerHTML += tableList
 }
 
-const getColorPayment = pagamentos => {
-    const findActualMonth = pagamentos.find(pagamento => pagamento.month == mes)
-    if(findActualMonth) {
-        return findActualMonth.situation
-    }
-    return ""
-}
 
-const getPaymentSituation = pagamentos => {
-    const fisrFindPayment = pagamentos
-    .find(pagamento => pagamento.situation == "A receber")
-    const { month, situation } = fisrFindPayment
-    paymentMonth = month
-    paymentSituation = situation
-
-}
-
-const getPlanoValue = plano => {
-    const planoArray = Object.keys(planosObj).map(key => [key, planosObj[key]])
-    const findClientPlano = planoArray.find(plano => pagamento.month == mes)
-}
 
 const cleanInputs = () => {
     document.querySelector("#txt-nome").value = ""
@@ -162,64 +134,8 @@ const formatCep = () => {
     }
 }
 
-
-
-const renderPaymentTable = payment => {
-    const { month, situation, value } = payment
-    const colorVenc =  situation === 'A receber' ? `style="color: var(--soft-red)";` : `style="color: var(--soft-green)";`
-    const tr = document.createElement("tr")
-    tr.setAttribute("class", "tr-padrao-3")
-    tr.innerHTML = `
-        <td>Mes: ${month}</td>
-        <td ${colorVenc}>${situation}</td>
-        <td>Valor: ${value}</td>
-        <td class="select-td-payment" data-js="${month}">Selecionar</td>
-    `
-    paymentTable.append(tr)
-}
-
-
-const getPayment = id => {
-    paymentTable.innerHTML = ""
-    arrayPayment = clients[id].pagamento
-    arrayPayment.forEach(payment => renderPaymentTable(payment))
-}
-
-const payManualMonth = month => {
-    const monthToPay = arrayPayment.find(payment => payment.month == month)
-    monthToPay.situation = "Recebido"
-    setDb()
-}
-
-//TODO: CREATE A LET MONTHTOCONFIRM AND MAKE THEM SELECT THE ID FROM THE MONTH
-
 let idToConfirm
 let monthToConfirm
-
-tableContas.addEventListener("click", e => {
-    e.preventDefault()
-    idToConfirm = e.target.getAttribute("data-id")
-    if(idToConfirm === null) {
-        return
-    }
-    modalConfirmPayment.style.display = "grid"
-    getPayment(idToConfirm)
-})
-paymentTable.addEventListener("click", e => {
-    e.preventDefault()
-    monthToConfirm = e.target.getAttribute("data-js")
-})
-
-denyPaymentBtn.addEventListener("click", event => {
-    event.preventDefault()
-    modalConfirmPayment.style.display = "none"
-})
-addPaymentBtn.addEventListener("click", event => {
-    event.preventDefault()
-    modalConfirmPayment.style.display = "none"
-    payManualMonth(monthToConfirm)
-    tableContasLoad()
-})
 
 
 
@@ -389,8 +305,9 @@ const newClientAdd = () =>{
 }
 
 const findIndexToDelete = () => {
-    return clients.map(client => client.nome)
-    .indexOf(nomeParaIndex)
+    return clients
+        .map(client => client.nome)
+        .indexOf(nomeParaIndex)
 }
 
 const deleteClient = () => {
@@ -464,26 +381,7 @@ window.addEventListener("click", event => {
     }
 })
 
-const tableLoad = () => {
-    let tableList = ""
-    let table = document.querySelector(".client-tb")
-    table.innerHTML = ""
-    clients.forEach((client, index)=>{
-        tableList += `
-            <tr class="tr-padrao-2">
-                <td style="width: 250px; cursor: pointer;" data-id="${index}">
-                    ${client.nome}
-                </td>
-                <td>${client.plano}</td>
-                <td> ${client.CPF}</td>
-                <td>${client.RG}</td>
-                <td>${client.Telefone}</td>
-                <td>${client.Bairro}</td>
-                <td>${client.Endereço}</td>
-            `
-    })
-    table.innerHTML += tableList
-}
+
 
 const btnNovoCad = document.querySelector(".novo-cadastro")
 const modal = document.querySelector(".modal-overlay")

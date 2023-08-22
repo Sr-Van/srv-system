@@ -9,6 +9,7 @@
     <script src='/assets/js/index.js' defer></script>
     <script src='/assets/js/ordens.js' defer></script>
     <script src='/assets/js/search.js' defer></script>
+    <script src='/assets/js/contas.js' defer></script>
     <title>Dashboard SRV</title>
 </head>
 <body>
@@ -76,11 +77,11 @@
                                 <h3>Clientes</h3>
                                 <div>
                                     <h1>Ativos</h1>
-                                    <p>100</p>
+                                    <p class="active-clients">100</p>
                                 </div>
                                 <div>
                                     <h1>Inativos</h1>
-                                    <p>100</p>
+                                    <p class="unactive-clients">100</p>
                                 </div>
                             </div>
                             <div class="progress">
@@ -99,19 +100,19 @@
                                 <h3>Vendas Mensais</h3>
                                 <div>
                                     <h1>Recebidas</h1>
-                                    <p>$640,000</p>
+                                    <p class="received-payment">$640,000</p>
                                 </div>
                                 <div>
                                     <h1>A Receber</h1>
-                                    <p>$128,000</p>
+                                    <p class="unreceived-payment">$128,000</p>
                                 </div>
                             </div>
                             <div class="progress">
                                     <svg>
-                                        <circle cx="38" cy="38" r="36"></circle>
+                                        <circle class="payment-svg" cx="38" cy="38" r="36"></circle>
                                     </svg>
                                     <div class="percentage">
-                                        <p>+80%</p>
+                                        <p class="payment-percentage">+80%</p>
                                     </div>
                             </div>
                         </div>
