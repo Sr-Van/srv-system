@@ -11,6 +11,8 @@
     --white-color: #F7F7F7;
     --box-shadow: 0 0 5px var(--black-bg);
     --icons-color: #b100c9;
+    --soft-green: #6fc276;
+    --soft-red: #ee4747 ;
 }
 
 
@@ -392,7 +394,19 @@ table::-webkit-scrollbar-thumb{
     font-size: 12px; 
     display: grid; 
     grid-template-columns: repeat(7, 1fr); 
-    border-bottom: 1px solid; 
+    border-bottom: 1px solid var(--black-bg); 
+    padding: 3px; 
+    background-color: var(--purple-light); 
+    gap:10px; 
+    overflow: hidden;
+}
+.tr-padrao-3 {
+    width: 100%; 
+    height: 25px; 
+    font-size: 12px; 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    border-bottom: 1px solid var(--black-bg); 
     padding: 3px; 
     background-color: var(--purple-light); 
     gap:10px; 
@@ -733,27 +747,52 @@ select {
 }
 
 .confirm-payment {
-    height: 400px;
-    width: 400px;
-    background-color: var(--grey-light);
-    border-radius: 1em;
+    height: auto;
+    width: 350px;
+    background-color: var(--purple-color);
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
     display: grid;
+    place-items: center;
     grid-template-areas: 
     "header header"
-    "left right";
+    "left right"
+    "table table";
     gap: 8px;
     box-shadow: var(--box-shadow);
 }
 
+.select-td-payment {
+    cursor: pointer;
+    text-align: center;
+}
+
+.select-td-payment:active {
+    background-color: #038b79;
+    color: var(--white-color);
+}
+
+
 .confirm-payment p {
     grid-area: header;
+    width: 100%;
+    height: 40px;
     text-align: center;
     background-color: var(--purple-color);
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+    box-shadow: var(--box-shadow);
+}
+.confirm-payment table {
+    grid-area: table;
+    width: 100%;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;    
+    overflow: auto;
 }
 .btn-confirm {
     grid-area: left;
+    width: 100px;
 }
 
 .btn-modal-padrao{
@@ -763,5 +802,6 @@ select {
 }
 
 .btn-deny {
+    width: 100px;
     grid-area: right;
 }

@@ -45,6 +45,8 @@ const modalConfirmPayment = document.querySelector(".modal-confirm-payment-overl
 const addPaymentBtn = document.querySelector(".btn-confirm")
 const denyPaymentBtn = document.querySelector(".btn-deny")
 
+const paymentTable = document.querySelector("#payments")
+
 const tableContasLoad = () =>{
     
     let tableList
@@ -86,6 +88,12 @@ const getPaymentSituation = pagamentos => {
     paymentSituation = situation
 
 }
+
+const getPlanoValue = plano => {
+    const planoArray = Object.keys(planosObj).map(key => [key, planosObj[key]])
+    const findClientPlano = planoArray.find(plano => pagamento.month == mes)
+}
+
 const cleanInputs = () => {
     document.querySelector("#txt-nome").value = ""
     document.querySelector("#txt-cpf").value = ""
@@ -154,18 +162,18 @@ const formatCep = () => {
     }
 }
 
-const paymentTable = document.querySelector("#payments")
+
 
 const renderPaymentTable = payment => {
     const { month, situation, value } = payment
-    const colorVenc =  situation === 'A receber' ? `style="color:#f31818";` : `style="color:#3ee60bb3";`
+    const colorVenc =  situation === 'A receber' ? `style="color: var(--soft-red)";` : `style="color: var(--soft-green)";`
     const tr = document.createElement("tr")
     tr.setAttribute("class", "tr-padrao-3")
     tr.innerHTML = `
         <td>Mes: ${month}</td>
         <td ${colorVenc}>${situation}</td>
         <td>Valor: ${value}</td>
-        <td data-js="${month}" style="cursor: pointer;">Selecionar</td>
+        <td class="select-td-payment" data-js="${month}">Selecionar</td>
     `
     paymentTable.append(tr)
 }
@@ -210,6 +218,7 @@ addPaymentBtn.addEventListener("click", event => {
     event.preventDefault()
     modalConfirmPayment.style.display = "none"
     payManualMonth(monthToConfirm)
+    tableContasLoad()
 })
 
 
@@ -308,7 +317,6 @@ const generatePayment = (planoValue, vencimento) => {
     let counter = 0
 
     for (i=mes; i <= 12; i++) {
-        console.log(counter);
         const objPayment = { }
         
         objPayment.month = vencimento <= diaAtual + 7 ? i + 1 : i
@@ -324,7 +332,6 @@ const generatePayment = (planoValue, vencimento) => {
 
             const diff = daysSignal < 0 ? parsePlano - totalValueDiff : parsePlano + totalValueDiff
 
-
             const fixedDiff = diff.toFixed(2)
 
             objPayment.value = fixedDiff
@@ -338,10 +345,13 @@ const generatePayment = (planoValue, vencimento) => {
     return payment
 }
 
-const getTextSelectPlano = () => {
-    const selecPlano = document.querySelector("#select-plano")
-    const optionPlano = selecPlano.children[selecPlano.selectedIndex]
+const getTextSelectPlano = select => {
+    const optionPlano = select.children[select.selectedIndex]
     return optionPlano.textContent
+}
+const putTextSelectPlano = (select, plano) => {
+    const optionPlano = select.children[select.selectedIndex]
+    optionPlano.textContent = plano
 }
 
 const newClientAdd = () =>{    
@@ -357,7 +367,10 @@ const newClientAdd = () =>{
     newClient.Numero = document.querySelector("#txt-nume").value
     newClient.Bairro = document.querySelector("#txt-bairro").value
     newClient.Sexualidade = document.querySelector('input[name=sex-radio]:checked').value
-    newClient.plano = getTextSelectPlano()
+
+    const selecPlano = document.querySelector("#select-plano")
+
+    newClient.plano = getTextSelectPlano(selecPlano)
     newClient.vencimento = document.querySelector("#select-venc").value
     
     const {CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento} = newClient
@@ -388,6 +401,29 @@ const deleteClient = () => {
     tableLoad()
 }
 
+const editClient = () => {
+    const editedClient = clients[findIndexToDelete()]
+
+    editedClient.nome = document.querySelector("#txt-e-nome").value
+    editedClient.CPF = document.querySelector("#txt-e-cpf").value
+    editedClient.RG = document.querySelector("#txt-e-rg").value
+    editedClient.Telefone = document.querySelector("#txt-e-tel").value
+    editedClient.CEP = document.querySelector("#txt-e-cep").value
+    editedClient.cidade = document.querySelector("#txt-e-cidade").value
+    editedClient.Endereço = document.querySelector("#txt-e-endereco").value
+    editedClient.Numero = document.querySelector("#txt-e-nume").value
+    editedClient.Bairro = document.querySelector("#txt-e-bairro").value
+    editedClient.Sexualidade = document.querySelector('input[name=sex-e-radio]:checked').value
+
+    const selecPlano = document.querySelector("#select-e-plano")
+    editedClient.plano = getTextSelectPlano(selecPlano)
+
+    setDb()
+    cleanInputs()
+    tableLoad()
+    modalEdit.style.display = "none"
+}
+
 const openModalEdit =  (clients, target) => {
     const {nome, CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento, Sexualidade} = clients[target]
 
@@ -404,7 +440,8 @@ const openModalEdit =  (clients, target) => {
     document.querySelector("#txt-e-nume").value = Numero
     document.querySelector("#txt-e-bairro").value = Bairro
     document.querySelector('input[name=sex-e-radio]:checked').value = Sexualidade
-    document.querySelector("#select-e-plano").value = plano
+    const select = document.querySelector("#select-e-plano")
+    putTextSelectPlano(select, plano)
     document.querySelector("#select-e-venc").value = vencimento
 
 }
@@ -474,6 +511,8 @@ btnCancelEdCad.addEventListener("click", ()=>{
 btnSalvarCad.addEventListener("click", newClientAdd)
 
 btnExcluirCad.addEventListener("click", deleteClient)
+
+btnEditarCad.addEventListener("click", editClient)
 
 
 
