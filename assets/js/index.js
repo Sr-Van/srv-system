@@ -1,18 +1,23 @@
 let clients = []
 
 let orders = []
-//setting data in localStorage for manipulating
 
-if(localStorage.clients) {
-    clients = JSON.parse(localStorage.getItem("clients"))
-    orders = JSON.parse(localStorage.getItem("orders"))
-} else {
-    localStorage.clients = JSON.stringify(clients)
-}
+let allTimeRegisters = []
+
 
 const setDb = () => {
     localStorage.clients = JSON.stringify(clients)
     localStorage.orders = JSON.stringify(orders)
+    localStorage.allTimeRegisters = JSON.stringify(allTimeRegisters)
+}
+
+//setting data in localStorage for manipulating
+if(localStorage.clients) {
+    clients = JSON.parse(localStorage.getItem("clients"))
+    orders = JSON.parse(localStorage.getItem("orders"))
+    allTimeRegisters = JSON.parse(localStorage.getItem("allTimeRegisters"))
+} else {
+    setDb()
 }
 
 const planosObj = {
@@ -30,6 +35,13 @@ const mes = date.getUTCMonth() + 1
 const ano = date.getFullYear()
 
 
+// search [FIX]
+const search = document.querySelector("#search")
+const render = document.querySelector("div.show-client")
+const alertBox = document.querySelector("div.alert")
+
+
+
 /* Declarando botoes do sidebar */
 const dashboardBtn = document.querySelector('.dashboard-btn')
 const cadastrosBtn = document.querySelector('.cadastros-btn')
@@ -41,30 +53,75 @@ const dashContent = document.querySelector('.dashboard-content')
 const cadastroContent = document.querySelector(".cadastros")
 const contasContent = document.querySelector(".contas")
 const ordensContent = document.querySelector(".ordens")
+const registerTable = document.querySelector(".client-tb")
+const activeUsers = document.querySelector(".active-clients")
+const allUsers = document.querySelector(".unactive-clients")
+const usersActivePercentage = document.querySelector(".atice-percentage")
+const usersActivePercentageCircle = document.querySelector(".users-percentage")
 
 
-const tableLoad = () => {
-    let tableList = ""
-    let table = document.querySelector(".client-tb")
-    table.innerHTML = ""
-    clients.forEach((client, index)=>{
-        tableList += `
+const btnNovoCad = document.querySelector(".novo-cadastro")
+const modal = document.querySelector(".modal-overlay")
+const modalEdit = document.querySelector(".modal-e-overlay")
+const btnSalvarCad = document.querySelector(".btn-salvar")
+const btnCancelCad = document.querySelector(".btn-cancelar")
+const btnEditarCad = document.querySelector(".btn-editar")
+const btnCancelEdCad = document.querySelector(".btn-cancelar-edit")
+const btnExcluirCad = document.querySelector(".excluir-cadastro")
+
+const renderClientOnRegister = (client, index) => {
+
+    const { nome, plano, CPF, RG, Telefone, Bairro, Endereço } = client
+
+    let registerTableList = ""
+    registerTableList += `
             <tr class="tr-padrao-2">
                 <td style="width: 230px; cursor: pointer; overflow: hidden;" data-id="${index}">
-                    ${client.nome}
+                    ${nome}
                 </td>
-                <td>${client.plano}</td>
-                <td> ${client.CPF}</td>
-                <td>${client.RG}</td>
-                <td>${client.Telefone}</td>
-                <td>${client.Bairro}</td>
-                <td>${client.Endereço}</td>
+                <td>${plano}</td>
+                <td> ${CPF}</td>
+                <td>${RG}</td>
+                <td>${Telefone}</td>
+                <td>${Bairro}</td>
+                <td>${Endereço}</td>
             `
-    })
-    table.innerHTML += tableList
+            
+    registerTable.innerHTML += registerTableList
 }
 
+const registerLoad = () => {
+    registerTable.innerHTML = ""
+    clients.forEach((client, index)=> renderClientOnRegister(client, index))
+}
 
+const loadUsersDashboard = () => {
+    allUsers.innerHTML = allTimeRegisters.length
+    activeUsers.innerHTML = clients.length
+
+    const percentage = Math.trunc(
+        ( clients.length * 100 ) / allTimeRegisters.length)
+    usersActivePercentage.textContent = `${percentage}%`
+
+
+    if (isNaN(percentage)) {
+        usersActivePercentage.textContent = `0%`
+    }
+
+    if (percentage <= 51) {
+        usersActivePercentageCircle.style.stroke = "#f31818";
+    } else {
+        usersActivePercentageCircle.style.stroke = "#038b79";
+    }
+
+    const percentageCircle = Math.trunc(
+        Math.abs(((percentage - 100) / 100) * 222))
+
+
+    usersActivePercentageCircle.style.strokeDashoffset = percentageCircle;
+}
+
+loadUsersDashboard()
 
 const cleanInputs = () => {
     document.querySelector("#txt-nome").value = ""
@@ -81,8 +138,7 @@ const cleanInputs = () => {
     document.querySelector("#select-venc").value = ""
 }
 
-const formatNames = () => {
-    nomeDefault = document.querySelector("#txt-nome").value
+const formatToFirstLetterUppercase = nomeDefault => {
     let completeName = nomeDefault.toString()
     let eachName = completeName.split(" ")
     nameFormatted = ""
@@ -105,12 +161,17 @@ const formatCpf = () => {
 
 const formatRg = () => {
     let rgDefault = document.querySelector("#txt-rg").value
-    if (rgDefault.length <= 8 || rgDefault.length >= 10) {
+    if (rgDefault.length <= 7 || rgDefault.length >= 10) {
         document.querySelector("#txt-rg").value = ""
-    } else {
-        rgFormatted = rgDefault.replace(/(\d{2})?(\d{3})?(\d{3})?(\d{1})/, "$1.$2.$3-$4")
-        document.querySelector("#txt-rg").value = rgFormatted
+        return 
     } 
+    if (rgDefault.length == 8) {
+        rgFormatted = rgDefault.replace(/(\d{2})?(\d{3})?(\d{3})/, "$1.$2.$3")
+        document.querySelector("#txt-rg").value = rgFormatted
+        return
+    }
+    rgFormatted = rgDefault.replace(/(\d{2})?(\d{3})?(\d{3})?(\d{1})/, "$1.$2.$3-$4")
+    document.querySelector("#txt-rg").value = rgFormatted
 }
 
 const formatTel = () => {
@@ -137,8 +198,6 @@ const formatCep = () => {
 let idToConfirm
 let monthToConfirm
 
-
-
 dashboardBtn.addEventListener('click', (e)=>{
     e.preventDefault()
     activeBtn(dashboardBtn)
@@ -155,7 +214,7 @@ cadastrosBtn.addEventListener('click', (e)=>{
     desativeBtn(dashboardBtn, osBtn, contasBtn)
     unSelect(dashContent, contasContent, ordensContent)
     cadastroContent.style.display = 'block'
-    tableLoad()
+    registerLoad()
     desativeRender()
 })
 
@@ -195,20 +254,10 @@ const unSelect = (content1, content2, content3) => {
     content3.style.display = "none"
 }
 
-
-// search [FIX]
-const search = document.querySelector("#search")
-const render = document.querySelector("div.show-client")
-const alertBox = document.querySelector("div.alert")
-
-
-
 const desativeRender = () => {
     alertBox.style.display = 'none'
     render.style.display = 'none'
 }
-
-
 
 const addOrderNewClient = () => {
     const newOrderAdd = {}
@@ -232,7 +281,7 @@ const generatePayment = (planoValue, vencimento) => {
 
     let counter = 0
 
-    for (i=mes; i <= 12; i++) {
+    for (i=mes; i < 12; i++) {
         const objPayment = { }
         
         objPayment.month = vencimento <= diaAtual + 7 ? i + 1 : i
@@ -272,6 +321,10 @@ const putTextSelectPlano = (select, plano) => {
 
 const newClientAdd = () =>{    
     let newClient = {}
+    let newClientRegister = {}
+
+    newClientRegister.nome = nameFormatted
+    newClientRegister.id = Math.trunc(Math.random() * 1000)
 
     newClient.nome = nameFormatted
     newClient.CPF = cpfFormatted
@@ -296,11 +349,14 @@ const newClientAdd = () =>{
     if (CPF === "" || RG === "" || Telefone === "" || CEP === "" || cidade === "" || Endereço === "" || Numero === "" || Bairro === "" || plano === "" || vencimento === "") {
         return
     }
+    allTimeRegisters.push(newClientRegister)
     clients.push(newClient)
-    tableLoad()
+    registerLoad()
     setDb()
     addOrderNewClient()
     cleanInputs()
+    renderDashPayments()
+    loadUsersDashboard()
     modal.style.display = "none"
 }
 
@@ -315,7 +371,8 @@ const deleteClient = () => {
     setDb()
     modalEdit.style.display = "none"
     cleanInputs()
-    tableLoad()
+    registerLoad()
+    loadUsersDashboard()
 }
 
 const editClient = () => {
@@ -337,7 +394,7 @@ const editClient = () => {
 
     setDb()
     cleanInputs()
-    tableLoad()
+    registerLoad()
     modalEdit.style.display = "none"
 }
 
@@ -381,16 +438,6 @@ window.addEventListener("click", event => {
     }
 })
 
-
-
-const btnNovoCad = document.querySelector(".novo-cadastro")
-const modal = document.querySelector(".modal-overlay")
-const modalEdit = document.querySelector(".modal-e-overlay")
-const btnSalvarCad = document.querySelector(".btn-salvar")
-const btnCancelCad = document.querySelector(".btn-cancelar")
-const btnEditarCad = document.querySelector(".btn-editar")
-const btnCancelEdCad = document.querySelector(".btn-cancelar-edit")
-const btnExcluirCad = document.querySelector(".excluir-cadastro")
 
 btnNovoCad.addEventListener("click", ()=>{
     modal.style.display = "grid"

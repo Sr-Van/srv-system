@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/assets/css/ordens.css">
+    <link rel="stylesheet" href="/assets/css/modal.css">
+    <link rel="stylesheet" href="/assets/css/contas.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src='/assets/js/index.js' defer></script>
     <script src='/assets/js/ordens.js' defer></script>
@@ -80,16 +84,16 @@
                                     <p class="active-clients">100</p>
                                 </div>
                                 <div>
-                                    <h1>Inativos</h1>
+                                    <h1>Totais</h1>
                                     <p class="unactive-clients">100</p>
                                 </div>
                             </div>
                             <div class="progress">
                                     <svg>
-                                        <circle cx="38" cy="38" r="36"></circle>
+                                        <circle class="users-percentage" cx="38" cy="38" r="36"></circle>
                                     </svg>
                                     <div class="percentage">
-                                        <p>+50%</p>
+                                        <p class="atice-percentage"></p>
                                     </div>
                             </div>
                         </div>
@@ -100,11 +104,11 @@
                                 <h3>Vendas Mensais</h3>
                                 <div>
                                     <h1>Recebidas</h1>
-                                    <p class="received-payment">$640,000</p>
+                                    <p class="received-payment">.</p>
                                 </div>
                                 <div>
                                     <h1>A Receber</h1>
-                                    <p class="unreceived-payment">$128,000</p>
+                                    <p class="unreceived-payment">.</p>
                                 </div>
                             </div>
                             <div class="progress">
@@ -112,7 +116,7 @@
                                         <circle class="payment-svg" cx="38" cy="38" r="36"></circle>
                                     </svg>
                                     <div class="percentage">
-                                        <p class="payment-percentage">+80%</p>
+                                        <p class="payment-percentage">0%</p>
                                     </div>
                             </div>
                         </div>
@@ -279,7 +283,7 @@
                 </div>
                 <div class="form-n-cadastro">
                     <label for="txt-nome">Nome Completo</label>
-                    <input onblur="formatNames()"  type="text" id="txt-nome">
+                    <input onblur="formatToFirstLetterUppercase(this.value)"  type="text" id="txt-nome">
                     <label for="txt-cpf">CPF/CNPJ</label>
                     <input onblur="formatCpf()" type="text" id="txt-cpf">
                     <label for="txt-rg">RG/IE</label>
@@ -289,7 +293,7 @@
                     <label for="txt-cep">CEP</label>
                     <input onblur="formatCep()" type="text" name="text" id="txt-cep">
                     <label for="txt-cep">Cidade</label>
-                    <input type="text" name="text" id="txt-cidade">
+                    <input type="text" name="text" id="txt-cidade" >
                     <label for="txt-endereco">Endereço</label>
                     <input type="text" id="txt-endereco">
                     <label for="txt-nume">Numero</label>

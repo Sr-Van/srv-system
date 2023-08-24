@@ -1,0 +1,237 @@
+.modal-overlay{
+    display: grid;
+    place-items: center;
+    position: relative;
+    z-index: 998;
+    height: 100vh;
+    width: min(100%, 100vw);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal-overlay .novo-cadastro-modal{
+    position: absolute;
+    z-index: 999;
+    width: min(100%, 900px);
+    height: 600px;
+    background-color: var(--grey-light);
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.novo-cadastro-modal .header-n-cadastro{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 50px;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: var(--purple-color);
+}
+.novo-cadastro-modal .header-n-cadastro a{
+    margin-left: 20px;
+}
+
+.novo-cadastro-modal .form-n-cadastro{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.novo-cadastro-modal .form-n-cadastro > input{
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey-color);
+    width: min(100%, 300px);
+}
+
+.excluir-cadastro {
+    position: absolute;
+    right: 2em;
+}
+.novo-cadastro-modal p{
+    color: var(--red-danger);
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    padding-bottom: .4em;
+}
+
+/* edit modal */
+
+
+.modal-e-overlay .edit-cadastro-modal{
+    position: absolute;
+    z-index: 999;
+    width: min(100%, 900px);
+    height: 600px;
+    background-color: var(--grey-light);
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-cadastro-modal .header-e-cadastro{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 50px;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: var(--purple-color);
+}
+.edit-cadastro-modal .header-e-cadastro a{
+    margin-left: 20px;
+}
+
+.edit-cadastro-modal .form-e-cadastro{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.edit-cadastro-modal .form-e-cadastro > input{
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey-color);
+    width: min(100%, 300px);
+}
+
+
+.edit-cadastro-modal p{
+    color: var(--red-danger);
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    padding-bottom: .4em;
+}
+
+.modal-anim{
+    animation: bluranim 1s ease-in;
+}
+
+@keyframes bluranim{
+    from{
+        filter: blur(10px);
+    }
+}
+
+.new-modal-anim{
+    animation: newmodal 1s ease-in-out;
+}
+
+@keyframes newmodal{
+    from{
+        transform: translateY(-100vh);
+    }
+}
+
+.modal-os-overlay .nova-os-modal{
+    position: absolute;
+    z-index: 999;
+    width: min(100%, 800px);
+    height: 600px;
+    background-color: var(--grey-light);
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.nova-os-modal .header-os-cadastro{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 50px;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: var(--purple-color);
+}
+.nova-os-modal .header-os-cadastro a{
+    margin-left: 20px;
+}
+
+.nova-os-modal .form-n-os{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    align-items: flex-start;
+}
+
+.nova-os-modal .form-n-os > select {
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey-color);
+    width: min(100%, 300px);
+}
+.nova-os-modal .form-n-os > input{
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey-color);
+    width: min(100%, 300px);
+}
+
+.confirm-payment {
+    height: auto;
+    width: 350px;
+    background-color: var(--purple-color);
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    display: grid;
+    place-items: center;
+    grid-template-areas: 
+    "header header"
+    "left right"
+    "table table";
+    gap: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+.select-td-payment {
+    cursor: pointer;
+    text-align: center;
+    background-color: var(--icons-color);
+    border-radius: 1em;
+}
+
+.select-td-payment:active {
+    background-color: #038b79;
+    color: var(--white-color);
+}
+
+
+.confirm-payment p {
+    grid-area: header;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    background-color: var(--purple-color);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    box-shadow: var(--box-shadow);
+}
+.confirm-payment table {
+    grid-area: table;
+    width: 100%;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;    
+    overflow: auto;
+}
+.btn-confirm {
+    grid-area: left;
+    width: 100px;
+}
+
+.btn-modal-padrao{
+    text-align: center;
+    margin: 5px;
+    box-shadow: var(--box-shadow);
+}
+
+.btn-deny {
+    width: 100px;
+    grid-area: right;
+}
+
+.confirm-pag{
+    background-color: var(--purple-color);
+    border-radius: 1rem;
+    padding: 3px;
+    color: var(--white-color);
+    font-size: 12px;
+    cursor: pointer;
+}

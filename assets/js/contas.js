@@ -66,18 +66,17 @@ const getPaymentSituation = (pagamentos) => {
 
 const renderPaymentTable = (payment) => {
   const { month, situation, value } = payment;
-  const colorVenc =
-    situation === "A receber"
-      ? `style="color: var(--soft-red)";`
-      : `style="color: var(--soft-green)";`;
+  const colorVenc = situation === "A receber"
+    ? `style="color: var(--soft-red)";`
+    : `style="color: var(--soft-green)";`;
   const tr = document.createElement("tr");
   tr.setAttribute("class", "tr-padrao-3");
   tr.innerHTML = `
-        <td>Mes: ${month}</td>
-        <td ${colorVenc}>${situation}</td>
-        <td>Valor: ${value}</td>
-        <td class="select-td-payment" data-js="${month}">Selecionar</td>
-    `;
+      <td>Mes: ${month}</td>
+      <td ${colorVenc}>${situation}</td>
+      <td>Valor: ${value}</td>
+      <td class="select-td-payment" data-js="${month}">Selecionar</td>
+      `;
   paymentTable.append(tr);
 };
 
@@ -93,8 +92,8 @@ const payManualMonth = (month) => {
   setDb();
 };
 
-const amountPercentage = totalAmount => {
-    const percentage = Math.trunc((paidAmount * 100) / totalAmount)
+const amountPercentage = (paid, totalAmount) => {
+    const percentage = Math.trunc((paid * 100) / totalAmount)
     percentagePaymentDash.textContent = `${percentage}%`
 
     if (percentage <= 51) {
@@ -110,10 +109,10 @@ const amountPercentage = totalAmount => {
 
 };
 
-const totalAmountDashboard = amout => {
-    totalAmount+= amout
+const totalAmountDashboard = (paid, amount) => {
+    totalAmount+= amount
 
-    amountPercentage(totalAmount)
+    amountPercentage(paid, totalAmount)
 }
 
 
@@ -140,7 +139,8 @@ const getPaymentAmount = (client) => {
     (accumulator, { value }) => accumulator + parseFloat(value),
     0
   );
-    totalAmountDashboard(totalAmount)
+
+  totalAmountDashboard(PaidAmount, totalAmount)
   sumPaymentDashboard(PaidAmount, unPaidAmount);
 };
 

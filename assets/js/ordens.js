@@ -75,6 +75,11 @@ const ordersPercentage = ordersOpened => {
     const percentage = (ordersOpened * 100) / orders.length
     const percentageFormat = Math.trunc(percentage)
     osPercengateDashboard.textContent = `${percentageFormat}%`
+
+    if (isNaN(percentage)) {
+        osPercengateDashboard.textContent = `0%`
+    }
+
     if(percentage >= 51){
         osPercengateDashboardCircle.style.stroke = "#f31818"
     } else {
