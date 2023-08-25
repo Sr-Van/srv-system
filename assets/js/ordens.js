@@ -13,7 +13,7 @@ const typesOfOrders = {
     1: "instalacao",
     2: "Troca de roteador",
     3: "lentidao ao jogar",
-    4: "lentidao ao jogar",
+    4: "lentidao ao navegar",
     5: "Remocao de equipamento",
     6: "Velocidade nao corresponde ao plano",
     7: "Troca de plano",
@@ -49,6 +49,9 @@ const messageCounterdoneOndash = document.querySelector(".p-orders-dash-done")
 const osPercengateDashboard = document.querySelector(".os-percengate")
 const osPercengateDashboardCircle = document.querySelector(".os-svg")
 
+const GetSelectClient = document.querySelector("#cliente-select")
+const GetSelectSituation = document.querySelector("#select-situacao")
+
 const getTypeOfOrders = (order, index) => {
     const { type, client, date, situation } = order
     const typeToText = typesOfOrders[type]
@@ -56,7 +59,13 @@ const getTypeOfOrders = (order, index) => {
 
     tr.classList.add("tr-padrao-os")
     tr.innerHTML = `
-        <td data-id="${index}" style="cursor: pointer;">${typeToText}</td>
+        <td style="cursor: pointer;">
+            <span data-id="${index}" class="material-symbols-sharp edit-order">
+                edit
+            </span>
+            
+        </td>
+        <td>${typeToText}</td>
         <td>${client}</td>
         <td>${date}</td>
         <td>${situation}</td>
@@ -93,8 +102,8 @@ const ordersPercentage = ordersOpened => {
 
 const countOrders = () => {
     const arrayOrdersOpened = orders
-    .filter(order => order
-    .situation === "Aberta")
+        .filter(order => order
+        .situation === "Aberta")
     const ordersOpened = arrayOrdersOpened.length
     const ordersNotOpened = orders.length - ordersOpened
     messageCounterOnScreen.textContent = ordersOpened
@@ -110,14 +119,21 @@ const countOrders = () => {
 countOrders()
 
 const renderNamesOnSelect = name => {
-    const select = document.querySelector("#cliente-select")
     const option = document.createElement("option")
     option.textContent = name
+    GetSelectClient.append(option)
+}
+
+const createDefaultOption = (select, text) => {
+    select.innerHTML = ""
+    const option = document.createElement("option")
+    option.textContent = text
     select.append(option)
 }
 
 const clientNameOnSelect = () => {
     const clientNameOnArray = clients.map(client => client.nome)
+    createDefaultOption(GetSelectClient, "Selecione um cliente")
     clientNameOnArray.forEach(client => renderNamesOnSelect(client))
 }
 
@@ -125,8 +141,10 @@ clientNameOnSelect()
 
 const getFinalMessageArray = () => {
     const arr =  Object.values(finalOrderMessages)
+    createDefaultOption(selectSituacao, "Aberta")
     arr.forEach((message, index) => putMessageOnSelect(message, index, selectSituacao))
 }
+
 
 const getReasonMessageArray = () => {
     const arr =  Object.values(typesOfOrders)
@@ -145,8 +163,6 @@ const putMessageOnSelect = (message, i, select) => {
 
 const addNewOrder = () => {
     const newOrder = {}
-    const GetSelectClient = document.querySelector("#cliente-select")
-    const GetSelectSituation = document.querySelector("#select-situacao")
     const typeAsNumber = Number(document.querySelector("#motivo-select").value)
     const client = GetSelectClient.options[GetSelectClient.selectedIndex].text
     const situation = GetSelectSituation.options[GetSelectSituation.selectedIndex].text
@@ -157,6 +173,7 @@ const addNewOrder = () => {
     newOrder.message = document.querySelector("#message").value
     newOrder.date = document.querySelector("#date-os").value
     newOrder.situation = situation
+
     orders.push(newOrder)
     renderTable()
     setOrdersData()
@@ -164,7 +181,31 @@ const addNewOrder = () => {
     countOrders()
 }
 
+const cleanInputsOrders = () => {
+    document.querySelector("#motivo-select").value = ""
+    GetSelectClient.options[0].text = "Escolha um cliente"
+    document.querySelector("#message").value = ""
+    document.querySelector("#date-os").value = ""
+    getFinalMessageArray()
+}
+
+
+const openEditOrderModal = target => {
+    modalOsOverlay.style.display = "grid"
+
+    const orderObj = orders[target]
+
+    const { type, client, message, date, situation } = orderObj
+    document.querySelector("#motivo-select").value = type
+    GetSelectClient.options[0].text = client
+    GetSelectSituation.options[0].text = situation
+    document.querySelector("#message").value = message
+    document.querySelector("#date-os").value = date
+
+}
+
 getReasonMessageArray()
+getFinalMessageArray()
 
 
 buttonSaveOrder.addEventListener("click", () =>{
@@ -172,14 +213,20 @@ buttonSaveOrder.addEventListener("click", () =>{
     modalOsOverlay.style.display = "none"
 })
 buttonCancelOrder.addEventListener("click", () => modalOsOverlay.style.display = "none")
-buttonNewOrder.addEventListener("click", () => modalOsOverlay.style.display = "grid")
+buttonNewOrder.addEventListener("click", () => {
+    modalOsOverlay.style.display = "grid"
+    cleanInputsOrders()
+})
 buttonChangeOrder.addEventListener("click", e => {
     e.preventDefault()
     const target = e.target.getAttribute("data-id")
-    orders[target].situation = "Finalizada"
+    orders[target].situation = GetSelectSituation.options[GetSelectSituation.selectedIndex].text
+
+    modalOsOverlay.style.display = "none"
     countOrders()
     renderTable()
     setOrdersData()
+    cleanInputsOrders()
 })
 
 table.addEventListener("click", event => {
@@ -188,6 +235,8 @@ table.addEventListener("click", event => {
     messageOutput.textContent = ""
     messageOutput.textContent = message
     buttonChangeOrder.setAttribute("data-id", id - 1)
+
+    openEditOrderModal(target)
 }) 
 
 

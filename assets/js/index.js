@@ -35,6 +35,7 @@ const mes = date.getUTCMonth() + 1
 const ano = date.getFullYear()
 
 
+
 // search [FIX]
 const search = document.querySelector("#search")
 const render = document.querySelector("div.show-client")
@@ -151,6 +152,7 @@ const formatToFirstLetterUppercase = nomeDefault => {
 
 const formatCpf = () => {
     let cpfDefault = document.querySelector("#txt-cpf").value
+
     if (cpfDefault.length <= 10 || cpfDefault.length >= 12) {
         document.querySelector("#txt-cpf").value = ""
     } else {

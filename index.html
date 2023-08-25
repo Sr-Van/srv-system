@@ -246,6 +246,7 @@
                         <table>
                             <thead>
                                 <tr style="color: var(--white-color); font-size: 20px; border-bottom: 1px solid var(--white-color); background-color: transparent; max-height: 30px;" class="tr-padrao-os">
+                                    <td></td>
                                     <td>Motivo</td>
                                     <td>Cliente</td>
                                     <td>Data</td>
@@ -268,7 +269,6 @@
                     </div>
                     <div class="comment-output">
                         <h2 style="color: var(--white-color);">Observacao:</h2>
-                        <a href="" class="btn-change-os btn-style">Alterar</a>
                         <p class="output"></p>
                     </div>
                 </div>
@@ -397,19 +397,16 @@
                 <div class="header-os-cadastro">
                     <a class="btn-style btn-salvar-ordem" href="#">Salvar</a>
                     <a class="btn-style btn-cancelar-ordem" href="#">Cancelar</a>
-                    <a class="btn-style btn-finalizar-ordem" href="#">Finalizar</a>
+                    <a class="btn-style btn-change-os" href="#">Finalizar</a>
                 </div>
                 <div class="form-n-os">
                     <label for="">Motivo:</label>
                     <select name="motivo-select" id="motivo-select">
-                        <option value="">Escolha o motivo</option>
-                        
+                        <option value="" selected>Escolha o motivo</option>
                     </select>
 
                     <label for="">Cliente:</label>
-                    <select name="cliente-select" id="cliente-select">
-                        <option value="">Selecione o cliente</option>
-                    </select>
+                    <select name="cliente-select" id="cliente-select"></select>
                     <label for="">Data de abertura:</label>
                     <input type="date" id="date-os">
 
@@ -418,13 +415,13 @@
 
                     <label for="">Situacao</label>
                     <select name="select-situacao" id="select-situacao">
-                        <option value="">Aberta</option>
+                        <option value="" selected>Aberta</option>
                     </select>
                 </div>
             </div>
         </div>
-        <div style="display: none;" class="modal-overlay modal-confirm-payment-overlay">
-            <div class="confirm-payment">
+        <div style="display: none;" class="modal-overlay modal-confirm-payment-overlay modal-anim">
+            <div class="confirm-payment new-modal-anim">
                 <p>Confirmacao de Pagamento</p>
                 <table name="payments" id="payments"></table>
                 <a class="btn-confirm btn-modal-padrao btn-style" href="">Pagar</a>
@@ -433,7 +430,7 @@
         </div>
         <footer style="color: var(--white-color); position: absolute;
         bottom: 0;
-        left: 50%; transform: translateX(-50%); font-size: 12px;">&copy; Vanderson Erlan, All Rights Reserved.</footer>
+        left: 50%; transform: translateX(-50%); font-size: 12px;">2023 &copy; Vanderson Erlan, All Rights Reserved.</footer>
     </main>
 </body>
 

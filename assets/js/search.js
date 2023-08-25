@@ -1,8 +1,5 @@
 
 
-
-
-
 const renderInSearch = (client, index) => {
 
     desativeBtn(osBtn, dashboardBtn, cadastrosBtn)

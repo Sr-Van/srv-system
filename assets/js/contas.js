@@ -1,5 +1,4 @@
 
-
 const tableContas = document.querySelector(".receber-tb");
 const modalConfirmPayment = document.querySelector(
   ".modal-confirm-payment-overlay"

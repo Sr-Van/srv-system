@@ -39,7 +39,7 @@
 
 .tr-padrao-os {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     background-color: var(--purple-light);
     border-bottom: 1px solid var(--black-bg);
     font-size: 0.75rem;
@@ -112,4 +112,10 @@
     position: absolute;
     top: 1em;
     right: 1em;
+}
+
+.edit-order {
+    font-size: 14px !important;
+    text-align: center;
+    color: var(--white-color);
 }
