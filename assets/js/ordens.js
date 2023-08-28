@@ -26,7 +26,9 @@ const finalOrderMessages = {
     2: "Necessita de equipe extra",
     3: "Cliente nao estava presente",
     4: "Nao foi possivel realizar o atendimento",
-    5: "Passada ao setor administrativo"
+    5: "Passada ao setor administrativo",
+    6: "Bom",
+    7: "Ruim"
 }
 
 const table = document.querySelector(`[data-js="table-os"]`)
@@ -51,6 +53,8 @@ const osPercengateDashboardCircle = document.querySelector(".os-svg")
 
 const GetSelectClient = document.querySelector("#cliente-select")
 const GetSelectSituation = document.querySelector("#select-situacao")
+
+const feedbackDasboardDiv = document.querySelector(".client-feedb")
 
 const getTypeOfOrders = (order, index) => {
     const { type, client, date, situation } = order
@@ -160,6 +164,42 @@ const putMessageOnSelect = (message, i, select) => {
     select.append(option)
 }
 
+const renderFeedbacks = array => {
+
+    const {client, situation, message} = array
+
+    const div = document.createElement("div")
+    div.setAttribute("class", "client")
+
+    const h3 = document.createElement("h3")
+    h3.innerHTML = client
+    
+    const span = document.createElement("span")
+    span.setAttribute("class", "material-symbols-sharp")
+
+    if(situation == "Bom") {
+        span.setAttribute("style", "color: #038b79; font-size: 120px;")
+        span.textContent = `sentiment_satisfied`
+    } else {
+        span.textContent = `sentiment_extremely_dissatisfied`
+        span.setAttribute("style", "color: var(--red-danger); font-size: 120px;")
+    }
+
+    const p = document.createElement("p")
+    p.textContent = message
+
+    div.append(h3, span, p)
+    feedbackDasboardDiv.prepend(div)
+}
+
+const getFeedback = () => {
+    feedbackDasboardDiv.innerHTML = ""
+    const arrayFeedbacks = orders.filter(({type}) => type == 9)
+
+    arrayFeedbacks.forEach(order => renderFeedbacks(order))
+}
+
+getFeedback()
 
 const addNewOrder = () => {
     const newOrder = {}

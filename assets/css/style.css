@@ -85,6 +85,7 @@ body{
     height: auto;
     border-radius: 1em;
     padding: .4em;
+    font-size: .8rem;
 }
 
 .container{
@@ -95,38 +96,6 @@ body{
     grid-template-columns: 12rem auto;
 }
 
-.user{
-    display: flex;
-    position: absolute;
-    left: 5em;
-    z-index: 100;
-    color: var(--grey-light);
-    height: 3.125rem;
-    flex-direction: column;
-    flex-wrap: wrap;
-    padding-right: 0.625rem;
-    box-shadow: var(--box-shadow);
-    align-items: flex-start;
-    flex-wrap: nowrap;
-}
-
-.user p b{
-    color: var(--white-color);
-    font-size: min(0.8rem, 1.25rem);
-    transition: all .3s ease;
-}
-
-.user p b:hover{
-    color: var(--purple-color);
-}
-
-.user span{
-    position: absolute;
-    top: 0.6rem;
-    right: -5rem;
-    cursor: pointer;
-    color: var(--icons-color);
-}
 
 
 .sidebar{
@@ -175,8 +144,7 @@ body{
     position: absolute;
     right: 2rem;
     top: 5rem;
-    width: 100%;
-    max-width: 57.5rem;
+    width: 57.5rem;
     height: 100%;
     max-height: 80vh;
     border-radius: 1.25rem;
@@ -292,5 +260,36 @@ select {
     text-align: end;
 }
 
+@media (min-width: 1400px) {
+    .main-container {
+        width: 67rem;
+    }
+}
 
+
+@media (max-width: 1224px) {
+    .main-container {
+        width: 45rem;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .main-container {
+        width: 53rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .main-container {
+        width: 33rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-container {
+        width: 20rem;
+    }
+}
 

@@ -73,22 +73,22 @@ const searchInKeyUp = event => {
 
     clientFound = filterSearch(searched)
 
-    if(searched.length<=0){
+    if(searched.trim().length<=0){
         setTimeout(()=>{
             desativeRender()
             activeBtn(dashboardBtn)
             desativeBtn(osBtn, cadastrosBtn, contasBtn)
-            dashContent.classList.add("back-animation")
             dashContent.style.display = 'grid'
+            alertBox.style.display = 'none'
         }, 1000)
         alertBox.style.display = 'flex'
         alertBox.innerHTML = 'Digite o nome de um cliente para mostrar o cadastro no dashboard.'
 
-        unSelect(dashContent, cadastroContent, contasContent) 
+        unSelect(render, cadastroContent, contasContent, ordensContent) 
         return
     }
 
-    unSelect(dashContent, cadastroContent, contasContent)
+    unSelect(render, cadastroContent, contasContent, ordensContent)
     render.innerHTML = ""
     clientFound.forEach((client, index) => renderInSearch(client, index))
 }

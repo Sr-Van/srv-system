@@ -100,37 +100,40 @@
     display: flex;
     overflow-y: hidden;
     overflow-x: auto;
-    justify-content: space-between;
+    justify-content: flex-start;
     grid-column: span 3;
     pointer-events: none;
     margin-right: 20px;
     margin-bottom: 15px;
 }
-
-.dashboard-content .client-feedb h1{
+.feedb-title {
     position: absolute;
-    top: 45%;
+    top: 47%;
+    left: 1rem;
     transform: translateY(-50%);
     font-size: min(14px, 20px);
 }
 
 
-.dashboard-content .client-feedb > div{
-    width: min(100%, 500px);
+.dashboard-content .client-feedb .client{
+    width: 10rem;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
     padding: 30px;
     margin: 1rem;
 }
 
-
-.dashboard-content .client-feedb > div h3{
-    position: relative;
-    top: -30px;
-    left: -10px;
+.client-feedb .client h3 {
+    width: 10rem;
+    text-align: center;
+    font-size: 0.7rem;
 }
 
+
 .dashboard-content .client-feedb p {
+    width: 10rem;
+    text-align: center;
     font-size: 10px;
 }

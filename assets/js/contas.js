@@ -128,16 +128,14 @@ const getPaymentAmount = (client) => {
   const arrPayment = client.pagamento;
 
   const unPaidAmount = arrPayment
-    .filter((payment) => payment.situation == "A receber")
+    .filter(({situation}) => situation == "A receber")
     .reduce((accumulator, { value }) => accumulator + parseFloat(value), 0);
   const PaidAmount = arrPayment
-    .filter((payment) => payment.situation == "Recebido")
+    .filter(({situation}) => situation == "Recebido")
     .reduce((accumulator, { value }) => accumulator + parseFloat(value), 0);
 
-  const totalAmount = arrPayment.reduce(
-    (accumulator, { value }) => accumulator + parseFloat(value),
-    0
-  );
+  const totalAmount = arrPayment
+    .reduce((accumulator, { value }) => accumulator + parseFloat(value),0);
 
   totalAmountDashboard(PaidAmount, totalAmount)
   sumPaymentDashboard(PaidAmount, unPaidAmount);

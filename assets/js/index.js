@@ -38,9 +38,8 @@ const ano = date.getFullYear()
 
 // search [FIX]
 const search = document.querySelector("#search")
-const render = document.querySelector("div.show-client")
-const alertBox = document.querySelector("div.alert")
-
+const render = document.querySelector(".show-client")
+const alertBox = document.querySelector(".alert")
 
 
 /* Declarando botoes do sidebar */
@@ -243,22 +242,17 @@ const activeBtn = btn => {
     btn.classList.add("active")
 }
 
-const desativeBtn = (btn1, btn2, btn3) => {
-    btn1.classList.remove("active")
-    btn2.classList.remove("active")
-    btn3.classList.remove("active")
+const desativeBtn = (...btn) => {
+    btn.forEach(btn => btn.classList.remove("active"));
 }
 
 //TODO: add the div to unselect on content2 e 3
-const unSelect = (content1, content2, content3) => {
-    content1.style.display = "none"
-    content2.style.display = "none"
-    content3.style.display = "none"
+const unSelect = (...content) => {
+    content.forEach(content => content.style.display = "none")
 }
 
-const desativeRender = () => {
-    alertBox.style.display = 'none'
-    render.style.display = 'none'
+const desativeRender = (...content) => {
+    content.forEach(content => content.style.display = "none")
 }
 
 const addOrderNewClient = () => {
