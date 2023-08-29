@@ -76,7 +76,7 @@ const renderClientOnRegister = (client, index) => {
     let registerTableList = ""
     registerTableList += `
             <tr class="tr-padrao-2">
-                <td style="width: 230px; cursor: pointer; overflow: hidden;" data-id="${index}">
+                <td style="width: 14.37rem; cursor: pointer; overflow: hidden;" data-id="${index}">
                     ${nome}
                 </td>
                 <td>${plano}</td>

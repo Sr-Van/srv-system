@@ -38,24 +38,24 @@
         <div class="container">
             <aside class="sidebar">
                 <!--sidebar-->
-                <a class="dashboard-btn active" href="#">
+                <a class="dashboard-btn active">
                     <span class="material-symbols-sharp">
                         analytics
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-                <a class="cadastros-btn" href="#">
+                <a class="cadastros-btn">
                     <span class="material-symbols-sharp">
                         groups
                     </span>
                     <h3>Cadastros</h3>
                 </a>
-                <a class="contas-btn" href="#">
+                <a class="contas-btn">
                     <span class="material-symbols-sharp">
                         savings
                     </span>
                     <h3>Contas</h3>
-                <a class="os-btn" href="#">
+                <a class="os-btn">
                     <span class="material-symbols-sharp">
                         engineering
                     </span>
@@ -68,81 +68,80 @@
                 <div class="show-client"></div>
                 <div class="dashboard-content">
                     <!--graficos do dashboard-->
-                    <div class="clients">
-                        <div class="status">
-                            <div class="info">
-                                <h3>Clientes</h3>
-                                <div>
-                                    <h1>Ativos</h1>
-                                    <p class="active-clients">100</p>
-                                </div>
-                                <div>
-                                    <h1>Totais</h1>
-                                    <p class="unactive-clients">100</p>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                    <svg>
-                                        <circle class="users-percentage" cx="38" cy="38" r="36"></circle>
-                                    </svg>
-                                    <div class="percentage">
-                                        <p class="atice-percentage"></p>
+                    <div class="cards-dash">
+                        <div class="clients cards-div">
+                            <div class="status">
+                                <div class="info">
+                                    <h3>Clientes</h3>
+                                    <div>
+                                        <h1>Ativos</h1>
+                                        <p class="active-clients">100</p>
                                     </div>
+                                    <div>
+                                        <h1>Totais</h1>
+                                        <p class="unactive-clients">100</p>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                        <svg>
+                                            <circle class="users-percentage" cx="38" cy="38" r="36"></circle>
+                                        </svg>
+                                        <div class="percentage">
+                                            <p class="atice-percentage"></p>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sales">
-                        <div class="status">
-                            <div class="info">
-                                <h3>Vendas Mensais</h3>
-                                <div>
-                                    <h1>Recebidas</h1>
-                                    <p class="received-payment">.</p>
-                                </div>
-                                <div>
-                                    <h1>A Receber</h1>
-                                    <p class="unreceived-payment">.</p>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                    <svg>
-                                        <circle class="payment-svg" cx="38" cy="38" r="36"></circle>
-                                    </svg>
-                                    <div class="percentage">
-                                        <p class="payment-percentage">0%</p>
+                        <div class="sales cards-div">
+                            <div class="status">
+                                <div class="info">
+                                    <h3>Vendas Mensais</h3>
+                                    <div>
+                                        <h1>Recebidas</h1>
+                                        <p class="received-payment">.</p>
                                     </div>
+                                    <div>
+                                        <h1>A Receber</h1>
+                                        <p class="unreceived-payment">.</p>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                        <svg>
+                                            <circle class="payment-svg" cx="38" cy="38" r="36"></circle>
+                                        </svg>
+                                        <div class="percentage">
+                                            <p class="payment-percentage">0%</p>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="cards" style="margin-right: 20px;">
-                        <div class="status">
-                            <div class="info">
-                                <h3>Ordens de Serviço</h3>
-                                <div>
-                                    <h1>Abertas</h1>
-                                    <p class="p-orders-dash-todo">12</p>
-                                </div>
-                                <div>
-                                    <h1>Fechadas</h1>
-                                    <p class="p-orders-dash-done">12</p>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                    <svg>
-                                        <circle class="os-svg" cx="38" cy="38" r="36"></circle>
-                                    </svg>
-                                    <div class="percentage">
-                                        <p class="os-percengate">+50%</p>
+                        <div class="cards cards-div">
+                            <div class="status">
+                                <div class="info">
+                                    <h3>Ordens de Serviço</h3>
+                                    <div>
+                                        <h1>Abertas</h1>
+                                        <p class="p-orders-dash-todo">12</p>
                                     </div>
+                                    <div>
+                                        <h1>Fechadas</h1>
+                                        <p class="p-orders-dash-done">12</p>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                        <svg>
+                                            <circle class="os-svg" cx="38" cy="38" r="36"></circle>
+                                        </svg>
+                                        <div class="percentage">
+                                            <p class="os-percengate">+50%</p>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!--Local para receber Feedbacks da central de auto atendimento online-->
                     <h1 class="feedb-title">Feedbacks</h1>
-                    <div class="client-feedb">
-                        
-                        
-                    </div>
+                    <div class="client-feedb"></div>
                 </div>
                 <div style="display: none; overflow: hidden;" class="cadastros">
                     <div class="header-cadastros">
@@ -157,7 +156,7 @@
                     margin-left: 1rem;
                     display:block;">
                         <tr class="tr-padrao">
-                            <td style="width: 250px;">Nome</td>
+                            <td style="width: 14.37rem;">Nome</td>
                             <td>Plano</td>
                             <td> CPF/CNPJ</td>
                             <td>RG/IE</td>
@@ -166,7 +165,7 @@
                             <td>Endereço</td>
                         </tr>
                         <tbody class="client-tb" 
-                        style="width: 100%;    
+                        style="width: 100%;   
                         display: grid; 
                         grid-template-columns: repeat(1, 1fr); 
                         overflow-y:auto;height: 100%; max-height: 63vh;">
@@ -180,7 +179,7 @@
                         <table>
                             <tr 
                             style="color: var(--white-color); 
-                            font-size: 20px; 
+                            font-size: 1.25rem; 
                             border-bottom: 1px solid var(--white-color); 
                             width: 100%;
                             display: grid;
@@ -206,7 +205,7 @@
                         <h2>Ordens de Serviço:</h2>
                         <table>
                             <thead>
-                                <tr style="color: var(--white-color); font-size: 20px; border-bottom: 1px solid var(--white-color); background-color: transparent; max-height: 30px;" class="tr-padrao-os">
+                                <tr style="color: var(--white-color); font-size: 1rem; border-bottom: 1px solid var(--white-color); background-color: transparent; max-height: 30px;" class="tr-padrao-os">
                                     <td></td>
                                     <td>Motivo</td>
                                     <td>Cliente</td>
@@ -239,8 +238,8 @@
         <div style="display: none;" class="modal-overlay modal-anim">
             <div class="novo-cadastro-modal new-modal-anim">
                 <div class="header-n-cadastro">
-                    <a class="btn-style btn-salvar" href="#">Salvar</a>
-                    <a class="btn-style btn-cancelar" href="#">Cancelar</a>
+                    <a class="btn-style btn-salvar">Salvar</a>
+                    <a class="btn-style btn-cancelar">Cancelar</a>
                 </div>
                 <div class="form-n-cadastro">
                     <label for="txt-nome">Nome Completo</label>
@@ -280,7 +279,7 @@
                             <option value="4">500mb - R$100,00</option>
                         </select>
                     </div>
-                    <div class="Vencimento">
+                    <div class="vencimento">
                         <label >Data de vencimento: </label>
                         <select name="select-venc" id="select-venc">
                             <option value="" selected>Selecionar</option>
@@ -297,8 +296,8 @@
         <div style="display: none;" class="modal-e-overlay modal-overlay modal-anim">
             <div class="edit-cadastro-modal new-modal-anim">
                 <div class="header-e-cadastro">
-                    <a class="btn-style btn-editar" href="#">editar</a>
-                    <a class="btn-style btn-cancelar-edit" href="#">Cancelar</a>
+                    <a class="btn-style btn-editar">editar</a>
+                    <a class="btn-style btn-cancelar-edit">Cancelar</a>
                     <a class="btn-style excluir-cadastro">Excluir</a>
                 </div>
                 <div class="form-e-cadastro">
@@ -339,7 +338,7 @@
                             <option value="500MB">500mb - R$100,00</option>
                         </select>
                     </div>
-                    <div class="Vencimento">
+                    <div class="vencimento">
                         <label >Data de vencimento: </label>
                         <select name="select-venc" id="select-e-venc">
                             <option value="" selected>Selecionar</option>
@@ -356,9 +355,9 @@
         <div style="display: none;" class="modal-os-overlay modal-overlay modal-anim">
             <div class="nova-os-modal new-modal-anim">
                 <div class="header-os-cadastro">
-                    <a class="btn-style btn-salvar-ordem" href="#">Salvar</a>
-                    <a class="btn-style btn-cancelar-ordem" href="#">Cancelar</a>
-                    <a class="btn-style btn-change-os" href="#">Finalizar</a>
+                    <a class="btn-style btn-salvar-ordem">Salvar</a>
+                    <a class="btn-style btn-cancelar-ordem">Cancelar</a>
+                    <a class="btn-style btn-change-os">Finalizar</a>
                 </div>
                 <div class="form-n-os">
                     <label for="">Motivo:</label>
@@ -372,7 +371,7 @@
                     <input type="date" id="date-os">
 
                     <label for="">OBS:</label>
-                    <input type="text" style="width: 350px; background-color: var(--white-color);border-radius: .2em;" placeholder="insira os detalhes da ordem" id="message">
+                    <input type="text" style="width: min(100%, 18.75rem); background-color: var(--white-color);border-radius: .2em;" placeholder="insira os detalhes da ordem" id="message">
 
                     <label for="">Situacao</label>
                     <select name="select-situacao" id="select-situacao">
@@ -391,7 +390,7 @@
         </div>
         <footer style="color: var(--white-color); position: absolute;
         bottom: 0;
-        left: 50%; transform: translateX(-50%); font-size: 12px;">2023 &copy; Vanderson Erlan, All Rights Reserved.</footer>
+        left: 50%; transform: translateX(-50%); font-size: 0.75rem;">2023 &copy; Vanderson Erlan, All Rights Reserved.</footer>
     </main>
 </body>
 

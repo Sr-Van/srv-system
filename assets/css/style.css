@@ -42,7 +42,7 @@ body{
 }
 
 .header input{
-    width: min(100%, 500px);
+    width: min(100%, 31.25rem);
     height: 2rem;
     padding-left: 1em;
     border-radius: 1.25rem;
@@ -67,11 +67,12 @@ body{
 .header #select-filter{
     text-align: center;
     border-radius: 1em;
+    height: 2rem;
     color: var(--white-color);
-    padding: .2em;
     background-color: var(--purple-light);
     outline: none;
     border: none;
+    font-size: 1rem;
     --webkit-appearance: none;
 }
 
@@ -115,6 +116,7 @@ body{
     padding: 1.25rem;
     justify-content: space-evenly;
     color: var(--white-color);
+    cursor: pointer;
 }
 
 .sidebar a.active{
@@ -138,6 +140,7 @@ body{
 
 .sidebar a .material-symbols-sharp{
     color: var(--icons-color);
+    font-size: 1.5rem;
 }
 
 .main-container{
@@ -159,7 +162,7 @@ body{
     flex-direction: column;
     border-radius: .5em;
     overflow: auto;
-    margin: 10px;
+    margin: 0.625rem;
 }
 
 .show-client::-webkit-scrollbar{
@@ -195,8 +198,8 @@ body{
 
 
 .header-cadastros{
-    height: 20px;
-    padding: 20px;
+    height: 1.25rem;
+    padding: 1.25rem;
 }
 
 table::-webkit-scrollbar{
@@ -212,38 +215,38 @@ table::-webkit-scrollbar-thumb{
 
 .tr-padrao {
     width: 100%;
-    max-width: 983px; 
-    font-size: minmax(auto,20px); 
+    max-width: 61.4rem; 
+    font-size: minmax(auto, 1.25rem); 
     color: var(--white-color); 
     display: grid; 
     grid-template-columns: repeat(7, 1fr); 
     border-bottom: 1px solid; 
     padding-bottom: 3px; 
-    gap: 5px;
+    gap: 0.31rem;
 }
 
 .tr-padrao-2 {
     width: 100%; 
-    height: 25px; 
-    font-size: 12px; 
+    height: 1.563rem; 
+    font-size: 0.75rem; 
     display: grid; 
     grid-template-columns: repeat(7, 1fr); 
     border-bottom: 1px solid var(--black-bg); 
     padding: 3px; 
     background-color: var(--purple-light); 
-    gap:10px; 
+    gap: 0.625rem; 
     overflow: hidden;
 }
 .tr-padrao-3 {
     width: 100%; 
-    height: 25px; 
-    font-size: 12px; 
+    height: 1.56rem; 
+    font-size: .75rem; 
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
     border-bottom: 1px solid var(--black-bg); 
     padding: 3px; 
     background-color: var(--purple-light); 
-    gap:10px; 
+    gap: 0.625rem; 
     overflow: hidden;
 }
 
@@ -251,45 +254,73 @@ table::-webkit-scrollbar-thumb{
 .btn-style{
     color: var(--white-color);
     background-color: var(--icons-color);
-    padding: .2em .6em;
-    border-radius: 1em;
+    padding: .2rem .6rem;
+    border-radius: 1rem;
     cursor: pointer;
+    font-size: .7rem;
 }
 select {
     background-color: var(--grey-light);
     text-align: end;
 }
 
-@media (min-width: 1400px) {
-    .main-container {
-        width: 67rem;
+
+@media only screen and (min-width: 720px) {
+    html{
+        font-size: 9px;
+    }
+    .dashboard-content .progress circle{
+        display: none;
+    }
+    .dashboard-content .cards-div{
+        height: 18rem !important;
+    }
+    .ordens {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+        grid-template-areas: 
+        "list"
+        "status"
+        "output" !important;
+        place-items: center;
+    }
+    
+}
+
+@media only screen and (min-width: 960px) {
+    html{
+        font-size: 13px;
+    }  
+    .dashboard-content {
+        display: grid;
+    }
+    .dashboard-content .progress circle{
+        display: flex;
+    }
+    .dashboard-content .cards-div{
+        height: 15rem !important;
+    }
+    .ordens {
+        grid-template-areas: 
+        "list status"
+        "list output" !important;
     }
 }
 
-
-@media (max-width: 1224px) {
-    .main-container {
-        width: 45rem;
+@media only screen and (min-width: 1240px) {
+    html{
+        font-size: 16px;
+    }
+    .dashboard-content .progress .percentage {
+        left: -1rem !important;
     }
 }
 
-
-@media (min-width: 1024px) {
-    .main-container {
-        width: 53rem;
+@media only screen and (min-width: 1440px) {
+    html{
+        font-size: 18px;
+    }
+    .dashboard-content .progress .percentage {
+        left: -1rem !important;
     }
 }
-
-
-@media (max-width: 768px) {
-    .main-container {
-        width: 33rem;
-    }
-}
-
-@media (max-width: 400px) {
-    .main-container {
-        width: 20rem;
-    }
-}
-

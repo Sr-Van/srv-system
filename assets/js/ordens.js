@@ -178,11 +178,11 @@ const renderFeedbacks = array => {
     span.setAttribute("class", "material-symbols-sharp")
 
     if(situation == "Bom") {
-        span.setAttribute("style", "color: #038b79; font-size: 120px;")
+        span.setAttribute("style", "color: #038b79; font-size: 7.5rem;")
         span.textContent = `sentiment_satisfied`
     } else {
         span.textContent = `sentiment_extremely_dissatisfied`
-        span.setAttribute("style", "color: var(--red-danger); font-size: 120px;")
+        span.setAttribute("style", "color: var(--red-danger); font-size: 7.5rem;")
     }
 
     const p = document.createElement("p")
