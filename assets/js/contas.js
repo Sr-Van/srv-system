@@ -1,4 +1,3 @@
-
 const tableContas = document.querySelector(".receber-tb");
 const modalConfirmPayment = document.querySelector(
   ".modal-confirm-payment-overlay"
@@ -50,24 +49,26 @@ const getColorPayment = (pagamentos) => {
 };
 
 const getPaymentSituation = (pagamentos) => {
-    fisrFindPayment = pagamentos
-        .find((pagamento) => pagamento.situation == "A receber");
+  fisrFindPayment = pagamentos.find(
+    (pagamento) => pagamento.situation == "A receber"
+  );
 
-    if(fisrFindPayment == null) {
-        fisrFindPayment = pagamentos
-        .find((pagamento) => pagamento.situation == "Recebido");
-    }
-    const { month, situation } = fisrFindPayment;
-    paymentMonth = month;
-    paymentSituation = situation; 
-
+  if (fisrFindPayment == null) {
+    fisrFindPayment = pagamentos.find(
+      (pagamento) => pagamento.situation == "Recebido"
+    );
+  }
+  const { month, situation } = fisrFindPayment;
+  paymentMonth = month;
+  paymentSituation = situation;
 };
 
 const renderPaymentTable = (payment) => {
   const { month, situation, value } = payment;
-  const colorVenc = situation === "A receber"
-    ? `style="color: var(--soft-red)";`
-    : `style="color: var(--soft-green)";`;
+  const colorVenc =
+    situation === "A receber"
+      ? `style="color: var(--soft-red)";`
+      : `style="color: var(--soft-green)";`;
   const tr = document.createElement("tr");
   tr.setAttribute("class", "tr-padrao-3");
   tr.innerHTML = `
@@ -92,28 +93,29 @@ const payManualMonth = (month) => {
 };
 
 const amountPercentage = (paid, totalAmount) => {
-    const percentage = Math.trunc((paid * 100) / totalAmount)
-    percentagePaymentDash.textContent = `${percentage}%`
+  const percentage = Math.trunc((paid * 100) / totalAmount);
+  percentagePaymentDash.textContent = `${percentage}%`;
 
-    if (percentage <= 51) {
-        percentagePaymentDashCircle.style.stroke = "#f31818";
-    } else {
-        percentagePaymentDashCircle.style.stroke = "#038b79";
-    }
+  if (percentage <= 51) {
+    percentagePaymentDashCircle.style.stroke = "#f31818";
+  } else {
+    percentagePaymentDashCircle.style.stroke = "#038b79";
+  }
 
-    const percentageCircle = Math.trunc(
-        Math.abs(((percentage - 100) / 100) * 222))
+  const percentageCircle = Math.trunc(
+    Math.abs(((percentage - 100) / 100) * 222)
+  );
 
-    percentagePaymentDashCircle.style.strokeDashoffset = percentageCircle;
-
+  percentagePaymentDashCircle.style.strokeDashoffset = percentageCircle;
 };
 
 const totalAmountDashboard = (paid, amount) => {
-    totalAmount+= amount
+  totalAmount += amount;
+  paidAmount += paid;
 
-    amountPercentage(paid, totalAmount)
-}
 
+  amountPercentage(paidAmount, totalAmount);
+};
 
 const sumPaymentDashboard = (paid, unPaid) => {
   paidAmount += paid;
@@ -121,23 +123,24 @@ const sumPaymentDashboard = (paid, unPaid) => {
 
   receivedDash.innerHTML = `$${paidAmount.toFixed(2)}`;
   unreceivedDash.innerHTML = `$${unpaidAmount.toFixed(2)}`;
-
 };
 
 const getPaymentAmount = (client) => {
   const arrPayment = client.pagamento;
 
   const unPaidAmount = arrPayment
-    .filter(({situation}) => situation == "A receber")
+    .filter(({ situation }) => situation == "A receber")
     .reduce((accumulator, { value }) => accumulator + parseFloat(value), 0);
   const PaidAmount = arrPayment
-    .filter(({situation}) => situation == "Recebido")
+    .filter(({ situation }) => situation == "Recebido")
     .reduce((accumulator, { value }) => accumulator + parseFloat(value), 0);
 
-  const totalAmount = arrPayment
-    .reduce((accumulator, { value }) => accumulator + parseFloat(value),0);
+  const totalAmount = arrPayment.reduce(
+    (accumulator, { value }) => accumulator + parseFloat(value),
+    0
+  );
 
-  totalAmountDashboard(PaidAmount, totalAmount)
+  totalAmountDashboard(PaidAmount, totalAmount);
   sumPaymentDashboard(PaidAmount, unPaidAmount);
 };
 
@@ -158,6 +161,7 @@ paymentTable.addEventListener("click", (e) => {
 denyPaymentBtn.addEventListener("click", (event) => {
   event.preventDefault();
   modalConfirmPayment.style.display = "none";
+  showAlert("acao cancelada");
 });
 addPaymentBtn.addEventListener("click", (event) => {
   event.preventDefault();
@@ -165,6 +169,7 @@ addPaymentBtn.addEventListener("click", (event) => {
   payManualMonth(monthToConfirm);
   tableContasLoad();
   renderDashPayments();
+  showAlert("Pagamento realizado");
 });
 
 tableContas.addEventListener("click", (e) => {
