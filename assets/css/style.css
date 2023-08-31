@@ -152,6 +152,7 @@ body{
     max-height: 80vh;
     border-radius: 1.25rem;
     background-color: var(--purple-color);
+    padding: 1rem;
 }
 
 
@@ -213,6 +214,15 @@ table::-webkit-scrollbar-thumb{
     border: 2px rgb(255, 255, 255 , 0.2) solid;
 }
 
+.client-tb {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    overflow-y: auto;
+    height: 100%;
+    max-height: 63vh;
+}
+
 .tr-padrao {
     width: 100%;
     max-width: 61.4rem; 
@@ -264,10 +274,73 @@ select {
     text-align: end;
 }
 
+@media only screen and (min-width: 400px) {
+    html{
+        font-size: 6px;
+    }
+    .sidebar{
+        width: min(100%, 5vw);
+        overflow: hidden;
+    }
+    .sidebar a > h3, span {
+        display: none;
+    }
+    .dashboard-content .progress circle{
+        display: none;
+    }
+    .dashboard-content .cards-div{
+        height: 18rem !important;
+    }
+    .ordens {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(3, 1fr));
+        grid-template-areas: 
+        "list"
+        "status"
+        "output" !important;
+        place-items: center;
+    }
+    .tr-padrao, .client-tb, .tr-padrao-2 {
+        width: 120rem;
+        font-size: 1.5rem;
+        max-width: 120rem;
+    }
+    .tr-padrao, .tr-padrao-2 {
+        height: 3rem;
+        gap: 1rem;
+    }
+    .btn-style {
+        padding: .4rem .8rem;
+        font-size: .9rem;
+    }
+    .confirm-pag {
+        padding: 0.18rem 0.3rem !important;
+    }
+    .confirm-payment {
+        width: 35rem !important;
+    }
+
+    .tr-padrao-3 {
+        height: 2rem;
+        font-size: .9rem;
+    }
+
+    .select-td-payment {
+        display: grid;
+        place-items: center;
+
+    }
+}
 
 @media only screen and (min-width: 720px) {
     html{
         font-size: 9px;
+    }
+    .sidebar{
+        width: min(100%, 20vw);
+    }
+    .sidebar a > h3, span {
+        display: block;
     }
     .dashboard-content .progress circle{
         display: none;
@@ -305,6 +378,15 @@ select {
         "list status"
         "list output" !important;
     }
+    .tr-padrao, .client-tb, .tr-padrao-2 {
+        width: 100% !important;
+        font-size: 0.8rem;
+        max-width: 55rem !important;
+    }
+    .tr-padrao, .tr-padrao-2 {
+        height: 1.5rem;
+        gap: 1rem;
+    }
 }
 
 @media only screen and (min-width: 1240px) {
@@ -313,6 +395,9 @@ select {
     }
     .dashboard-content .progress .percentage {
         left: -1rem !important;
+    }
+    .dashboard-content .client-feedb{
+        height: 16rem !important;
     }
 }
 

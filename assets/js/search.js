@@ -53,6 +53,7 @@ const renderInSearch = (client, index) => {
 
 const filterSearch = searched => {
     const selectFilter = document.querySelector("#select-filter").value
+    
     if(selectFilter === "nome"){
         return clients.filter(( client => {
             return client.nome.toLowerCase().includes(searched.toLowerCase())
@@ -68,6 +69,14 @@ const filterSearch = searched => {
     
 }
 
+const showAlert = message => {
+    setTimeout(() => alertBox.style.display = 'none', 1200)
+    alertBox.style.display = 'flex'
+    alertBox.innerHTML = message
+}
+
+
+
 const searchInKeyUp = event => {
     let searched = event.target.value
 
@@ -79,11 +88,8 @@ const searchInKeyUp = event => {
             activeBtn(dashboardBtn)
             desativeBtn(osBtn, cadastrosBtn, contasBtn)
             dashContent.style.display = 'grid'
-            alertBox.style.display = 'none'
         }, 1000)
-        alertBox.style.display = 'flex'
-        alertBox.innerHTML = 'Digite o nome de um cliente para mostrar o cadastro no dashboard.'
-
+        showAlert('Digite o nome de um cliente para mostrar o cadastro no dashboard.')
         unSelect(render, cadastroContent, contasContent, ordensContent) 
         return
     }

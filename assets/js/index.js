@@ -351,7 +351,6 @@ const newClientAdd = () =>{
     setDb()
     addOrderNewClient()
     cleanInputs()
-    renderDashPayments()
     loadUsersDashboard()
     modal.style.display = "none"
 }
@@ -418,7 +417,7 @@ const openModalEdit =  (clients, target) => {
 
 let target
 
-window.addEventListener("dblclick", event => {
+registerTable.addEventListener("click", event => {
     target = event.target.getAttribute("data-id")
 
     if(target) {
@@ -449,11 +448,22 @@ btnCancelEdCad.addEventListener("click", ()=>{
     cleanInputs()
 })
 
-btnSalvarCad.addEventListener("click", newClientAdd)
+btnSalvarCad.addEventListener("click", () => {
+    newClientAdd()
+    showAlert("Novo cadastro salvo")
+})
 
-btnExcluirCad.addEventListener("click", deleteClient)
+btnExcluirCad.addEventListener("click", () => {
+    deleteClient()
+    showAlert("Cadastro excluido")
+}
+)
 
-btnEditarCad.addEventListener("click", editClient)
+btnEditarCad.addEventListener("click", () => {
+    editClient()
+    showAlert("Cadastro editado com sucesso")
+} 
+)
 
 
 

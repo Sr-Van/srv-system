@@ -55,11 +55,9 @@
 .dashboard-content > div:hover{
     box-shadow: none;
 }
-
-.dashboard-content h3{
-    margin: .6rem;
-    font-size: 1rem;
+.dashboard-content .cards-dash h3 {
     color: var(--black-bg);
+    margin: .6rem;
 }
 
 .dashboard-content > div .status{
@@ -148,14 +146,15 @@
 }
 
 .client-feedb .client h3 {
-    width: 10rem;
+    color: var(--black-bg);
+    width: 12rem;
     text-align: center;
-    font-size: 0.7rem;
+    font-size: 1rem;
 }
 
 
 .dashboard-content .client-feedb p {
     width: 10rem;
     text-align: center;
-    font-size: 10px;
+    font-size: 0.9rem;
 }

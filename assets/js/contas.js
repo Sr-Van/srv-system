@@ -26,7 +26,7 @@ const tableContasLoad = () => {
         : `style="color:#3ee60bb3";`;
 
     tableList = `
-            <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light); max-height: 30px; overflow: hidden;">
+            <tr style="border-bottom: 1px solid var(--grey-color); background-color: var(--purple-light); height: 1.563rem; overflow: hidden;">
                 <td>${nome}</td>
                 <td>${plano}</td>
                 <td>${diaFormatted}/${mesFormatted}</td>
@@ -75,7 +75,7 @@ const renderPaymentTable = (payment) => {
       <td>Mes: ${month}</td>
       <td ${colorVenc}>${situation}</td>
       <td>Valor: ${value}</td>
-      <td class="select-td-payment" data-js="${month}">Selecionar</td>
+      <td> <a class="select-td-payment" data-js="${month}">Selecionar</a></td>
       `;
   paymentTable.append(tr);
 };

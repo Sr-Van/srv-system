@@ -195,8 +195,8 @@ const renderFeedbacks = array => {
 const getFeedback = () => {
     feedbackDasboardDiv.innerHTML = ""
     const arrayFeedbacks = orders.filter(({type}) => type == 9)
-
-    arrayFeedbacks.forEach(order => renderFeedbacks(order))
+    arrayFeedbacks.forEach(order => renderFeedbacks(order)
+    )
 }
 
 getFeedback()
@@ -219,6 +219,8 @@ const addNewOrder = () => {
     setOrdersData()
     ordersPercentage()
     countOrders()
+    getFeedback()
+    showAlert("Ordem adicionada")
 }
 
 const cleanInputsOrders = () => {
@@ -267,6 +269,8 @@ buttonChangeOrder.addEventListener("click", e => {
     renderTable()
     setOrdersData()
     cleanInputsOrders()
+    getFeedback()
+    showAlert("Ordem alterada")
 })
 
 table.addEventListener("click", event => {
