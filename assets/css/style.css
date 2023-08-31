@@ -309,9 +309,13 @@ select {
         height: 3rem;
         gap: 1rem;
     }
+    .header-n-cadastro {
+        height: 8rem !important;
+    }
     .btn-style {
-        padding: .4rem .8rem;
-        font-size: .9rem;
+        padding: .8rem 1rem;
+        font-size: 2rem;
+        border-radius: 3rem;
     }
     .confirm-pag {
         padding: 0.18rem 0.3rem !important;

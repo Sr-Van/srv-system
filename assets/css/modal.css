@@ -38,7 +38,7 @@
 }
 
 .novo-cadastro-modal .form-n-cadastro label {
-    font-size: .7rem;
+    font-size: 2rem;
 }
 
 .novo-cadastro-modal .form-n-cadastro > input{
@@ -47,11 +47,8 @@
     width: min(100%, 18.75rem);
 }
 
-.plano select {
-    font-size: .7rem;
-}
-.vencimento select {
-    font-size: .7rem;
+.plano select, .vencimento select {
+    font-size: 2rem;
 }
 
 .excluir-cadastro {

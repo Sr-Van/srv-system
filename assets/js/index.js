@@ -204,38 +204,33 @@ dashboardBtn.addEventListener('click', (e)=>{
     activeBtn(dashboardBtn)
     desativeBtn(osBtn, cadastrosBtn, contasBtn)
     dashContent.style.display = 'grid' //mostrando o conteudo da div dashboard-content apenas quando o botao dashboard estiver ativo
-    unSelect(cadastroContent, contasContent, ordensContent)
-    desativeRender()
-
+    unSelect(cadastroContent, contasContent, ordensContent, render)
 })
 
 cadastrosBtn.addEventListener('click', (e)=>{
     e.preventDefault()
     activeBtn(cadastrosBtn)
     desativeBtn(dashboardBtn, osBtn, contasBtn)
-    unSelect(dashContent, contasContent, ordensContent)
+    unSelect(dashContent, contasContent, ordensContent, render)
     cadastroContent.style.display = 'block'
     registerLoad()
-    desativeRender()
 })
 
 contasBtn.addEventListener('click', (e)=>{
     e.preventDefault()
     activeBtn(contasBtn)
     desativeBtn(dashboardBtn, cadastrosBtn, osBtn)
-    unSelect(dashContent, cadastroContent, ordensContent)
+    unSelect(dashContent, cadastroContent, ordensContent, render)
     contasContent.style.display = 'grid'
     tableContasLoad()
-    desativeRender()
 })
 
 osBtn.addEventListener('click', (e)=>{
     e.preventDefault()
     activeBtn(osBtn)
     desativeBtn(dashboardBtn, cadastrosBtn, contasBtn)
-    unSelect(dashContent, cadastroContent, contasContent)
+    unSelect(dashContent, cadastroContent, contasContent, render)
     ordensContent.style.display = 'grid'
-    desativeRender()
 })
 
 const activeBtn = btn => {
@@ -251,9 +246,6 @@ const unSelect = (...content) => {
     content.forEach(content => content.style.display = "none")
 }
 
-const desativeRender = (...content) => {
-    content.forEach(content => content.style.display = "none")
-}
 
 const addOrderNewClient = () => {
     const newOrderAdd = {}
