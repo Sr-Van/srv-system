@@ -70,7 +70,7 @@ const filterSearch = searched => {
 }
 
 const showAlert = message => {
-    setTimeout(() => alertBox.style.display = 'none', 1200)
+    setTimeout(() => alertBox.style.display = 'none', 3000)
     alertBox.style.display = 'flex'
     alertBox.innerHTML = message
 }
@@ -84,13 +84,12 @@ const searchInKeyUp = event => {
 
     if(searched.trim().length<=0){
         setTimeout(()=>{
-            desativeRender()
             activeBtn(dashboardBtn)
             desativeBtn(osBtn, cadastrosBtn, contasBtn)
             dashContent.style.display = 'grid'
+            unSelect(render, cadastroContent, contasContent, ordensContent)
         }, 1000)
-        showAlert('Digite o nome de um cliente para mostrar o cadastro no dashboard.')
-        unSelect(render, cadastroContent, contasContent, ordensContent) 
+        showAlert('Digite o nome de um cliente para mostrar o cadastro no dashboard.') 
         return
     }
 

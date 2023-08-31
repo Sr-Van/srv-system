@@ -196,6 +196,9 @@ body{
     cursor: pointer;
     color: var(--white-color);
 }
+.show-client .edit-client > span{
+    font-size: 1.5rem;
+}
 
 
 .header-cadastros{
@@ -256,7 +259,7 @@ table::-webkit-scrollbar-thumb{
     border-bottom: 1px solid var(--black-bg); 
     padding: 3px; 
     background-color: var(--purple-light); 
-    gap: 0.625rem; 
+    gap: 5rem; 
     overflow: hidden;
 }
 
@@ -309,9 +312,32 @@ select {
         height: 3rem;
         gap: 1rem;
     }
-    .header-n-cadastro {
+    .novo-cadastro-modal .sex-select > input {
+        width: auto !important;
+    }
+    .header-n-cadastro, .header-e-cadastro, .header-os-cadastro {
         height: 8rem !important;
     }
+    .modal-e-overlay .edit-cadastro-modal {
+        height: auto !important;
+    }
+    .edit-cadastro-modal label, input {
+        font-size: 2rem;
+    }
+    .edit-cadastro-modal .sex-select > input {
+        width: auto !important;
+    }
+    .form-n-os label, input, select > option {
+        width: 100%;
+        font-size: 2rem;
+    }
+    .form-n-os > select, input {
+        width: 70% !important;
+    }
+    .edit-cadastro-moda, input {
+        font-style: italic;
+    }
+
     .btn-style {
         padding: .8rem 1rem;
         font-size: 2rem;
@@ -320,19 +346,14 @@ select {
     .confirm-pag {
         padding: 0.18rem 0.3rem !important;
     }
-    .confirm-payment {
-        width: 35rem !important;
-    }
-
     .tr-padrao-3 {
-        height: 2rem;
-        font-size: .9rem;
+        height: 4rem;
+        font-size: 2rem;
     }
 
     .select-td-payment {
         display: grid;
         place-items: center;
-
     }
 }
 

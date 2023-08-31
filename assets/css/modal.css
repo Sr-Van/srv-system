@@ -178,7 +178,7 @@
 
 .confirm-payment {
     height: auto;
-    width: 25rem;
+    width: auto;
     background-color: var(--purple-color);
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
@@ -190,6 +190,7 @@
     "table table";
     gap: 0.5rem;
     box-shadow: var(--box-shadow);
+    font-size: 2rem;
 }
 
 .select-td-payment {
@@ -197,7 +198,7 @@
     text-align: center;
     background-color: var(--icons-color);
     border-radius: 1em;
-    font-size: .7rem;
+    font-size: 2rem;
 }
 
 .select-td-payment:active {
@@ -222,10 +223,10 @@
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;    
     overflow: auto;
+    font-size: 5rem;
 }
 .btn-confirm {
     grid-area: left;
-    width: 6.25rem;
 }
 
 .btn-modal-padrao{
@@ -235,7 +236,6 @@
 }
 
 .btn-deny {
-    width: 6.25rem;
     grid-area: right;
 }
 
