@@ -281,6 +281,16 @@ select {
     html{
         font-size: 6px;
     }
+    .cards-dash circle {
+        cy: 18;
+        r: 18;
+        cx: 18;
+        stroke-width: 4 !important;
+        stroke-dasharray: 120 !important;
+    }
+    .dashboard-content .progress .percentage {
+        top: 20px !important;
+    }
     .sidebar{
         width: min(100%, 5vw);
         overflow: hidden;
@@ -296,9 +306,6 @@ select {
         place-items: center;
     }
     .sidebar a > h3, span {
-        display: none;
-    }
-    .dashboard-content .progress circle{
         display: none;
     }
     .dashboard-content .cards-div{
@@ -381,9 +388,6 @@ select {
     .sidebar a > h3, span {
         display: block;
     }
-    .dashboard-content .progress circle{
-        display: none;
-    }
     .dashboard-content .cards-div{
         height: 18rem !important;
     }
@@ -395,6 +399,17 @@ select {
         "status"
         "output" !important;
         place-items: center;
+    }
+    .cards-dash circle {
+        cy: 18;
+        r: 18;
+        cx: 18;
+        stroke-width: 4 !important;
+        stroke-dasharray: 120 !important;
+    }
+    .dashboard-content .progress .percentage {
+        top: 20px !important;
+        left: -10px !important;
     }
     
 }
@@ -426,6 +441,49 @@ select {
         height: 1.5rem;
         gap: 1rem;
     }
+    .cards-dash circle {
+        cy: 38;
+        r: 38;
+        cx: 38;
+        stroke-width: 10 !important;
+        stroke-dasharray: 235 !important;
+    }
+    .dashboard-content .progress .percentage {
+        top: 30px !important;
+        left: 0 !important;
+    }
+    .header-n-cadastro, .header-e-cadastro, .header-os-cadastro {
+        height: 4rem !important;
+    }
+    .modal-e-overlay .edit-cadastro-modal {
+        height: auto !important;
+    }
+    .edit-cadastro-modal label, input {
+        font-size: .8rem !important;
+    }
+    .edit-cadastro-modal .sex-select > input {
+        width: auto !important;
+    }
+    .form-n-os label, input, select > option {
+        width: 100%;
+        font-size: .8rem !important;
+    }
+    .form-n-os > select, input {
+        width: 70% !important;
+    }
+    .edit-cadastro-moda, input {
+        font-style: italic;
+    }
+    .plano select, .vencimento select {
+        font-size: .8rem !important;
+    }
+    .btn-style {
+        padding: .2rem .6rem;
+        font-size: .9rem;
+    }
+    .form-n-cadastro label {
+        font-size: .8rem !important;
+    }
 }
 
 @media only screen and (min-width: 1240px) {
@@ -447,4 +505,9 @@ select {
     .dashboard-content .progress .percentage {
         left: -1rem !important;
     }
+    .sidebar {
+        height: auto;
+    }
+    
+    
 }

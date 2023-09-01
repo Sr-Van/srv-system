@@ -63,8 +63,10 @@ const getPaymentSituation = (pagamentos) => {
   paymentSituation = situation;
 };
 
-const renderPaymentTable = (payment) => {
+const renderPaymentTable = payment => {
+
   const { month, situation, value } = payment;
+
   const colorVenc =
     situation === "A receber"
       ? `style="color: var(--soft-red)";`
@@ -80,10 +82,20 @@ const renderPaymentTable = (payment) => {
   paymentTable.append(tr);
 };
 
+
+const renderClienteNameToPay = id => {
+  const clientName = document.querySelector(".client-to-pay")
+  const {nome} = clients[id]
+
+  clientName.innerHTML = nome
+}
+
 const getPayment = (id) => {
   paymentTable.innerHTML = "";
   arrayPayment = clients[id].pagamento;
-  arrayPayment.forEach((payment) => renderPaymentTable(payment));
+  arrayPayment.forEach(payment => renderPaymentTable(payment));
+
+  renderClienteNameToPay(id)
 };
 
 const payManualMonth = (month) => {
@@ -103,9 +115,8 @@ const amountPercentage = (paid, totalAmount) => {
   }
 
   const percentageCircle = Math.trunc(
-    Math.abs(((percentage - 100) / 100) * 222)
+    Math.abs(((percentage - 100) / 100) * strokeDashToCircle)
   );
-
   percentagePaymentDashCircle.style.strokeDashoffset = percentageCircle;
 };
 

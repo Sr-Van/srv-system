@@ -99,7 +99,7 @@ const ordersPercentage = ordersOpened => {
         osPercengateDashboardCircle.style.stroke = "#038b79";
     }
     //CALCULO PORCENTAGEM    
-    const percentageCircle = Math.trunc(Math.abs((percentageFormat - 100) / 100 * 222))
+    const percentageCircle = Math.trunc(Math.abs((percentageFormat - 100) / 100 * strokeDashToCircle))
     osPercengateDashboardCircle.style.strokeDashoffset = percentageCircle
 }
 

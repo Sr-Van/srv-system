@@ -57,7 +57,14 @@ const registerTable = document.querySelector(".client-tb")
 const activeUsers = document.querySelector(".active-clients")
 const allUsers = document.querySelector(".unactive-clients")
 const usersActivePercentage = document.querySelector(".atice-percentage")
-const usersActivePercentageCircle = document.querySelector(".users-percentage")
+const usersActivePercentageCircle = document.querySelector(".users-percentage") 
+
+const styleCircle =  getComputedStyle(usersActivePercentageCircle)
+const strokeInCircle = styleCircle.strokeWidth
+
+const strokeDashToCircle = strokeInCircle == "4px" ? 120 : 235
+
+
 
 
 const btnNovoCad = document.querySelector(".novo-cadastro")
@@ -115,7 +122,7 @@ const loadUsersDashboard = () => {
     }
 
     const percentageCircle = Math.trunc(
-        Math.abs(((percentage - 100) / 100) * 222))
+        Math.abs(((percentage - 100) / 100) * strokeDashToCircle))
 
 
     usersActivePercentageCircle.style.strokeDashoffset = percentageCircle;
