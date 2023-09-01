@@ -284,6 +284,16 @@ select {
     .sidebar{
         width: min(100%, 5vw);
         overflow: hidden;
+        height: 30vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .sidebar a {
+        height: 100%;
+        display: grid;
+        place-items: center;
     }
     .sidebar a > h3, span {
         display: none;
@@ -363,6 +373,10 @@ select {
     }
     .sidebar{
         width: min(100%, 20vw);
+    }
+    .sidebar a {
+        height: 100%;
+        display: flex;
     }
     .sidebar a > h3, span {
         display: block;
