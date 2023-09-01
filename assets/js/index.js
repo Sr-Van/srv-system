@@ -27,7 +27,9 @@ const planosObj = {
     4: "100,00"
 }
 
-
+if(allTimeRegisters.length == 0) {
+    alert("Para carregar dados no sistema crie um novo cadastro no menu cadastros")
+}
 
 let date = new Date()
 const diaAtual = date.getDate()

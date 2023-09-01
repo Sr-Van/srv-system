@@ -320,6 +320,9 @@ select {
         "output" !important;
         place-items: center;
     }
+    .ordens .table-os {
+        width: 50rem !important;
+    }
     .tr-padrao, .client-tb, .tr-padrao-2 {
         width: 120rem;
         font-size: 1.5rem;
@@ -380,6 +383,7 @@ select {
     }
     .sidebar{
         width: min(100%, 20vw);
+        height: 40vh;
     }
     .sidebar a {
         height: 100%;
@@ -393,7 +397,7 @@ select {
     }
     .ordens {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+        grid-template-rows: repeat(auto-fit, minmax(370px, 1fr));
         grid-template-areas: 
         "list"
         "status"
@@ -411,7 +415,7 @@ select {
         top: 20px !important;
         left: -10px !important;
     }
-    
+
 }
 
 @media only screen and (min-width: 960px) {
@@ -431,6 +435,9 @@ select {
         grid-template-areas: 
         "list status"
         "list output" !important;
+    }
+    .ordens .table-os {
+        width: 30rem !important;
     }
     .tr-padrao, .client-tb, .tr-padrao-2 {
         width: 100% !important;
@@ -496,6 +503,10 @@ select {
     .dashboard-content .client-feedb{
         height: 16rem !important;
     }
+    .ordens .table-os {
+        width: 28rem !important;
+    }
+    
 }
 
 @media only screen and (min-width: 1440px) {
@@ -508,6 +519,10 @@ select {
     .sidebar {
         height: auto;
     }
-    
-    
+}
+
+@media only screen and (min-width: 1600px) {
+    .main-container {
+        width: 68rem !important;
+    }
 }

@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+/* variables */
+:root{
+	--white-soft: #D7E5F9;
+	--purple-soft: #7C73DB;
+	--purple-medium: #463DC7;
+	--purple-blue: #232995;
+	--purple-dark: #580ef6;
+}
+
+/* reset */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* stylizing */
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(/images/backgroundimg.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.container{
+    background-color: #580ef691;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.case-login{
+    position: relative;
+    width: 300px;
+    height: 33vh;
+    background-color: var(--purple-soft);
+    border-radius: 2em;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.2);
+    transition: all .3s ease;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.case-login:hover{
+    box-shadow: none;
+}
+
+.login h1{
+    color: var(--purple-medium);
+}
+
+.login a{
+    text-decoration: none;
+}
+
+.login #submit-btn{
+    background-color: var(--purple-medium);
+    width: 200px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: .5em;
+    padding: .3em;
+    transition: all .3s ease;
+}
+
+.login #submit-btn:hover{
+    color: var(--white-soft);
+    background-color: var(--purple-dark);
+}
+
+/* validation animation */
+.cred-acepted{
+    animation: correct ease 1s infinite;
+}
+
+@keyframes correct{
+    60%{
+        background-color: rgba(0,128,0,0.6);
+    }
+    80%{
+        background-color: rgba(0,128,0,0.8);
+    }
+    100%{
+        background-color: rgba(0,128,0,1);
+    }
+}
+
+/* end of validation animation */
+
+.login .login-form{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 200px;
+}
+
+.login .login-form input{
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.login .login-form span{
+    position: absolute;
+    color: var(--purple-dark);
+    top: 7px;
+    left: 2px;
+    pointer-events: none;
+    transition: all .3s ease-in-out;
+}
+
+.login .login-form #txt-email:focus ~ span{
+    transform: translateX(150px);
+}
+
+.login .login-form #txt-pass:focus ~ span{
+    transform: translateX(115px);
+}
+
+.login .login-form #txt-email:valid ~ span{
+    opacity: 0;
+}
+
+.login .login-form #txt-pass:valid ~ span{
+    opacity: 0;
+}
+
+.box-loading{
+   width: 100%;
+   height: 100%;
+   display: grid;
+   place-items: center;
+}
+
+.box-loading .loading{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 6px solid rgb(214, 214, 214);
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    from{
+        transform: rotate(360deg);
+    }
+    to{
+        transform: rotate(0deg);
+    }
+}
+
+
+@media (min-width: 1200px){
+    .login #submit-btn{
+        padding: .7em;
+    }
+}
+
+
+@media (max-width: 600px){
+    .case-login{
+        height: 40vh;
+    }
+}
+
