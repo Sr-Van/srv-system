@@ -29,7 +29,7 @@ btnLogin.addEventListener("click", e =>{
                 boxLogin.style.display = "none"
                 boxLoading.style.display = "grid"
                 setTimeout(()=>{
-                    window.location.assign("index.html")
+                    window.location.assign("/index.html")
                 }, 3000)
                 
             }, 1000);
