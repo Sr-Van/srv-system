@@ -24,7 +24,7 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url(/images/backgroundimg.jpg);
+    background-image: url(/src/assets/images/backgroundimg.jpg);
     background-position: center;
     background-size: cover;
 }

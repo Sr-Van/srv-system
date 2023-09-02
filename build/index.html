@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#580ef6" />
+    <link rel="shortcut icon" href="/src/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="/src/css/dashboard.css">
+    <link rel="stylesheet" href="/src/css/ordens.css">
+    <link rel="stylesheet" href="/src/css/modal.css">
+    <link rel="stylesheet" href="/src/css/contas.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src='/src/js/index.js' defer></script>
+    <script src='/src/js/ordens.js' defer></script>
+    <script src='/src/js/search.js' defer></script>
+    <script src='/src/js/contas.js' defer></script>
+    <title>Dashboard SRV</title>
+</head>
+<body>
+    <head>
+        <div class="header">
+            <!--header com pesquisa que muda para cada select-->
+            <select name="select" id="select-filter">
+                <option value="nome">Nome</option>
+                <option value="CPF">CPF</option>
+                <option value="Endereço">Endereço</option>
+            </select>
+            <span class="material-symbols-sharp">
+                search
+            </span>
+            <input id="search" type="text">
+        </div>
+    </head>
+    <div class="alert">
+        alerta
+    </div>
+    <main>
+        <div class="container">
+            <aside class="sidebar">
+                <!--sidebar-->
+                <a class="dashboard-btn active">
+                    <span class="material-symbols-sharp">
+                        analytics
+                    </span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a class="cadastros-btn">
+                    <span class="material-symbols-sharp">
+                        groups
+                    </span>
+                    <h3>Cadastros</h3>
+                </a>
+                <a class="contas-btn">
+                    <span class="material-symbols-sharp">
+                        savings
+                    </span>
+                    <h3>Contas</h3>
+                <a class="os-btn">
+                    <span class="material-symbols-sharp">
+                        engineering
+                    </span>
+                    <h3>Ordens de Serviço</h3>
+                    <span class="count-messages">12</span>
+                </a>
+            </aside>
+            <div class="main-container">
+                <!--div para mostrar o conteudo principal e todas as div que forem abertas pelo usuario clicando nos sidelinks-->
+                <div class="show-client"></div>
+                <div class="dashboard-content">
+                    <!--graficos do dashboard-->
+                    <div class="cards-dash">
+                        <div class="clients cards-div">
+                            <div class="status">
+                                <div class="info">
+                                    <h3>Clientes</h3>
+                                    <div>
+                                        <h1>Ativos</h1>
+                                        <p class="active-clients">100</p>
+                                    </div>
+                                    <div>
+                                        <h1>Totais</h1>
+                                        <p class="unactive-clients">100</p>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                        <svg>
+                                            <circle class="users-percentage" cx="28" cy="28" r="26"></circle>
+                                        </svg>
+                                        <div class="percentage">
+                                            <p class="atice-percentage"></p>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sales cards-div">
+                            <div class="status">
+                                <div class="info">
+                                    <h3>Vendas Mensais</h3>
+                                    <div>
+                                        <h1>Recebidas</h1>
+                                        <p class="received-payment">.</p>
+                                    </div>
+                                    <div>
+                                        <h1>A Receber</h1>
+                                        <p class="unreceived-payment">.</p>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                        <svg>
+                                            <circle class="payment-svg" cx="38" cy="38" r="36"></circle>
+                                        </svg>
+                                        <div class="percentage">
+                                            <p class="payment-percentage">0%</p>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cards cards-div">
+                            <div class="status">
+                                <div class="info">
+                                    <h3>Ordens de Serviço</h3>
+                                    <div>
+                                        <h1>Abertas</h1>
+                                        <p class="p-orders-dash-todo">12</p>
+                                    </div>
+                                    <div>
+                                        <h1>Fechadas</h1>
+                                        <p class="p-orders-dash-done">12</p>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                        <svg>
+                                            <circle class="os-svg" cx="38" cy="38" r="36"></circle>
+                                        </svg>
+                                        <div class="percentage">
+                                            <p class="os-percengate">+50%</p>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Local para receber Feedbacks da central de auto atendimento online-->
+                    <h1 class="feedb-title">Feedbacks</h1>
+                    <div class="client-feedb"></div>
+                </div>
+                <div style="display: none; overflow: hidden;" class="cadastros">
+                    <div class="header-cadastros">
+                        <a class="btn-style novo-cadastro">Novo</a>
+                    </div>
+                    <!--fazer cadastros-->
+                    <table 
+                    style="width: 100%;
+                    margin-top: 5rem; 
+                    display:block;
+                    overflow: auto;">
+                        <tr class="tr-padrao">
+                            <td style="width: 14.37rem;">Nome</td>
+                            <td>Plano</td>
+                            <td> CPF/CNPJ</td>
+                            <td>RG/IE</td>
+                            <td>Telefone</td>
+                            <td>Bairro</td>
+                            <td>Endereço</td>
+                        </tr>
+                        <tbody class="client-tb"></tbody>
+                    </table>
+                </div>
+                <div style="display: none;" class="contas">
+                    <!--fazer contas-->
+                    <div class="table-receber">
+                        <table>
+                            <tr 
+                            style="color: var(--white-color); 
+                            font-size: 1.25rem; 
+                            border-bottom: 1px solid var(--white-color); 
+                            width: 100%;
+                            display: grid;
+                            grid-template-columns: repeat(5, 1fr);
+                            text-align: center;">
+                                <td>Cliente</td>
+                                <td>plano</td>
+                                <td>vencimento</td>
+                                <td>Situacao</td>
+                                <td></td>
+                            </tr>
+                            <tbody class="receber-tb" 
+                            style="display: block; 
+                            overflow: auto; 
+                            height: auto; 
+                            max-height: 70vh;"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="display: none;" class="ordens">
+                    <a class="btn-style btn-nova-os">Nova</a>
+                    <div class="table-os">
+                        <h2>Ordens de Serviço:</h2>
+                        <table>
+                            <thead>
+                                <tr style="color: var(--white-color); font-size: 1rem; border-bottom: 1px solid var(--white-color); background-color: transparent; max-height: 30px;" class="tr-padrao-os">
+                                    <td></td>
+                                    <td>Motivo</td>
+                                    <td>Cliente</td>
+                                    <td>Data</td>
+                                    <td>Situacao</td>
+                                </tr> 
+                            </thead>
+                            <tbody data-js="table-os"></tbody>
+                        </table>
+                    </div>
+                    <div class="status-os">
+                        <h2>Ordens por Status</h2>
+                        <div class="status1">
+                            <p class="p-done-os">12</p>
+                            <h3>Feitas</h3>
+                        </div>
+                        <div class="status2">
+                            <p class="p-todo-os">12</p>
+                            <h3>Abertas</h3>
+                        </div>
+                    </div>
+                    <div class="comment-output">
+                        <h2 style="color: var(--white-color);">Observacao:</h2>
+                        <p class="output"></p>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <!--modal overlay-->
+        <div style="display: none;" class="modal-overlay modal-anim">
+            <div class="novo-cadastro-modal new-modal-anim">
+                <div class="header-n-cadastro">
+                    <a class="btn-style btn-salvar">Salvar</a>
+                    <a class="btn-style btn-cancelar">Cancelar</a>
+                </div>
+                <div class="form-n-cadastro">
+                    <label for="txt-nome">Nome Completo</label>
+                    <input onblur="formatToFirstLetterUppercase(this.value)"  type="text" id="txt-nome">
+                    <label for="txt-cpf">CPF/CNPJ</label>
+                    <input onblur="formatCpf()" type="text" id="txt-cpf">
+                    <label for="txt-rg">RG/IE</label>
+                    <input onblur="formatRg()" type="text" id="txt-rg">
+                    <label for="txt-tel">Telefone</label>
+                    <input onblur="formatTel()" type="tel" required id="txt-tel">
+                    <label for="txt-cep">CEP</label>
+                    <input onblur="formatCep()" type="text" name="text" id="txt-cep">
+                    <label for="txt-cep">Cidade</label>
+                    <input type="text" name="text" id="txt-cidade" >
+                    <label for="txt-endereco">Endereço</label>
+                    <input type="text" id="txt-endereco">
+                    <label for="txt-nume">Numero</label>
+                    <input type="text" id="txt-nume">
+                    <label for="txt-bairro">Bairro</label>
+                    <input type="text" id="txt-bairro">
+                    <div style="padding-top: 20px;" class="sex-select">
+                        <label>Sexualidade: </label>
+                        <input type="radio" name="sex-radio" id="male-sex" value="Masculino">
+                        <label for="male-sex">Masculino</label>
+                        <input type="radio" name="sex-radio" id="female-sex" value="Feminino">
+                        <label for="female-sex">Feminino</label>
+                        <input type="radio" name="sex-radio" id="other-sex" value="Outro" checked>
+                        <label for="male-sex">Outro</label>
+                    </div>
+                    <div class="plano">
+                        <label >Plano: </label>
+                        <select name="select-plano" id="select-plano">
+                            <option value="" selected>Selecionar</option>
+                            <option value="1">100mb - R$50,00</option>
+                            <option value="2">200mb - R$60,00</option>
+                            <option value="3">300mb - R$70,00</option>
+                            <option value="4">500mb - R$100,00</option>
+                        </select>
+                    </div>
+                    <div class="vencimento">
+                        <label >Data de vencimento: </label>
+                        <select name="select-venc" id="select-venc">
+                            <option value="" selected>Selecionar</option>
+                            <option value="1">Pos pago dia 1</option>
+                            <option value="10">Pos pago dia 10</option>
+                            <option value="15">Pos pago dia 15</option>
+                            <option value="20">Pos pago dia 20</option>
+                        </select>
+                    </div>
+                </div>
+                <p>Todos os valores devem ser preenchidos ou o cadastro nao sera realizado</p>
+            </div>
+        </div>
+        <div style="display: none;" class="modal-e-overlay modal-overlay modal-anim">
+            <div class="edit-cadastro-modal new-modal-anim">
+                <div class="header-e-cadastro">
+                    <a class="btn-style btn-editar">editar</a>
+                    <a class="btn-style btn-cancelar-edit">Cancelar</a>
+                    <a class="btn-style excluir-cadastro">Excluir</a>
+                </div>
+                <div class="form-e-cadastro">
+                    <label for="txt-e-nome">Nome Completo</label>
+                    <input type="text" id="txt-e-nome">
+                    <label for="txt-e-cpf">CPF/CNPJ</label>
+                    <input type="text" id="txt-e-cpf">
+                    <label for="txt-e-rg">RG/IE</label>
+                    <input type="text" id="txt-e-rg">
+                    <label for="txt-e-tel">Telefone</label>
+                    <input type="tel" required id="txt-e-tel">
+                    <label for="txt-e-cep">CEP</label>
+                    <input type="text" name="text" id="txt-e-cep">
+                    <label for="txt-e-cep">Cidade</label>
+                    <input type="text" name="text" id="txt-e-cidade">
+                    <label for="txt-e-endereco">Endereço</label>
+                    <input type="text" id="txt-e-endereco">
+                    <label for="txt-e-nume">Numero</label>
+                    <input type="text" id="txt-e-nume">
+                    <label for="txt-e-bairro">Bairro</label>
+                    <input type="text" id="txt-e-bairro">
+                    <div style="padding-top: 20px;" class="sex-select">
+                        <label>Sexualidade: </label>
+                        <input type="radio" name="sex-e-radio" id="male-sex" value="Masculino">
+                        <label for="male-sex">Masculino</label>
+                        <input type="radio" name="sex-e-radio" id="female-sex" value="Feminino">
+                        <label for="female-sex">Feminino</label>
+                        <input type="radio" name="sex-e-radio" id="other-sex" value="Outro" checked>
+                        <label for="male-sex">Outro</label>
+                    </div>
+                    <div class="plano">
+                        <label >Plano: </label>
+                        <select name="select-plano" id="select-e-plano">
+                            <option value="" selected>Selecionar</option>
+                            <option value="100MB">100mb - R$50,00</option>
+                            <option value="200MB">200mb - R$60,00</option>
+                            <option value="300MB">300mb - R$70,00</option>
+                            <option value="500MB">500mb - R$100,00</option>
+                        </select>
+                    </div>
+                    <div class="vencimento">
+                        <label >Data de vencimento: </label>
+                        <select name="select-venc" id="select-e-venc">
+                            <option value="" selected>Selecionar</option>
+                            <option value="1">Pos pago dia 1</option>
+                            <option value="10">Pos pago dia 10</option>
+                            <option value="15">Pos pago dia 15</option>
+                            <option value="20">Pos pago dia 20</option>
+                        </select>
+                    </div>
+                </div>
+                <p>Todos os valores devem ser preenchidos ou o cadastro nao sera realizado</p>
+            </div>
+        </div>
+        <div style="display: none;" class="modal-os-overlay modal-overlay modal-anim">
+            <div class="nova-os-modal new-modal-anim">
+                <div class="header-os-cadastro">
+                    <a class="btn-style btn-salvar-ordem">Salvar</a>
+                    <a class="btn-style btn-cancelar-ordem">Cancelar</a>
+                    <a class="btn-style btn-change-os">Finalizar</a>
+                </div>
+                <div class="form-n-os">
+                    <label for="">Motivo:</label>
+                    <select name="motivo-select" id="motivo-select">
+                        <option value="" selected>Escolha o motivo</option>
+                    </select>
+
+                    <label for="">Cliente:</label>
+                    <select name="cliente-select" id="cliente-select"></select>
+                    <label for="">Data de abertura:</label>
+                    <input type="date" id="date-os">
+
+                    <label for="">OBS:</label>
+                    <input type="text" style="width: min(100%, 18.75rem); background-color: var(--white-color);border-radius: .2em;" placeholder="insira os detalhes da ordem" id="message">
+
+                    <label for="">Situacao</label>
+                    <select name="select-situacao" id="select-situacao">
+                        <option value="" selected>Aberta</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;" class="modal-overlay modal-confirm-payment-overlay modal-anim">
+            <div class="confirm-payment new-modal-anim">
+                <p>Financeiro de <b class="client-to-pay"></b></p>
+                <table name="payments" id="payments"></table>
+                <a class="btn-confirm btn-modal-padrao btn-style" href="">Pagar</a>
+                <a class="btn-deny btn-modal-padrao btn-style" href="">Cancelar</a>
+            </div>
+        </div>
+        <footer style="color: var(--white-color); position: absolute;
+        bottom: 0;
+        left: 50%; transform: translateX(-50%); font-size: 0.75rem;">2023 &copy; Vanderson Erlan, All Rights Reserved.</footer>
+    </main>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</html>
