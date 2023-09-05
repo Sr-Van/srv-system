@@ -30,7 +30,6 @@
     width: 100%;
     height: 100%;
     padding: 1rem 0 0 1rem;
-    display: block;
 }
 .table-os > table > tbody {
     overflow: auto;

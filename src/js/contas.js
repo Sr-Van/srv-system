@@ -114,6 +114,12 @@ const amountPercentage = (paid, totalAmount) => {
     percentagePaymentDashCircle.style.stroke = "#038b79";
   }
 
+  if (percentage >= 100) {
+    percentagePaymentDashCircle.style.strokeDashoffset = 0
+    percentagePaymentDash.textContent = `+ 100%`
+    return
+  }
+
   const percentageCircle = Math.trunc(
     Math.abs(((percentage - 100) / 100) * strokeDashToCircle)
   );
