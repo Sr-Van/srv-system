@@ -52,6 +52,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 1rem;
 }
 
 .case-login:hover{
@@ -157,6 +158,13 @@ body{
     border-top-color: transparent;
     border-bottom-color: transparent;
     animation: rotate 1s linear infinite;
+}
+
+.forgot-password {
+    cursor: pointer;
+}
+.forgot-password:hover {
+    text-decoration: underline;
 }
 
 @keyframes rotate {

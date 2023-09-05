@@ -442,7 +442,6 @@ select {
     .tr-padrao, .client-tb, .tr-padrao-2 {
         width: 100% !important;
         font-size: 0.8rem;
-        max-width: 55rem !important;
     }
     .tr-padrao, .tr-padrao-2 {
         height: 1.5rem;

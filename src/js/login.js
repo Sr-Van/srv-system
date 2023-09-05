@@ -8,6 +8,7 @@ const credentials = [{
 
 
 const btnLogin = document.querySelector("#submit-btn")
+const btnForgotPassword = document.querySelector(".forgot-password")
 
 btnLogin.addEventListener("click", e =>{
     e.preventDefault()
@@ -41,3 +42,6 @@ btnLogin.addEventListener("click", e =>{
         }
     })
 })
+
+
+btnForgotPassword.addEventListener("click", () => alert("Para login: admin@admin.com Para senha: admin1234"))

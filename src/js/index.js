@@ -27,6 +27,14 @@ const planosObj = {
     4: "100,00"
 }
 
+const vencimentoObj = {
+    1: "Pos pago dia 1",
+    2: "Pos pago dia 10",
+    3: "Pos pago dia 15",
+    4: "Pos pago dia 20"
+}
+
+
 if(allTimeRegisters.length == 0) {
     alert("Para carregar dados no sistema crie um novo cadastro no menu cadastros")
 }
@@ -77,6 +85,8 @@ const btnCancelCad = document.querySelector(".btn-cancelar")
 const btnEditarCad = document.querySelector(".btn-editar")
 const btnCancelEdCad = document.querySelector(".btn-cancelar-edit")
 const btnExcluirCad = document.querySelector(".excluir-cadastro")
+
+const selectVencimento = document.querySelector("#select-venc")
 
 const renderClientOnRegister = (client, index) => {
 
@@ -415,6 +425,23 @@ const openModalEdit =  (clients, target) => {
     document.querySelector("#select-e-venc").value = vencimento
 
 }
+
+const getVencimentosObjArray = () => {
+    const arr =  Object.values(vencimentoObj)
+    console.log("🚀 ~ file: index.js:41 ~ getVencimentosObjArray ~ arr:", arr)
+    arr.forEach((data, index) => putVencimentoOnSelect(data, index))
+}
+
+
+const putVencimentoOnSelect = (data, i) => {
+    i++
+    const option = document.createElement("option")
+    option.setAttribute("value", i)
+    option.textContent = data
+    selectVencimento.append(option)
+}
+
+getVencimentosObjArray()
 
 let target
 
