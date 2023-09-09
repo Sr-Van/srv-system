@@ -79,7 +79,7 @@ const strokeDashToCircle = strokeInCircle == "4px" ? 120 : 235
 
 const btnNovoCad = document.querySelector(".novo-cadastro")
 const modal = document.querySelector(".modal-overlay")
-const modalEdit = document.querySelector(".modal-e-overlay")
+const modalEditCad = document.querySelector(".modal-e-overlay")
 const btnSalvarCad = document.querySelector(".btn-salvar")
 const btnCancelCad = document.querySelector(".btn-cancelar")
 const btnEditarCad = document.querySelector(".btn-editar")
@@ -250,6 +250,7 @@ osBtn.addEventListener('click', (e)=>{
     desativeBtn(dashboardBtn, cadastrosBtn, contasBtn)
     unSelect(dashContent, cadastroContent, contasContent, render)
     ordensContent.style.display = 'grid'
+    createModalEditOs()
 })
 
 const activeBtn = btn => {
@@ -375,7 +376,7 @@ const findIndexToDelete = () => {
 const deleteClient = () => {
     clients.splice(findIndexToDelete(), 1)
     setDb()
-    modalEdit.style.display = "none"
+    modalEditCad.style.display = "none"
     cleanInputs()
     registerLoad()
     loadUsersDashboard()
@@ -401,14 +402,14 @@ const editClient = () => {
     setDb()
     cleanInputs()
     registerLoad()
-    modalEdit.style.display = "none"
+    modalEditCad.style.display = "none"
 }
 
-const openModalEdit =  (clients, target) => {
+const openModalEditCad =  (clients, target) => {
     const {nome, CPF, RG, Telefone, CEP, cidade, Endereço, Numero, Bairro, plano, vencimento, Sexualidade} = clients[target]
 
     nomeParaIndex = nome
-    modalEdit.style.display = "grid"
+    modalEditCad.style.display = "grid"
 
     document.querySelector("#txt-e-nome").value = nome
     document.querySelector("#txt-e-cpf").value = CPF
@@ -428,7 +429,6 @@ const openModalEdit =  (clients, target) => {
 
 const getVencimentosObjArray = () => {
     const arr =  Object.values(vencimentoObj)
-    console.log("🚀 ~ file: index.js:41 ~ getVencimentosObjArray ~ arr:", arr)
     arr.forEach((data, index) => putVencimentoOnSelect(data, index))
 }
 
@@ -449,7 +449,7 @@ registerTable.addEventListener("click", event => {
     target = event.target.getAttribute("data-id")
 
     if(target) {
-        openModalEdit(clients,target)
+        openModalEditCad(clients,target)
     }
 })
 
@@ -457,7 +457,7 @@ window.addEventListener("click", event => {
     target = event.target.getAttribute("data-change")
 
     if(target) {
-        openModalEdit(clientFound, target)
+        openModalEditCad(clientFound, target)
     }
 })
 
@@ -472,7 +472,7 @@ btnCancelCad.addEventListener("click", ()=>{
 })
 
 btnCancelEdCad.addEventListener("click", ()=>{
-    modalEdit.style.display = "none"
+    modalEditCad.style.display = "none"
     cleanInputs()
 })
 

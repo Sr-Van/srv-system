@@ -175,6 +175,53 @@
     border-bottom: 1px solid var(--grey-color);
     width: min(100%, 18.75rem);
 }
+.modal-e-os-overlay {
+    position: absolute;
+}
+
+.modal-e-os-overlay .edit-os-modal{
+    position: absolute;
+    z-index: 999;
+    width: min(100%, 50rem);
+    height: 37.5rem;
+    background-color: var(--grey-light);
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-os-modal .header-os-edit{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 3.125rem;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: var(--purple-color);
+}
+.edit-os-modal .header-os-edit a{
+    margin-left: 1.25rem;
+}
+
+.edit-os-modal .form-e-os{
+    display: flex;
+    flex-direction: column;
+    margin: 1.25rem;
+    align-items: flex-start;
+}
+
+.edit-os-modal .form-e-os > select {
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey-color);
+    width: min(100%, 18.75rem);
+    font-size: 1rem;
+}
+.edit-os-modal .form-e-os > input{
+    font-size: 1rem;
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey-color);
+    width: min(100%, 18.75rem);
+}
 
 .confirm-payment {
     height: auto;

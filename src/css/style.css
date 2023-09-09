@@ -335,7 +335,7 @@ select {
     .novo-cadastro-modal .sex-select > input {
         width: auto !important;
     }
-    .header-n-cadastro, .header-e-cadastro, .header-os-cadastro {
+    .header-n-cadastro, .header-e-cadastro, .header-os-cadastro, .header-os-edit {
         height: 8rem !important;
     }
     .modal-e-overlay .edit-cadastro-modal {
@@ -351,7 +351,7 @@ select {
         width: 100%;
         font-size: 2rem;
     }
-    .form-n-os > select, input {
+    .form-n-os, .form-e-os > select, input {
         width: 70% !important;
     }
     .edit-cadastro-moda, input {
@@ -458,7 +458,7 @@ select {
         top: 30px !important;
         left: 0 !important;
     }
-    .header-n-cadastro, .header-e-cadastro, .header-os-cadastro {
+    .header-n-cadastro, .header-e-cadastro, .header-os-cadastro, .header-os-edit {
         height: 4rem !important;
     }
     .modal-e-overlay .edit-cadastro-modal {
