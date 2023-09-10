@@ -66,60 +66,7 @@
                 </a>
             </aside>
             <div class="main-container">
-                <div style="display: none;" class="modal-overlay modal-anim">
-                    <div class="novo-cadastro-modal new-modal-anim">
-                        <div class="header-n-cadastro">
-                            <a class="btn-style btn-salvar">Salvar</a>
-                            <a class="btn-style btn-cancelar">Cancelar</a>
-                        </div>
-                        <div class="form-n-cadastro">
-                            <label for="txt-nome">Nome Completo</label>
-                            <input onblur="formatToFirstLetterUppercase(this.value)"  type="text" id="txt-nome">
-                            <label for="txt-cpf">CPF/CNPJ</label>
-                            <input onblur="formatCpf()" type="text" id="txt-cpf">
-                            <label for="txt-rg">RG/IE</label>
-                            <input onblur="formatRg()" type="text" id="txt-rg">
-                            <label for="txt-tel">Telefone</label>
-                            <input onblur="formatTel()" type="tel" required id="txt-tel">
-                            <label for="txt-cep">CEP</label>
-                            <input onblur="formatCep()" type="text" name="text" id="txt-cep">
-                            <label for="txt-cep">Cidade</label>
-                            <input type="text" name="text" id="txt-cidade" >
-                            <label for="txt-endereco">Endereço</label>
-                            <input type="text" id="txt-endereco">
-                            <label for="txt-nume">Numero</label>
-                            <input type="text" id="txt-nume">
-                            <label for="txt-bairro">Bairro</label>
-                            <input type="text" id="txt-bairro">
-                            <div style="padding-top: 20px;" class="sex-select">
-                                <label>Sexualidade: </label>
-                                <input type="radio" name="sex-radio" id="male-sex" value="Masculino">
-                                <label for="male-sex">Masculino</label>
-                                <input type="radio" name="sex-radio" id="female-sex" value="Feminino">
-                                <label for="female-sex">Feminino</label>
-                                <input type="radio" name="sex-radio" id="other-sex" value="Outro" checked>
-                                <label for="male-sex">Outro</label>
-                            </div>
-                            <div class="plano">
-                                <label >Plano: </label>
-                                <select name="select-plano" id="select-plano">
-                                    <option value=""  selected>Selecionar</option>
-                                    <option value="1">100mb - R$50,00</option>
-                                    <option value="2">200mb - R$60,00</option>
-                                    <option value="3">300mb - R$70,00</option>
-                                    <option value="4">500mb - R$100,00</option>
-                                </select>
-                            </div>
-                            <div class="vencimento">
-                                <label >Data de vencimento: </label>
-                                <select name="select-venc" id="select-venc">
-                                    <option value="" selected>Selecionar</option>
-                                </select>
-                            </div>
-                        </div>
-                        <p>Todos os valores devem ser preenchidos ou o cadastro nao sera realizado</p>
-                    </div>
-                </div>
+                
                 <!--div para mostrar o conteudo principal e todas as div que forem abertas pelo usuario clicando nos sidelinks-->
                 <div class="show-client"></div>
                 <div class="dashboard-content">
@@ -283,7 +230,60 @@
             </div>  
         </div>
         <!--modal overlay-->
-       
+        <div style="display: none;" class="modal-overlay modal-anim">
+            <div class="novo-cadastro-modal new-modal-anim">
+                <div class="header-n-cadastro">
+                    <a class="btn-style btn-salvar">Salvar</a>
+                    <a class="btn-style btn-cancelar">Cancelar</a>
+                </div>
+                <div class="form-n-cadastro">
+                    <label for="txt-nome">Nome Completo</label>
+                    <input onblur="formatToFirstLetterUppercase(this.value)"  type="text" id="txt-nome">
+                    <label for="txt-cpf">CPF/CNPJ</label>
+                    <input onblur="formatCpf()" type="text" id="txt-cpf">
+                    <label for="txt-rg">RG/IE</label>
+                    <input onblur="formatRg()" type="text" id="txt-rg">
+                    <label for="txt-tel">Telefone</label>
+                    <input onblur="formatTel()" type="tel" required id="txt-tel">
+                    <label for="txt-cep">CEP</label>
+                    <input onblur="formatCep()" type="text" name="text" id="txt-cep">
+                    <label for="txt-cep">Cidade</label>
+                    <input type="text" name="text" id="txt-cidade" readonly>
+                    <label for="txt-endereco">Endereço</label>
+                    <input type="text" id="txt-endereco">
+                    <label for="txt-nume">Numero</label>
+                    <input type="text" id="txt-nume">
+                    <label for="txt-bairro">Bairro</label>
+                    <input type="text" id="txt-bairro">
+                    <div style="padding-top: 20px;" class="sex-select">
+                        <label>Sexualidade: </label>
+                        <input type="radio" name="sex-radio" id="male-sex" value="Masculino">
+                        <label for="male-sex">Masculino</label>
+                        <input type="radio" name="sex-radio" id="female-sex" value="Feminino">
+                        <label for="female-sex">Feminino</label>
+                        <input type="radio" name="sex-radio" id="other-sex" value="Outro" checked>
+                        <label for="male-sex">Outro</label>
+                    </div>
+                    <div class="plano">
+                        <label >Plano: </label>
+                        <select name="select-plano" id="select-plano">
+                            <option value=""  selected>Selecionar</option>
+                            <option value="1">100mb - R$50,00</option>
+                            <option value="2">200mb - R$60,00</option>
+                            <option value="3">300mb - R$70,00</option>
+                            <option value="4">500mb - R$100,00</option>
+                        </select>
+                    </div>
+                    <div class="vencimento">
+                        <label >Data de vencimento: </label>
+                        <select name="select-venc" id="select-venc">
+                            <option value="" selected>Selecionar</option>
+                        </select>
+                    </div>
+                </div>
+                <p>Todos os valores devem ser preenchidos ou o cadastro nao sera realizado</p>
+            </div>
+        </div>
         <div style="display: none;" class="modal-e-overlay modal-overlay modal-anim">
             <div class="edit-cadastro-modal new-modal-anim">
                 <div class="header-e-cadastro">

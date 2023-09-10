@@ -215,8 +215,28 @@ const formatCep = () => {
     }
 }
 
+const getCep = async (cep) => {
+    await fetch(`https://cdn.apicep.com/file/apicep/${cep}.json`)
+    .then(response => response.json()
+    .then(data => showData(data)))
+}
+
+const showData = ({city}) => {
+    document.querySelector('#txt-cidade').value = city
+}
+
+
 let idToConfirm
 let monthToConfirm
+
+const cepInputNewClient = document.querySelector("#txt-cep")
+
+cepInputNewClient.addEventListener('blur', (e) => {
+    e.preventDefault()
+    setTimeout(() => {
+        getCep(e.target.value.replace(/(\d{5})(\d{3})/, `$1-$2`))
+    }, 200);
+})
 
 dashboardBtn.addEventListener('click', (e)=>{
     e.preventDefault()
@@ -325,6 +345,14 @@ const getTextSelectPlano = select => {
 const putTextSelectPlano = (select, plano) => {
     const optionPlano = select.children[select.selectedIndex]
     optionPlano.textContent = plano
+}
+
+const verifyInputs = (...inputs) => {
+    inputs.forEach((input) => {
+        if(input === '') {
+            console.log('false')
+        }
+    })
 }
 
 const newClientAdd = () =>{    
