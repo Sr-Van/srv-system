@@ -248,11 +248,6 @@
     font-size: 2rem;
 }
 
-.select-td-payment:active {
-    background-color: #038b79;
-    color: var(--white-color);
-}
-
 
 .confirm-payment p {
     grid-area: header;

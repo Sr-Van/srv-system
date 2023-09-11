@@ -5,6 +5,7 @@ const modalConfirmPayment = document.querySelector(
 const addPaymentBtn = document.querySelector(".btn-confirm");
 const denyPaymentBtn = document.querySelector(".btn-deny");
 const paymentTable = document.querySelector("#payments");
+const paymentTd = document.querySelector(".select-td-payment");
 
 const receivedDash = document.querySelector(".received-payment");
 const unreceivedDash = document.querySelector(".unreceived-payment");
@@ -173,13 +174,22 @@ renderDashPayments();
 paymentTable.addEventListener("click", (e) => {
   e.preventDefault();
   monthToConfirm = e.target.getAttribute("data-js");
+  if(e.target.getAttribute('data-js')){
+    e.target.classList.add('payment-selected')
+    setTimeout(()=>{
+      e.target.classList.remove('payment-selected')
+    }, 2100)
+  }
 });
+
+
 
 denyPaymentBtn.addEventListener("click", (event) => {
   event.preventDefault();
   modalConfirmPayment.style.display = "none";
   showAlert("acao cancelada");
 });
+
 addPaymentBtn.addEventListener("click", (event) => {
   event.preventDefault();
   modalConfirmPayment.style.display = "none";
