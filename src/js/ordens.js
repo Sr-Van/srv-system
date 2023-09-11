@@ -218,6 +218,15 @@ const addNewOrder = () => {
     newOrder.date = document.querySelector("#date-os").value
     newOrder.situation = situation
 
+
+    const {id, type, client: clientName, message, date} = newOrder
+
+
+    if(id === '' || type === '' || clientName === '' || message === '' || date === '') {
+        showAlertModal('Uma ordem so pode ser salva com todos os valores inseridos')
+        return
+    }
+
     orders.push(newOrder)
     renderTable()
     setOrdersData()
@@ -225,6 +234,7 @@ const addNewOrder = () => {
     countOrders()
     getFeedback()
     showAlert("Ordem adicionada")
+    modalOsOverlay.style.display = "none"
 }
 
 const cleanInputsOrders = () => {
@@ -258,7 +268,6 @@ getFinalMessageArray()
 
 buttonSaveOrder.addEventListener("click", () =>{
     addNewOrder()
-    modalOsOverlay.style.display = "none"
 })
 buttonCancelOrder.addEventListener("click", () => modalOsOverlay.style.display = "none")
 buttonNewOrder.addEventListener("click", () => {

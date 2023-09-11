@@ -383,8 +383,11 @@ const newClientAdd = () =>{
     newClient.pagamento = generatePayment(planoValue, vencimento)
 
     if (CPF === "" || RG === "" || Telefone === "" || CEP === "" || cidade === "" || Endereço === "" || Numero === "" || Bairro === "" || plano === "" || vencimento === "") {
+        showAlertModal('Voce precisa inserir todos os dados para fazer um cadastro.')
         return
     }
+
+    showAlert("Novo cadastro salvo")
     allTimeRegisters.push(newClientRegister)
     clients.push(newClient)
     registerLoad()
@@ -506,7 +509,6 @@ btnCancelEdCad.addEventListener("click", ()=>{
 
 btnSalvarCad.addEventListener("click", () => {
     newClientAdd()
-    showAlert("Novo cadastro salvo")
 })
 
 btnExcluirCad.addEventListener("click", () => {

@@ -7,6 +7,8 @@ const addLabelInput = (label, input) => {
     editOrderInnerModalContent.append(input)
 }
 
+const mainContainer = document.querySelector('.main-tag')
+
 const editOrderModal = createElement('div')
 const editOrderInnerModal = createElement('div')
 const editOrderInnerModalHeader = createElement('div')
@@ -15,7 +17,7 @@ const editOrderInnerModalContent = createElement('div')
 const btnFinalizarOrder = createElement('a')
 const btnCancelOrder = createElement('a')
 
-
+const overlayModal = createElement('modal')
 
 const createModalEditOs = () => {
     editOrderModal.innerHTML = ""
@@ -27,7 +29,7 @@ const createModalEditOs = () => {
     
     editOrderInnerModalHeader.classList.add('header-os-edit')
     
-    const mainContainer = document.querySelector('.main-tag')
+    
     
     btnCancelOrder.setAttribute('class', 'btn-style btn-cancelar-ordem')
     btnCancelOrder.textContent = "Cancelar"
@@ -100,6 +102,27 @@ const createModalEditOs = () => {
     mainContainer.append(editOrderModal)
 }
 
+overlayModal.setAttribute('class', 'modal-overlay modal-anim')
+overlayModal.setAttribute('style', 'display: none; z-index: 1000; top: 0; position: fixed;')
+
+mainContainer.append(overlayModal)
+
+const modalContainer = createElement('div')
+modalContainer.classList.add('alert-modal')
+overlayModal.append(modalContainer)
+
+const alertText = createElement('p')
+modalContainer.append(alertText)
+
+const showAlertModal = msg => {
+    overlayModal.style.display = "grid"
+
+    alertText.innerHTML = `<b>ALERTA!</b> ${msg}`
+}
+
+
+
+
 
 btnFinalizarOrder.addEventListener('click', () => {
     
@@ -117,3 +140,8 @@ btnFinalizarOrder.addEventListener('click', () => {
 
 
 btnCancelOrder.addEventListener('click', () => modalEdit.style.display = 'none')
+
+
+overlayModal.addEventListener('click', () => {
+    overlayModal.style.display = "none"
+})
