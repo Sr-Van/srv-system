@@ -233,7 +233,7 @@ const addNewOrder = () => {
     ordersPercentage()
     countOrders()
     getFeedback()
-    showAlert("Ordem adicionada")
+    showAlert("Ordem adicionada", 'good')
     modalOsOverlay.style.display = "none"
 }
 
@@ -284,7 +284,7 @@ buttonChangeOrder.addEventListener("click", () => {
     setOrdersData()
     cleanInputsOrders()
     getFeedback()
-    showAlert("Ordem alterada")
+    showAlert("Ordem alterada", 'good')
 })
 
 table.addEventListener("click", event => {

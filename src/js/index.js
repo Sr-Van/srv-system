@@ -57,6 +57,7 @@ const dashboardBtn = document.querySelector('.dashboard-btn')
 const cadastrosBtn = document.querySelector('.cadastros-btn')
 const contasBtn = document.querySelector('.contas-btn')
 const osBtn = document.querySelector('.os-btn')
+const btnLogout = document.querySelector(".Btn-logout")
 
 /* Declarando conteudos */
 const dashContent = document.querySelector('.dashboard-content')
@@ -387,7 +388,7 @@ const newClientAdd = () =>{
         return
     }
 
-    showAlert("Novo cadastro salvo")
+    showAlert("Novo cadastro salvo", 'good')
     allTimeRegisters.push(newClientRegister)
     clients.push(newClient)
     registerLoad()
@@ -513,15 +514,25 @@ btnSalvarCad.addEventListener("click", () => {
 
 btnExcluirCad.addEventListener("click", () => {
     deleteClient()
-    showAlert("Cadastro excluido")
+    showAlert("Cadastro excluido", 'good')
 }
 )
 
 btnEditarCad.addEventListener("click", () => {
     editClient()
-    showAlert("Cadastro editado com sucesso")
+    showAlert("Cadastro editado com sucesso", 'good')
 } 
 )
+
+
+btnLogout.addEventListener('click', () => {
+    setTimeout(() => {
+        window.location.assign("/index.html")
+    }, 3100);
+    showAlert('you are being disconnected!', 'good')
+    
+})
+
 
 
 

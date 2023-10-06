@@ -5,7 +5,7 @@ const modalConfirmPayment = document.querySelector(
 const addPaymentBtn = document.querySelector(".btn-confirm");
 const denyPaymentBtn = document.querySelector(".btn-deny");
 const paymentTable = document.querySelector("#payments");
-const paymentTd = document.querySelector(".select-td-payment");
+const monthTooltip = document.querySelector(".month-tooltip");
 
 const receivedDash = document.querySelector(".received-payment");
 const unreceivedDash = document.querySelector(".unreceived-payment");
@@ -176,6 +176,7 @@ paymentTable.addEventListener("click", (e) => {
   monthToConfirm = e.target.getAttribute("data-js");
   if(e.target.getAttribute('data-js')){
     e.target.classList.add('payment-selected')
+    monthTooltip.innerHTML = `Mes ${monthToConfirm}`
     setTimeout(()=>{
       e.target.classList.remove('payment-selected')
     }, 2100)
@@ -187,7 +188,7 @@ paymentTable.addEventListener("click", (e) => {
 denyPaymentBtn.addEventListener("click", (event) => {
   event.preventDefault();
   modalConfirmPayment.style.display = "none";
-  showAlert("acao cancelada");
+  showAlert("acao cancelada", 'bad');
 });
 
 addPaymentBtn.addEventListener("click", (event) => {
@@ -196,7 +197,7 @@ addPaymentBtn.addEventListener("click", (event) => {
   payManualMonth(monthToConfirm);
   tableContasLoad();
   renderDashPayments();
-  showAlert("Pagamento realizado");
+  showAlert("Pagamento realizado", 'good');
 });
 
 tableContas.addEventListener("click", (e) => {

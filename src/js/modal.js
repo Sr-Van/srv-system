@@ -135,7 +135,7 @@ btnFinalizarOrder.addEventListener('click', () => {
     setOrdersData()
     cleanInputsOrders()
     getFeedback()
-    showAlert("Ordem alterada")
+    showAlert("Ordem alterada", 'good')
 })
 
 

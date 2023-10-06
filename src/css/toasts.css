@@ -1,0 +1,40 @@
+.alert{
+    display: none;
+    color: var(--white-color);
+    position: absolute;
+    z-index: 999;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto;
+    height: 3rem;
+    border-radius: .7em;
+    opacity: 0;
+    padding: .4em;
+    font-size: .8rem;
+    animation: toLeft 2.9s ease-in-out;
+}
+
+@keyframes toLeft {
+    0% {
+        transform: translateX(400px);
+        opacity: 1;
+    }
+
+    40%{
+        transform: translateX(-20px);
+    }
+    50%{
+        transform: translateX(0px);
+    }
+    80%{
+        transform: translateX(0px);
+    }
+    95%{
+        transform: translateX(-20px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}

@@ -234,10 +234,16 @@
     grid-template-areas: 
     "header header"
     "left right"
-    "table table";
+    "table table"
+    "footer footer";
     gap: 0.5rem;
     box-shadow: var(--box-shadow);
     font-size: 2rem;
+}
+.tooltip-payment {
+    grid-area: footer;
+    font-size: 1.5rem;
+    color: var(--red-danger);
 }
 
 .select-td-payment {
@@ -249,7 +255,7 @@
 }
 
 
-.confirm-payment p {
+.confirm-payment .client-p {
     grid-area: header;
     width: 100%;
     height: 2.5rem;
