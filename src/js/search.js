@@ -73,7 +73,7 @@ const showAlert = (message, stts) => {
     setTimeout(() => alertBox.style.display = 'none', 3000)
     alertBox.style.backgroundColor = stts == 'good' ? 'rgb(3, 139, 121)' : 'rgb(243, 24, 24)'
     alertBox.style.display = 'block'
-    alertBox.innerHTML = message
+    alertBox.children[0].innerHTML = message
 }
 
 

@@ -4,6 +4,7 @@
     position: absolute;
     z-index: 999;
     right: 1rem;
+
     bottom: 1rem;
     width: auto;
     height: 3rem;
@@ -12,6 +13,9 @@
     padding: .4em;
     font-size: .8rem;
     animation: toLeft 2.9s ease-in-out;
+}
+.alert p {
+    padding: 0 .7rem;
 }
 
 @keyframes toLeft {
