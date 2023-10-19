@@ -78,7 +78,7 @@ const renderPaymentTable = payment => {
       <td>Mes: ${month}</td>
       <td ${colorVenc}>${situation}</td>
       <td>Valor: ${value}</td>
-      <td> <a class="select-td-payment" data-js="${month}">Selecionar</a></td>
+      <td> <a class="select-td-payment" data-js="${month}" data-select="unselect">Selecionar</a></td>
       `;
   paymentTable.append(tr);
 };
@@ -174,12 +174,21 @@ renderDashPayments();
 paymentTable.addEventListener("click", (e) => {
   e.preventDefault();
   monthToConfirm = e.target.getAttribute("data-js");
+  const buttonsClient = document.querySelectorAll('.select-td-payment')
+
+  buttonsClient.forEach(button => {
+    if(button.dataset.select === 'selected') {
+      button.dataset.select = 'unselect'
+      button.innerText = "Selecionar"
+    }
+  })
+
   if(e.target.getAttribute('data-js')){
-    e.target.classList.add('payment-selected')
+
+    e.target.dataset.select = 'selected'
+    e.target.innerText = 'Selecionado'
+
     monthTooltip.innerHTML = `Mes ${monthToConfirm}`
-    setTimeout(()=>{
-      e.target.classList.remove('payment-selected')
-    }, 2100)
   }
 });
 
